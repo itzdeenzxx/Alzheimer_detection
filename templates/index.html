@@ -1,27 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
-    <title>NeuroSafeZone</title>
+  <title>NeuroSafeZone</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
-  </head>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
+</head>
 
 <body>
 
@@ -36,36 +37,70 @@
       </div>
     </div>
   </div> -->
+ <!-- script sound  -->
+  <script>
+    var audio = new Audio('{{ sound_file_url }}');
 
+    window.onload = function () {
+      console.log("Page loaded. Playing audio...");
+      audio.play().then(function () {
+        console.log("Audio played successfully!");
+      }).catch(function (error) {
+        console.error("Error playing audio:", error);
+      });
+    };
+  </script>
+  <script>
+  
+    // สร้างตัวแปรเพื่อตรวจสอบว่าเสียงกำลังเล่นหรือไม่
+    var isPlaying = false;
 
+    // สร้างฟังก์ชันเล่นเสียง
+    function playSound(line) {
+        // ตรวจสอบว่าเสียงกำลังเล่นหรือไม่
+        if (!isPlaying) {
+            isPlaying = true;
+            var audio = new Audio(line);
 
+            audio.pause();
+            audio.currentTime = 0;
+            audio.play();
+
+            audio.onended = function() {
+                isPlaying = false;
+            };
+        }
+    }
+</script>
   <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
     <div class="container">
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
-            
-            <a href="index.html" class="logo">
-              <h4>NeuroSafeZone<img src="{{ url_for('static', filename='img/icon_title_2.png') }}" alt=""></h4>
-            </a>
+              <a  href="#top" class="logo">
+                <h4>NeuroSafeZone<img src="{{ url_for('static', filename='img/icon_title_2.png') }}" alt=""></h4>
+              </a>
+            </form>
             <ul class="nav">
               <li class="scroll-to-section"><a href="#top" class="active">หน้าหลัก</a></li>
               <li class="scroll-to-section"><a href="#features_2">วิธีการใช้งาน</a></li>
               <li class="scroll-to-section"><a href="#about">เรื่องน่ารู้</a></li>
               <li class="scroll-to-section"><a href="#services">หน้าหลัก</a></li>
-              
-              <li class="scroll-to-section"><div class="main-blue-button"><a href="#contact">เริ่มการออกกำลังกาย</a></div></li> 
-            </ul>        
+
+              <li class="scroll-to-section">
+                <div class="main-blue-button"><a href="#contact">เริ่มการออกกำลังกาย</a></div>
+              </li>
+            </ul>
             <a class='menu-trigger'>
-                <span>Menu</span>
+              <span>Menu</span>
             </a>
-          
+
           </nav>
         </div>
       </div>
     </div>
   </header>
-  
+
 
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">
@@ -75,16 +110,17 @@
             <div class="col-lg-6 align-self-center">
               <div class="left-content header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
-                  <h4 class="info-stat">เว็บไซต์การบริหารสมองป้องกันอัลไซเมอร์<br>ด้วยเทคโนโลยีการ Detect (ตรวจจับ) การเคลื่อนไหวของมือ</h4>
+                  <h4 class="info-stat">เว็บไซต์การบริหารสมองป้องกันอัลไซเมอร์<br>ด้วยเทคโนโลยีการ Detect (ตรวจจับ)
+                    การเคลื่อนไหวของมือ</h4>
                   <div class="col-lg-12">
                     <h2>เส้นทางสู่สุขภาพสมองที่แข็งแรง</h2>
                   </div>
                   <div class="col-lg-12">
                     <div class="main-green-button scroll-to-section">
                       <form action="/fitness" method="post">
-                          <button type="submit" class="button-start"><a>เริ่มการออกกำลังกาย</a></button>
+                        <button type="submit" class="button-start"><a>เริ่มการออกกำลังกาย</a></button>
                       </form>
-                  </div>                  
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,7 +181,8 @@
                 </div>
               </div>
               <div class="col-lg-3">
-                <div class="features-item second-feature last-features-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+                <div class="features-item second-feature last-features-item wow fadeInUp" data-wow-duration="1s"
+                  data-wow-delay="0.6s">
                   <div class="fourth-number number">
                     <h6>04</h6>
                   </div>
@@ -175,13 +212,28 @@
             <!-- <h2>Top <em>marketing</em> agency &amp; consult your website <span>with us</span></h2> -->
             <h1>สมองเราต้องการออกกำลังกาย!</h1>
           </div>
-  
-          <p class="info-banner"><a href="https://www.bumrungrad.com/th/health-blog/september-2018/alzheimer-disease" target="_parent">
-            โรคอัลไซเมอร์</a> เมื่อเข้าสู่วัยสูงอายุ, การออกกำลังกายประจำวันเป็นวิธีที่ดีในการป้องกันโรคสมองเสื่อม 
-            เล่นกีฬาหรือเดินเล่นช่วยกระตุ้นสมองและลดความเครียด รักษาการนอนหลับที่ดี, รับประทานอาหารที่เหมาะสม และหลีกเลี่ยงการดื่มแอลกอฮอล์ 
+
+          <p class="info-banner"><a href="https://www.bumrungrad.com/th/health-blog/september-2018/alzheimer-disease"
+              target="_parent">
+              โรคอัลไซเมอร์</a> เมื่อเข้าสู่วัยสูงอายุ, การออกกำลังกายประจำวันเป็นวิธีที่ดีในการป้องกันโรคสมองเสื่อม
+            เล่นกีฬาหรือเดินเล่นช่วยกระตุ้นสมองและลดความเครียด รักษาการนอนหลับที่ดี, รับประทานอาหารที่เหมาะสม
+            และหลีกเลี่ยงการดื่มแอลกอฮอล์
             เพื่อสุขภาพสมองที่แข็งแกร่งและมีคุณภาพ!</p>
-          <div class="main-green-button"><a href="https://www.paolohospital.com/th-TH/phahol/Article/Details/%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1-%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B2%E0%B8%97%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B8%A1%E0%B8%AD%E0%B8%87/%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%AD%E0%B8%B1%E0%B8%A5%E0%B9%84%E0%B8%8B%E0%B9%80%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%8C">
-            อ่านเพิ่มเติม</a></div>
+          <div class="main-green-button-2"><a class="info-btn"
+               href="https://www.paolohospital.com/th-TH/phahol/Article/Details/%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1-%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B2%E0%B8%97%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B8%A1%E0%B8%AD%E0%B8%87/%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%AD%E0%B8%B1%E0%B8%A5%E0%B9%84%E0%B8%8B%E0%B9%80%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%8C">
+              อ่านเพิ่มเติม</a>
+            <a class="speech-btn" onclick="playSound('../static/sound/info_sound.wav')"><h4>อ่านออกเสียง <svg xmlns="http://www.w3.org/2000/svg" id="sound-icon" width="40" height="40"
+              fill="currentColor" class="bi bi-volume-up-fill" viewBox="0 0 16 16">
+              <path
+                d="M11.536 14.01A8.47 8.47 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.48 7.48 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303z" />
+              <path
+                d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.48 5.48 0 0 1 11.025 8a5.48 5.48 0 0 1-1.61 3.89z" />
+              <path
+                d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
+            </svg></h4></a>
+            
+          </div>
+
         </div>
       </div>
     </div>
@@ -327,7 +379,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-01.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 101</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 101</h4>
+                      </a>
                       <span>Marketing</span>
                     </div>
                   </div>
@@ -338,7 +392,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 102</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 102</h4>
+                      </a>
                       <span>Branding</span>
                     </div>
                   </div>
@@ -351,7 +407,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-02.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 103</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 103</h4>
+                      </a>
                       <span>Consulting</span>
                     </div>
                   </div>
@@ -362,7 +420,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-05.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 104</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 104</h4>
+                      </a>
                       <span>Artwork</span>
                     </div>
                   </div>
@@ -375,7 +435,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-03.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 105</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 105</h4>
+                      </a>
                       <span>Branding</span>
                     </div>
                   </div>
@@ -386,7 +448,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-06.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 106</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 106</h4>
+                      </a>
                       <span>Artwork</span>
                     </div>
                   </div>
@@ -399,7 +463,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 107</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 107</h4>
+                      </a>
                       <span>Creative</span>
                     </div>
                   </div>
@@ -410,7 +476,9 @@
                   <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
                   <div class="hover-content">
                     <div class="inner-content">
-                      <a href="#"><h4>Awesome Project 108</h4></a>
+                      <a href="#">
+                        <h4>Awesome Project 108</h4>
+                      </a>
                       <span>Consulting</span>
                     </div>
                   </div>
@@ -444,12 +512,14 @@
                   </div>
                   <div class="col-lg-6">
                     <fieldset>
-                      <input type="surname" name="surname" id="surname" placeholder="Surname" autocomplete="on" required>
+                      <input type="surname" name="surname" id="surname" placeholder="Surname" autocomplete="on"
+                        required>
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
                     <fieldset>
-                      <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                      <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email"
+                        required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-6">
@@ -459,7 +529,8 @@
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
+                      <textarea name="message" type="text" class="form-control" id="message" placeholder="Message"
+                        required=""></textarea>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
@@ -504,9 +575,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          
-          
-          <br>ข้อมูลในเว็บไซต์โดย <a rel="nofollow" href="www.paolohospital.com" title="Paolo hospital">โรงพยาบาลเปาโล </a> <a rel="nofollow" href="https://www.bumrungrad.com/th" title="Bumrungrad hospital">โรงพยาบาลบำรุงราษฎร์</a></p>
+
+
+          <br>ข้อมูลในเว็บไซต์โดย <a rel="nofollow" href="www.paolohospital.com" title="Paolo hospital">โรงพยาบาลเปาโล
+          </a> <a rel="nofollow" href="https://www.bumrungrad.com/th"
+            title="Bumrungrad hospital">โรงพยาบาลบำรุงราษฎร์</a></p>
         </div>
       </div>
     </div>
@@ -522,7 +595,8 @@
 
   <!-- เปลี่ยนทุกอย่างให้เป็น url for และ ทำการย้ายพวก bootstrap ให้เหมือนใน static-->
   <!-- แก้บัคเลเอ้าไม่ตรง -->
-  
+
 
 </body>
+
 </html>

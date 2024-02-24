@@ -30,10 +30,8 @@
             <h1 class="title_main">ห้องออกกำลังกาย</h1>
             <div>
               <form action="/">
-                <button>
-                  <a>
+                <button class="back-btn">
                     กลับหน้าหลัก
-                  </a>
                 </button>
               </form>
             </div>
@@ -44,11 +42,11 @@
   </header>
   <div class="container">
     <div>
-      <img id="bg" class="camera-main" src="{{ url_for('video_feed') }}">
+      <img id="bg" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s" src="{{ url_for('video_feed') }}">
     </div>
     <div>
       <form class="form-start" action="">
-        <button class="start-btn ">
+        <button class="start-btn center_1 wow slideInUp" data-wow-duration="1s" data-wow-delay="0s">
           <h4>เริ่มออกกำลังกาย</h4>
         </button>
       </form>

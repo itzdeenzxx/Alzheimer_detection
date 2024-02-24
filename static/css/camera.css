@@ -100,8 +100,55 @@ body, html {
   background: none;
 }
 
+/* back button  */
+/* .back-btn {
+  color: #FFFFFF;
+  
+} */
+.back-btn {
+  background-color: #789461;
+  border: 2px solid #294B29;
+  border-radius: 30px;
+  box-shadow: #294B29 4px 4px 0 0;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, 40%);
+  font-size: 30px;
+  cursor: pointer;
+  font-family: "Prompt", sans-serif;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
+.back-btn:hover {
+  background-color: #fff;
+  color: black;
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
 
+.back-btn:active {
+  box-shadow: #294B29 2px 2px 0 0;
+  /* transform: translate(1px, 1px); */
+}
+
+@media (min-width: 768px) {
+  .back-btn {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+/* responsive */
   @media (max-width: 767px) {
     .title_main {
       font-size: 25px;
