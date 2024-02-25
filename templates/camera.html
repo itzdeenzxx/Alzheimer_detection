@@ -20,10 +20,11 @@
 
   <title>ห้องออกกำลังกาย</title>
 </head>
+<!-- Responcive function  -->
 
 <body>
-  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-    <div class="container">
+  <header class="header-area wow slideInDown bar-top" data-wow-duration="0.75s" data-wow-delay="0s" id="nav-bar-top">
+    <div class="container-nav">
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
@@ -41,8 +42,9 @@
     </div>
   </header>
   <div class="container">
-    <div>
-      <img id="bg" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s" src="{{ url_for('video_feed') }}">
+    <!-- ทำให้เต็มจอโดยการเรียกใช้ js ที่ภามในแชท -->
+    <div class="camera-div"> 
+      <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s" src="{{ url_for('video_feed') }}">
     </div>
     <div>
       <form class="form-start" action="">
@@ -50,9 +52,15 @@
           <h4>เริ่มออกกำลังกาย</h4>
         </button>
       </form>
+      <form action="">
+        <div class="fullscreen-div">
+          <a class="fullscreen-btn" onclick="toggleFullscreen()" ><h5>เข้าสู่เต็มจอ</h5></a>
+        </div>
+      </form>
     </div>
   </div>
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
   <script src="{{ url_for('static', filename='js/animation.js') }}"></script>

@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     margin: 0;
+    padding: 0;
     display: grid;
     justify-content: center;
     align-items: center;
@@ -24,15 +25,12 @@ body, html {
 }
 /* camera */
 .camera-main {
-    transform: 100%;
+  transform: 100%;
 }
-.container img {
-    
+.camera-div{
+  margin-top: 10%;
 }
 
-.container img:hover {
-    
-}
 /*button */
 
 .start-btn {
@@ -99,6 +97,18 @@ body, html {
   border-width: 4px 0 0;
   background: none;
 }
+ 
+/* Fullscreen Button */
+.fullscreen-btn {
+  display: none;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20%;
+}
+.fullscreen-div{
+  margin-top: 5%;
+}
 
 /* back button  */
 /* .back-btn {
@@ -141,19 +151,26 @@ body, html {
   /* transform: translate(1px, 1px); */
 }
 
-@media (min-width: 768px) {
-  .back-btn {
-    min-width: 120px;
-    padding: 0 25px;
-  }
-}
+
 
 /* responsive */
   @media (max-width: 767px) {
     .title_main {
-      font-size: 25px;
+      font-size: 23px;
     }
     .camera-main{
       transform: translateY(-90%);
+    }
+    .back-btn {
+      display: none;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 10px;
+    }
+    .fullscreen-btn {
+      display: contents;
     }
   }

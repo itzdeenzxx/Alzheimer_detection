@@ -1730,6 +1730,19 @@ responsive
   form#contact {
     padding: 45px;
   }
+  .main-green-button-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-green-button-2 .speech-btn{
+    text-align: center;
+}
+.main-green-button-2 .info-btn {
+    text-align: center; /* คำสั่งนี้จะทำให้เนื้อหาอยู่ตรงกลาง */
+}
+
   
 }
 
@@ -1782,5 +1795,11 @@ responsive
   }
   .main-green-button-2 .speech-btn h4{
     padding-top: 5%;
+  }
+  .info-btn {
+    transform: translateX(50%);
+  }
+  .bar-top {
+    
   }
 }

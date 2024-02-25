@@ -7,10 +7,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html',sound_file_url='/static/sound/welcome_sound.wav')
 
-
 @app.route('/fitness' , methods=['GET', 'POST'])
 def fitness():
     return render_template('camera.html')
+
+# @app.route('/fitness_')
 
 def gen(camera):
     while True:
