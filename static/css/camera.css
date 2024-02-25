@@ -100,14 +100,19 @@ body, html {
  
 /* Fullscreen Button */
 .fullscreen-btn {
-  display: none;
+  display: block;
   text-align: center;
   justify-content: center;
   align-items: center;
-  padding-top: 20%;
+  padding-top: 0%;
+  font-size: 26px;
+  cursor: pointer;
+}
+.fullscreen-btn :hover {
+  color: #656565;
 }
 .fullscreen-div{
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 /* back button  */
@@ -172,5 +177,12 @@ body, html {
     }
     .fullscreen-btn {
       display: contents;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20%;
+    }
+    .fullscreen-div{
+      margin-top: 5%;
     }
   }

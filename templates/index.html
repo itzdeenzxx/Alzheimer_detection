@@ -85,10 +85,15 @@
               <li class="scroll-to-section"><a href="#top" class="active">หน้าหลัก</a></li>
               <li class="scroll-to-section"><a href="#features_2">วิธีการใช้งาน</a></li>
               <li class="scroll-to-section"><a href="#about">เรื่องน่ารู้</a></li>
-              <li class="scroll-to-section"><a href="#services">หน้าหลัก</a></li>
+              <li class="scroll-to-section"><a href="#benefit">ประโยชน์</a></li>
 
               <li class="scroll-to-section">
-                <div class="main-blue-button"><a href="#contact">เริ่มการออกกำลังกาย</a></div>
+                  <div class="main-blue-button">
+                    <form action="/fitness" method="post">
+                      <button type="submit" class="button-start"><a>เริ่มการออกกำลังกาย</a></button>
+                  </form>
+                  </div>
+                
               </li>
             </ul>
             <a class='menu-trigger'>
@@ -231,15 +236,13 @@
               <path
                 d="M8.707 11.182A4.5 4.5 0 0 0 10.025 8a4.5 4.5 0 0 0-1.318-3.182L8 5.525A3.5 3.5 0 0 1 9.025 8 3.5 3.5 0 0 1 8 10.475zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06" />
             </svg></h4></a>
-            
           </div>
-
         </div>
       </div>
     </div>
   </div>
 
-  <div id="services" class="our-services section">
+  <div id="benefit" class="our-services section">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
@@ -508,6 +511,7 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
   <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
