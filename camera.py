@@ -4,24 +4,21 @@ import mediapipe as mp
 
 mp_face_detection = mp.solutions.face_detection
 mp_hands = mp.solutions.hands
-
+count_work = 0
 class VideoCamera(object):
     def __init__(self):
         self.camera_index = 0 
         self.video = cv2.VideoCapture(self.camera_index)
-
-        # Initialize Mediapipe Face Detection and Hand modules
         self.face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.3)
         self.hands = mp_hands.Hands(min_detection_confidence=0.3)
 
     def __del__(self):
         self.video.release()
-
     def get_frame(self):
         ret, frame = self.video.read()
         if not ret:
             return None
-
+        cv2.putText(frame, str(count_work), (100, 100), cv2.FONT_HERSHEY_DUPLEX, 1.5, (255, 255, 255), 2)
         # Convert the frame to RGB for Mediapipe
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
