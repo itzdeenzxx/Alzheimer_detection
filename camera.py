@@ -2,6 +2,13 @@ import cv2
 import numpy as np
 import mediapipe as mp
 
+# import fitness 
+from class_fitness.L_pose import Hand_L_Detector 
+
+# var pose 
+L_pose = Hand_L_Detector()
+
+# detection var 
 mp_face_detection = mp.solutions.face_detection
 mp_hands = mp.solutions.hands
 mp_pose = mp.solutions.pose
@@ -23,6 +30,7 @@ class VideoCamera(object):
         ret, frame = self.video.read()
         if not ret:
             return None
+        L_pose.detect_and_count_finger_distance(frame)
         cv2.putText(frame, str(count_work), (100, 100), cv2.FONT_HERSHEY_DUPLEX, 1.5, (255, 255, 255), 2)
 
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -37,10 +45,10 @@ class VideoCamera(object):
                 cv2.rectangle(frame, bbox, (0, 0, 255), 2)
 
         # Hand Detection using Mediapipe
-        results_hands = self.hands.process(rgb_frame)
-        if results_hands.multi_hand_landmarks:
-            for hand_landmarks in results_hands.multi_hand_landmarks:
-                mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+        # results_hands = self.hands.process(rgb_frame)
+        # if results_hands.multi_hand_landmarks:
+        #     for hand_landmarks in results_hands.multi_hand_landmarks:
+        #         mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
         # Body (Pose) Detection using Mediapipe
         results_pose = self.pose.process(rgb_frame)
