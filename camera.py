@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import mediapipe as mp
+import time
 from class_fitness.L_pose import Hand_L_Detector,confirm_right,confirm_left,count_right,count_left,count_final
 
 mp_hands = mp.solutions.hands
@@ -9,7 +10,7 @@ set_of_Hand_L = 0
 
 #var break time 10sec
 countdown_time = 10
-overlay_break = cv2.imread('class_fitness/img/background_trans.png', cv2.IMREAD_UNCHANGED)
+
 
 class VideoCamera(object):
     def __init__(self):
@@ -23,19 +24,18 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self):
-        global overlay_break , set_of_Hand_L , overlay_break
+        global set_of_Hand_L
         ret, frame = self.video.read()
         if not ret:
             return None
         if self.count_final_main < 10 :
-            self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame)
-            print(self.count_final_main)
+            self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
+            # print(self.count_final_main)
 
         elif self.count_final_main >= 10 :
-            overlay_break_resized = cv2.resize(overlay_break, (frame.shape[1], frame.shape[0]))
-            cv2.imshow('Camera with Overlay', overlay_break_resized)
-            
-
+            # ทำอะไรสักอย่างง เมื่อพัก คิดว่าจจะเอาภาพมาแทรกใน กล้องที่เป็นภาพหลักไม่ใช่ overlay และ แก้บัค reponsive ของมือถือ เมื่อเปิดกล้อง
+            self.show_overlay()
+            self.count_final_main = 0
 
         ret, jpeg = cv2.imencode('.jpg', frame)
 
@@ -43,8 +43,9 @@ class VideoCamera(object):
             return None
         return jpeg.tobytes()
     
-    def show_overlay():
-        pass
+    def show_overlay(self):
+        time.sleep(2)
+            
 
     def gen(self):
         while True:

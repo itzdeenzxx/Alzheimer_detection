@@ -18,8 +18,14 @@ class Hand_L_Detector:
     def calculate_distance(self, lm1, lm2):
         return math.sqrt((lm1.x - lm2.x)**2 + (lm1.y - lm2.y)**2)
 
-    def detect_and_count_finger_distance(self, frame):
+    def detect_and_count_finger_distance(self, frame , count):
         global confirm_right , confirm_left , count_right , count_left , count_final
+
+        count_final = count
+
+        check_count = count
+        if check_count == 0 :
+            count_left , count_right = 0 , 0
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results_hands = self.hands.process(rgb_frame)
 
