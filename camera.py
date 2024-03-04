@@ -34,7 +34,8 @@ class VideoCamera(object):
         elif self.count_final_main >= 10 :
             overlay_break_resized = cv2.resize(overlay_break, (frame.shape[1], frame.shape[0]))
             cv2.imshow('Camera with Overlay', overlay_break_resized)
-            print("11111111111111111111111111111111111111111111111111111")
+            
+
 
         ret, jpeg = cv2.imencode('.jpg', frame)
 
