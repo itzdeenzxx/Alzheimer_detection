@@ -23,8 +23,11 @@ class Hand_L_Detector:
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results_hands = self.hands.process(rgb_frame)
 
-        cv2.putText(frame, str(count_final), (100, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
 
+        if count_final == 10 :
+            return 10
+        
         if results_hands.multi_hand_landmarks:
             if confirm_left == 0 or confirm_right == 0 :
                 for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
@@ -57,7 +60,7 @@ class Hand_L_Detector:
                 if count_left == count_right:
                     count_final = count_left
 
-                mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
+                # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
             
             elif confirm_left >= 1 and confirm_right >= 1 :
                 for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
@@ -74,29 +77,28 @@ class Hand_L_Detector:
                     ring_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
                     pinky_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_DIP]
 
-                    
-
                     if label == 'Left':
                         if thumb_tip.x > thumb_ip.x and index_tip.y > index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
                             cv2.putText(frame, "Left great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_right += 1
                             if confirm_right >= 1 and count_right % 2 == 1:
                                 count_right += 1
-                                print(count_right)
 
-                    if label == 'Right':
+                    if label == 'Right': 
                         if thumb_tip.x < thumb_ip.x and index_tip.y < index_dip.y and middle_tip.y > middle_dip.y and ring_tip.y > ring_dip.y and pinky_tip.y > pinky_dip.y:
                             cv2.putText(frame, "Right great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_left += 1
                             if confirm_left >= 1 and count_left % 2 == 1 :
                                 count_left += 1
-                                print(count_left)
 
                     if count_left == count_right and count_right % 2 == 0 and count_left % 2 == 0:
                         count_final = count_left
-                        confirm_right , confirm_left = 0,0
+                        confirm_right , confirm_left = 0,0 
+        return count_final
+                    
 
-                    mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
+                        
+                    # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
             
                 
 
