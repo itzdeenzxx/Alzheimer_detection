@@ -66,7 +66,7 @@ class Hand_L_Detector:
                 if count_left == count_right:
                     count_final = count_left
 
-                # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
+                # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)/-ตภคึ/-ภถตค
             
             elif confirm_left >= 1 and confirm_right >= 1 :
                 for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
