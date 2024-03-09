@@ -26,6 +26,9 @@ class thumb_pinky:
         check_count = count
         if check_count == 0 :
             count_left , count_right = 0 , 0
+        
+        
+
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results_hands = self.hands.process(rgb_frame)
 
@@ -49,16 +52,21 @@ class thumb_pinky:
                     middle_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP]
                     ring_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
                     pinky_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_DIP]
+                    index_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP]
+                    middle_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP]
+                    ring_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_PIP]
+                    pinky_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_PIP]
 
+                    # TIP ต้องอยู่ด้านซ้าย PIP ในแนวแกน x note
                     if label == 'Right':
-                        if thumb_tip.x < thumb_ip.x and index_tip.y < index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
+                        if thumb_tip.y < index_tip.y and index_pip.y < middle_pip.y and middle_pip.y < ring_pip.y and ring_pip.y < pinky_pip.y:
                             cv2.putText(frame, "Right great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_right += 1
                             if confirm_right == 1 :
                                 count_right += 1
-                    #กลับด้าน
+                    
                     if label == 'Left':
-                        if thumb_tip.y > thumb_ip.y and thumb_tip.y > index_tip.y and index_tip.x > index_dip.x and middle_tip.x > middle_dip.x and ring_tip.x > ring_dip.x and pinky_tip.x > pinky_dip.x:
+                        if pinky_tip.y < ring_tip.y and ring_tip.y > ring_dip.y and middle_tip.y > middle_dip.y and index_tip.y > index_dip.y and thumb_tip.x < thumb_ip.x:
                             cv2.putText(frame, "Left great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_left += 1
                             if confirm_left == 1 :
@@ -66,7 +74,7 @@ class thumb_pinky:
                 if count_left == count_right:
                     count_final = count_left
 
-                # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
+            
             
             elif confirm_left >= 1 and confirm_right >= 1 :
                 for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
@@ -82,16 +90,21 @@ class thumb_pinky:
                     middle_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP]
                     ring_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
                     pinky_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_DIP]
+                    index_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP]
+                    middle_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP]
+                    ring_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_PIP]
+                    pinky_pip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_PIP]
+                    
 
                     if label == 'Left':
-                        if thumb_tip.x > thumb_ip.x and index_tip.y > index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
+                        if thumb_tip.y < index_tip.y and index_pip.y < middle_pip.y and middle_pip.y < ring_pip.y and ring_pip.y < pinky_pip.y:
                             cv2.putText(frame, "Left great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_right += 1
                             if confirm_right >= 1 and count_right % 2 == 1:
                                 count_right += 1
-
+                    
                     if label == 'Right': 
-                        if thumb_tip.x < thumb_ip.x and index_tip.y < index_dip.y and middle_tip.y > middle_dip.y and ring_tip.y > ring_dip.y and pinky_tip.y > pinky_dip.y:
+                        if pinky_tip.y < ring_tip.y and ring_tip.y > ring_dip.y and middle_tip.y > middle_dip.y and index_tip.y > index_dip.y and thumb_tip.x > thumb_ip.x:
                             cv2.putText(frame, "Right great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_left += 1
                             if confirm_left >= 1 and count_left % 2 == 1 :
@@ -99,31 +112,30 @@ class thumb_pinky:
 
                     if count_left == count_right and count_right % 2 == 0 and count_left % 2 == 0:
                         count_final = count_left
-                        confirm_right , confirm_left = 0,0 
+                        confirm_right , confirm_left = 0,0
+            mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
         return count_final
                     
 
                         
-                    # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
 
+# cap = cv2.VideoCapture(0)
 
+# thumb_pinky_obj = thumb_pinky()
+# count = 0
 
-cap = cv2.VideoCapture(0)
+# while True:
+#     ret, frame = cap.read()
+#     frame = cv2.flip(frame,1)
 
-thumb_pinky_obj = thumb_pinky()
-count = 0
+#     count = thumb_pinky_obj.detect_and_count_finger_distance(frame, count)
 
-while True:
-    ret, frame = cap.read()
+#     cv2.imshow('Frame', frame)
 
-    count = thumb_pinky_obj.detect_and_count_finger_distance(frame, count)
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
-    cv2.imshow('Frame', frame)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()
 
 

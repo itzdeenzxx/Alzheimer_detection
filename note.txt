@@ -1,0 +1,22 @@
+สำเร็จ
+
+
+
+ยังไม่เสร็จ
+    1 โป้งก้อย เงื่อนไข 2
+    2 overlay pause
+    3 how to use app 
+    4 nav game 
+    5 หน้าเกมต่างๆ 
+    6 link game with flask หน้า html ให้เข้า flask 
+    7 แก้ responsive มือถือ
+    
+    tutorial --
+    sound tutorial -- 
+    footer --
+
+จำ debug วันต่อไป
+    .ทำอะไรสักอย่างง เมื่อพัก คิดว่าจจะเอาภาพมาแทรกใน กล้องที่เป็นภาพหลักไม่ใช่ overlay และ แก้บัค reponsive ของมือถือ เมื่อเปิดกล้อง
+    .
+    .
+    .
