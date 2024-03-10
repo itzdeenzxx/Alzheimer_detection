@@ -362,135 +362,51 @@
       </div>
     </div>
   </div>
-
-  <div id="portfolio" class="our-portfolio section">
+  <div id="contact" class="contact-us section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5">
-          <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-            <!-- <h6>Our Portofolio</h6>
-            <h2>Discover Our Recent <em>Projects</em> And <span>Showcases</span></h2> -->
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="loop owl-carousel">
-            <div class="item">
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-01.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 101</h4>
-                      </a>
-                      <span>Marketing</span>
-                    </div>
-                  </div>
+        <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+          <form id="contact" action="" method="post">
+            <div class="row">
+              <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading">
+                  <h3 class="" style="color: #789461;">อุทยานสมอง</h3>
+                  <h2>เกมฝึกสมองด้วยความสนุก</h2>
+                  <h2>สู่สมองที่แข็งแกร่ง</h2>
                 </div>
               </div>
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 102</h4>
-                      </a>
-                      <span>Branding</span>
+              <div class="col-lg-12 mt-4">
+                <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ url_for('static', filename='img/banner_game_2.png') }}" class="d-block mx-auto game-img" alt="Image 1" data-image-id="1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='img/banner_count_game.png') }}" class="d-block mx-auto game-img" alt="Image 2" data-image-id="2">
+                        </div>
+                        <!-- Add more carousel items with additional images -->
                     </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                        <span class="sr-only"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                        <span class="sr-only"></span>
+                    </a>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-02.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 103</h4>
-                      </a>
-                      <span>Consulting</span>
-                    </div>
+                <form id="contactForm" action="/game_counter" method="post">
+                  <div class="col-lg-4 offset-lg-4">
+                          <!-- <button type="submit" class="main-button">Send Message Now</button> -->
                   </div>
-                </div>
-              </div>
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-05.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 104</h4>
-                      </a>
-                      <span>Artwork</span>
-                    </div>
-                  </div>
-                </div>
+                </form>
+                <form action="/game_counter" method="post">
+                  <button type="submit" class="button-start"><a>เข้าร่วมเกม</a></button>
+                </form>
               </div>
             </div>
-            <div class="item">
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-03.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 105</h4>
-                      </a>
-                      <span>Branding</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-06.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 106</h4>
-                      </a>
-                      <span>Artwork</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 107</h4>
-                      </a>
-                      <span>Creative</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-item">
-                <div class="thumb">
-                  <img src="{{ url_for('static', filename='images/portfolio-04.jpg') }}" alt="">
-                  <div class="hover-content">
-                    <div class="inner-content">
-                      <a href="#">
-                        <h4>Awesome Project 108</h4>
-                      </a>
-                      <span>Consulting</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -518,6 +434,9 @@
   <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
   <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
   <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
   <!-- เปลี่ยนทุกอย่างให้เป็น url for และ ทำการย้ายพวก bootstrap ให้เหมือนใน static-->
   <!-- แก้บัคเลเอ้าไม่ตรง -->
