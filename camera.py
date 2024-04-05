@@ -18,7 +18,7 @@ class VideoCamera(object):
     def __init__(self):
         self.camera_index = 0 
         self.video = cv2.VideoCapture(self.camera_index)
-        self.L_pose = Hand_L_Detector() 
+        self.L_pose = Hand_L_Detector()
         self.thumb_pink = thumb_pinky()
         self.check_count = True
         self.count_final_main = 0
@@ -37,15 +37,15 @@ class VideoCamera(object):
             self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
 
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
-            self.show_overlay()
+            # self.show_overlay()
             set_of_Hand_L +=1
             self.count_final_main = 0
 
         if set_of_Hand_L > 3 and self.count_final_main < 10 and set_of_thumb_pinky <= 3:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
 
-        elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3:
-            self.show_overlay()
+        elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3 and set_of_Hand_L > 3:
+            # self.show_overlay()
             set_of_thumb_pinky +=1
             self.count_final_main = 0
 
