@@ -9,7 +9,7 @@
     3 how to use app //tang
     5 หน้าเกมต่างๆ //tang
     7 แก้ responsive มือถือ ** //deen
-    
+    8 connect game.py disconnect cam_count.py
     tutorial -- 
     sound tutorial -- //tang
     footer index.html credit -- //tang

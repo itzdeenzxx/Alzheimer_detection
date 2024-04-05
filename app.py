@@ -20,7 +20,6 @@ def fitness():
 
 @app.route("/video_feed")
 def video_feed():
-<<<<<<< HEAD
     return Response(cam.gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # game
@@ -31,9 +30,7 @@ def game_counter():
 @app.route('/cam_game_count')
 def cam_game_count():
     return Response(cam_game.gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
-=======
-    return Response(cam.gen(), mimetype="multipart/x-mixed-replace; boundary=frame")
->>>>>>> b5ccad74f13c20cbf7c02cf154b88c33128a7eda
+
 
 
 if __name__ == "__main__":
