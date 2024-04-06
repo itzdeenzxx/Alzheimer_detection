@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/countdown.css') }}"> -->
   <link rel="icon" href="{{ url_for('static', filename='img/favicon_io/favicon.ico') }}" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +44,7 @@
   </header>
   <div class="container">
     <div class="camera-div"> 
+      <!-- <div class="container-time"></div> -->
       <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s" src="{{ url_for('static', filename='img/pre_start.jpg') }}">
     </div>
     <div>
@@ -53,10 +55,16 @@
         <div class="fullscreen-div">   
           <a class="fullscreen-btn" onclick="toggleFullscreen()" ><h5>เข้าสู่เต็มจอ</h5></a>
         </div>
+        <div class="fullscreen-div"> 
+          <form action="/">
+              <a href="/" class="back-btn-mobile" ><h5>กลับหน้าหลัก</h5></a>
+          </form>  
+        </div>
       </form>
     </div>
   </div>
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <!-- <script src="{{ url_for('static', filename='js/time_countdown.js') }}"></script> -->
   <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>

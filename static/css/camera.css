@@ -102,7 +102,9 @@ body, html {
   border-width: 4px 0 0;
   background: none;
 }
- 
+.back-btn-mobile {
+  display: none;
+}
 /* Fullscreen Button */
 .fullscreen-btn {
   display: block;
@@ -169,13 +171,55 @@ body, html {
       font-size: 23px;
     }
     .camera-main{
-      transform: translateY(-90%);
-      border-radius: 0;
-      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.31);
+      width: 100vw;
+      border-radius: 0cm;
+      box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.31);
     }
     .back-btn {
       display: none;
     }
+    .back-btn-mobile {
+      display: contents;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20%;
+      color: #515151;
+      font-size: 20px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 10px;
+    }
+    .fullscreen-btn {
+      display: contents;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20%;
+      
+    }
+    .fullscreen-div{
+      margin-top: 5%;
+    }
+  }
+  @media (max-width: 374px) {
+    .title_main {
+      font-size: 23px;
+    }
+    .camera-main{
+      transform: translateY(-90%);
+      border-radius: 0;
+      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.31);
+      width: fit-content;
+      height: fit-content;
+    }
+    .back-btn {
+      display: none;
+    }
+    
     .container {
       display: grid;
       grid-template-columns: 1fr;

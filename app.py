@@ -1,11 +1,11 @@
 from flask import Flask, render_template, Response, request
-from camera import VideoCamera
+from camera import VideoCamera , set_of_Header , set_of_thumb_pinky , confirm_timer
 
 app = Flask(__name__, static_folder="static")
 
 cam = VideoCamera()
 
-
+count_present = 0
 @app.route("/")
 def index():
     return render_template(
@@ -18,9 +18,10 @@ def fitness():
     return render_template("camera.html")
 
 
-@app.route("/video_feed")
+@app.route("/video_feed" , methods = ["POST" , "GET"])
 def video_feed():
     return Response(cam.gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 # game
 @app.route('/game_counter', methods=['GET', 'POST'])
@@ -30,7 +31,6 @@ def game_counter():
 @app.route('/cam_game_count')
 def cam_game_count():
     return Response(cam_game.gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
 
 
 if __name__ == "__main__":
