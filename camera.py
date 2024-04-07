@@ -121,7 +121,6 @@ class VideoCamera(object):
                 #reset countdown 30sec
                 # pause overlay 
                 
-        
         if set_of_Header > 3 and set_of_Ear <= 3:
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             
