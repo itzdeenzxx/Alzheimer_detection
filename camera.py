@@ -6,13 +6,14 @@ from datetime import datetime, timedelta
 from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
-
+from class_fitness.ear_head import Head_Ear_Detector
 mp_hands = mp.solutions.hands
 
 # set in fitness
 set_of_Hand_L = 1
 set_of_thumb_pinky = 1
 set_of_Header = 1
+set_of_Ear = 1
 # var time 30sec
 confirm_timer = False
 timer_started = False
@@ -34,6 +35,7 @@ class VideoCamera(object):
         self.L_pose = Hand_L_Detector()
         self.thumb_pink = thumb_pinky()
         self.header_finger = Header_finger()
+        self.ear = Head_Ear_Detector()
         self.check_count = True
         self.count_final_main = 0
 
@@ -95,9 +97,7 @@ class VideoCamera(object):
                     if not timer_paused:
                         pause_time = cv2.getTickCount()
                         timer_paused = True
-                        print("111")
-                    pause_duration = (cv2.getTickCount() - pause_time) / cv2.getTickFrequency()
-                    elapsed_time += pause_duration  # Add pause duration to elapsed time
+                        print("Paused at:", pause_time)
                     pause_requested = False  # Reset pause request flag
                 else:
                     if resume_requested:
@@ -106,31 +106,30 @@ class VideoCamera(object):
                             pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
                             start_time += pause_duration  # Adjust start time to resume
                             timer_paused = False
-                            print("222")
+                            print("Resumed at:", resume_time)
                         resume_requested = False  # Reset resume request flag
-                        print("333")
-                        
+
                 elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
                 remaining_time = max(0, countdown_time - elapsed_time)
                 remaining_time_continue = remaining_time
+                            
 
             text = f"Time left: {int(remaining_time_continue)} seconds"
             self.draw_text(frame, text, (frame.shape[1] // 2, 50))
-            
             if remaining_time_continue == 0 :
                 set_of_Header += 1
                 #reset countdown 30sec
-                set_of_Header += 1
-                countdown_time = 30
-                start_stop_continue = True
-                timer_started = False
-                timer_paused = False
                 # pause overlay 
+                
         
-        if set_of_Header > 3 :
-            pass
-        
-
+        if set_of_Header > 3 and set_of_Ear <= 3:
+            self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
+            
+        elif self.count_final_main >= 10 and set_of_Ear <= 3 and set_of_Header > 3:
+            # self.show_overlay()
+            set_of_thumb_pinky +=1
+            self.count_final_main = 0
+            
         ret, jpeg = cv2.imencode('.jpg', frame)
 
         if not ret:
