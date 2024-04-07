@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
-
+from class_fitness.ear_head import Head_Ear_Detector
 mp_hands = mp.solutions.hands
 
 # set in fitness
 set_of_Hand_L = 1
 set_of_thumb_pinky = 1
 set_of_Header = 1
-
+set_of_Ear = 1
 # var time 30sec
 confirm_timer = False
 timer_started = False
@@ -35,6 +35,7 @@ class VideoCamera(object):
         self.L_pose = Hand_L_Detector()
         self.thumb_pink = thumb_pinky()
         self.header_finger = Header_finger()
+        self.ear = Head_Ear_Detector()
         self.check_count = True
         self.count_final_main = 0
 
@@ -123,8 +124,13 @@ class VideoCamera(object):
                 # pause overlay 
                 
         
-        if set_of_Header > 3 :
-            pass
+        if set_of_Header > 3 and set_of_Ear <= 3:
+            self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
+            
+        elif self.count_final_main >= 10 and set_of_Ear <= 3 and set_of_Header > 3:
+            # self.show_overlay()
+            set_of_thumb_pinky +=1
+            self.count_final_main = 0
             
 
         ret, jpeg = cv2.imencode('.jpg', frame)
