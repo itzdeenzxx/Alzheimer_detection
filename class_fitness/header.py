@@ -28,7 +28,7 @@ class Header_finger:
         if results_hands.multi_hand_landmarks and results_pose.pose_landmarks:
             for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
                 label = MessageToDict(handedness_inner)['classification'][0]['label']
-
+            
                 index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
 
                 for landmark in results_pose.pose_landmarks.landmark:
