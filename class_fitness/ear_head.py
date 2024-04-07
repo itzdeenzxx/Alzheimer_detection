@@ -47,14 +47,14 @@ class Head_Ear_Detector:
                     
                     for landmark in results_pose.pose_landmarks.landmark:
                         if label == 'Right':
-                            if True:
+                            if self.calculate_distance(index_tip, landmark) < self.threshold:
                                 cv2.putText(frame, "Right great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                                 confirm_right += 1
                                 if confirm_right == 1 :
                                     count_right += 1
 
                         if label == 'Left':
-                            if True:
+                            if self.calculate_distance(index_tip, landmark) < self.threshold:
                                 cv2.putText(frame, "Left great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                                 confirm_left += 1
                                 if confirm_left == 1 :

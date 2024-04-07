@@ -97,9 +97,7 @@ class VideoCamera(object):
                     if not timer_paused:
                         pause_time = cv2.getTickCount()
                         timer_paused = True
-                        print("111")
-                    pause_duration = (cv2.getTickCount() - pause_time) / cv2.getTickFrequency()
-                    elapsed_time += pause_duration  # Add pause duration to elapsed time
+                        print("Paused at:", pause_time)
                     pause_requested = False  # Reset pause request flag
                 else:
                     if resume_requested:
@@ -108,13 +106,13 @@ class VideoCamera(object):
                             pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
                             start_time += pause_duration  # Adjust start time to resume
                             timer_paused = False
-                            print("222")
+                            print("Resumed at:", resume_time)
                         resume_requested = False  # Reset resume request flag
-                        print("333")
-                        
+
                 elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
                 remaining_time = max(0, countdown_time - elapsed_time)
                 remaining_time_continue = remaining_time
+                            
 
             text = f"Time left: {int(remaining_time_continue)} seconds"
             self.draw_text(frame, text, (frame.shape[1] // 2, 50))
@@ -132,7 +130,6 @@ class VideoCamera(object):
             set_of_thumb_pinky +=1
             self.count_final_main = 0
             
-
         ret, jpeg = cv2.imencode('.jpg', frame)
 
         if not ret:
