@@ -13,6 +13,7 @@ mp_hands = mp.solutions.hands
 set_of_Hand_L = 1
 set_of_thumb_pinky = 1
 set_of_Header = 1
+
 # var time 30sec
 confirm_timer = False
 timer_started = False
@@ -116,20 +117,15 @@ class VideoCamera(object):
 
             text = f"Time left: {int(remaining_time_continue)} seconds"
             self.draw_text(frame, text, (frame.shape[1] // 2, 50))
-            
             if remaining_time_continue == 0 :
                 set_of_Header += 1
                 #reset countdown 30sec
-                set_of_Header += 1
-                countdown_time = 30
-                start_stop_continue = True
-                timer_started = False
-                timer_paused = False
                 # pause overlay 
+                
         
         if set_of_Header > 3 :
             pass
-        
+            
 
         ret, jpeg = cv2.imencode('.jpg', frame)
 

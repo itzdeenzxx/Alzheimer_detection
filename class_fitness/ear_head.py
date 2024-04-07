@@ -17,7 +17,6 @@ class Head_Ear_Detector:
         self.pose = mp_pose.Pose(min_detection_confidence=0.5)
         self.threshold = 0.05
         
-
     def calculate_distance(self, lm1, lm2):
         return math.sqrt((lm1.x - lm2.x)**2 + (lm1.y - lm2.y)**2)
 
