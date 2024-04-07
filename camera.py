@@ -13,13 +13,19 @@ mp_hands = mp.solutions.hands
 set_of_Hand_L = 1
 set_of_thumb_pinky = 1
 set_of_Header = 1
-#var break time 10sec
+# var time 30sec
 confirm_timer = False
-
 timer_started = False
-countdown_time = 20
-remaining_time_continue = 20
+countdown_time = 30 # countdown
+remaining_time_continue = 30 # countdown output
+start_time = 30
 start_stop_continue = True
+pause_requested = False  
+timer_paused = False  
+pause_time = 0 
+resume_requested = False
+elapsed_time = 0
+start_stop = False
 
 class VideoCamera(object):
     def __init__(self):
@@ -43,8 +49,8 @@ class VideoCamera(object):
         cv2.putText(image, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
         
     def get_frame(self):
-        global set_of_Hand_L , set_of_thumb_pinky
-        global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue
+        global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
+        global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue , pause_requested , timer_paused ,pause_time , resume_requested , elapsed_time , start_stop
         
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
@@ -67,31 +73,63 @@ class VideoCamera(object):
             # self.show_overlay()
             set_of_thumb_pinky +=1
             self.count_final_main = 0
+            
         if set_of_thumb_pinky > 3 and set_of_Header <= 3:
             self.header_finger.detect_and_head_finger_distance(frame)
             if self.header_finger.confirm_left and self.header_finger.confirm_right:
-                confirm_timer = True
                 start_stop = start_stop_continue
-            else:
-                confirm_timer = False
-            print(confirm_timer)
+                resume_requested = True
+            else : 
+                pause_requested = True
             
-            if confirm_timer:
+            if True:
                 if not timer_started:
-                    if start_stop :
+                    if start_stop:
                         start_time = cv2.getTickCount()
                         start_stop_continue = False
                     timer_started = True
                 current_time = cv2.getTickCount()
+
+                # Check if pausing is requested
+                if pause_requested:
+                    if not timer_paused:
+                        pause_time = cv2.getTickCount()
+                        timer_paused = True
+                        print("111")
+                    pause_duration = (cv2.getTickCount() - pause_time) / cv2.getTickFrequency()
+                    elapsed_time += pause_duration  # Add pause duration to elapsed time
+                    pause_requested = False  # Reset pause request flag
+                else:
+                    if resume_requested:
+                        if timer_paused:
+                            resume_time = cv2.getTickCount()
+                            pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
+                            start_time += pause_duration  # Adjust start time to resume
+                            timer_paused = False
+                            print("222")
+                        resume_requested = False  # Reset resume request flag
+                        print("333")
+                        
                 elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
                 remaining_time = max(0, countdown_time - elapsed_time)
                 remaining_time_continue = remaining_time
-            else:
-                timer_started = False
-                
-            text = f"Time left: {int(remaining_time)} seconds"
+
+            text = f"Time left: {int(remaining_time_continue)} seconds"
             self.draw_text(frame, text, (frame.shape[1] // 2, 50))
-                
+            
+            if remaining_time_continue == 0 :
+                set_of_Header += 1
+                #reset countdown 30sec
+                set_of_Header += 1
+                countdown_time = 30
+                start_stop_continue = True
+                timer_started = False
+                timer_paused = False
+                # pause overlay 
+        
+        if set_of_Header > 3 :
+            pass
+        
 
         ret, jpeg = cv2.imencode('.jpg', frame)
 
@@ -102,7 +140,6 @@ class VideoCamera(object):
     def show_overlay(self):
         time.sleep(2)
             
-
     def gen(self):
         while True:
             frame = self.get_frame()

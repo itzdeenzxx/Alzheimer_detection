@@ -12,7 +12,6 @@ def index():
         "index.html", sound_file_url="/static/sound/welcome_sound.wav"
     )
 
-
 @app.route("/fitness", methods=["GET", "POST"])
 def fitness():
     return render_template("camera.html")

@@ -21,7 +21,7 @@ class VideoCamera_Game(object):
         self.video.release()
 
     def get_frame(self):
-
+        
         ret, frame = self.video.read()
 
         if not ret:
