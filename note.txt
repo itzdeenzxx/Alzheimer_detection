@@ -1,23 +1,27 @@
 สำเร็จ
     1 โป้งก้อย เงื่อนไข 
     4 nav game (ขอบฟ้ายังไม่แก้)
-    6 link game with flask หน้า html ให้เข้า flask  //deen
+    -- จับหัวนวดศรีษระ
+    7 แก้ responsive มือถือ ** //deen
+    8 connect game.py disconnect cam_count.py
+    6 link game with flask หน้า html ให้เข้า flask  //deen 
 
 
 ยังไม่เสร็จ
     2 overlay pause (times up) //deen
     3 how to use app //tang
     5 หน้าเกมต่างๆ //tang
-    7 แก้ responsive มือถือ ** //deen
-    8 connect game.py disconnect cam_count.py
-    tutorial -- 
+
+    1st **(เหลือ เมื่อจับถึงจะนับเวลา เมื่อปล่อยเวลาจะหยุด เมื่อจับจะนับต่อ)** 
+    
+    == last ==
+    tutorial -- (กด next แล้ววงแนะนำปุ่ม อาจเป็นรูปภาพพื้นหลังดำโปร่งใส มีวงกลมแนะนำ)
     sound tutorial -- //tang
     footer index.html credit -- //tang
     
 ++ main-topic-continue ++
-
-    -- จับหัวนวดศรีษระ (เมื่อจับถึงจะนับเวลา เมื่อปล่อยเวลาจะหยุด เมื่อจับจะนับต่อ)
     -- จับไหล่ ไหปลาร้า นวด
+    -- จับหูสลับไปมา
     etc.
 
 !! จำ debug วันต่อไป

@@ -1,67 +1,44 @@
-import cv2
-import math
-import mediapipe as mp
-from google.protobuf.json_format import MessageToDict
+# ประกาศตัวแปรที่จำเป็น
+confirm_timer = True  # ตัวแปรเพื่อยืนยันการนับถอยหลัง
+timer_started = False  # ตัวแปรเพื่อตรวจสอบว่านับถอยหลังเริ่มต้นหรือไม่
+start_stop = True  # ตัวแปรเพื่อแสดงถึงการเริ่มหรือหยุดการนับถอยหลัง
+start_stop_continue = False  # ตัวแปรเพื่อตรวจสอบว่าการเริ่มหรือหยุดการนับถอยหลังยังคงดำเนินการอยู่หรือไม่
+countdown_time = 60  # เวลาที่กำหนดในการนับถอยหลัง (วินาที)
+pause_requested = False  # ตัวแปรเพื่อตรวจสอบว่ามีคำขอให้หยุดชั่วคราวหรือไม่
+timer_paused = False  # ตัวแปรเพื่อแสดงถึงการหยุดชั่วคราวของการนับถอยหลัง
+pause_time = 0  # เวลาที่เก็บไว้เมื่อการหยุดชั่วคราวเกิดขึ้น
+resume_requested = False  # ตัวแปรเพื่อตรวจสอบว่ามีคำขอให้ดำเนินการต่อหลังจากการหยุดชั่วคราวหรือไม่
 
-mp_hands = mp.solutions.hands
-confirm_right = 0
-confirm_left = 0
-count_right = 0
-count_left = 0
-sumcont = 0
-class Hand_L_Detector:
-    def __init__(self):
-        self.hands = mp_hands.Hands(min_detection_confidence=0.3)
-        
-    def calculate_distance(self, lm1, lm2):
-        return math.sqrt((lm1.x - lm2.x)**2 + (lm1.y - lm2.y)**2)
+# เงื่อนไขสำหรับการหยุดชั่วคราว
+if confirm_timer:
+    if not timer_started:
+        if start_stop:
+            start_time = cv2.getTickCount()
+            start_stop_continue = False
+        timer_started = True
+    current_time = cv2.getTickCount()
 
-    def detect_and_count_finger_distance(self, frame):
-        global confirm_right, confirm_left, count_right, count_left
-        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        results_hands = self.hands.process(rgb_frame)
+    # Check if pausing is requested
+    if pause_requested:
+        if not timer_paused:
+            pause_time = cv2.getTickCount()
+            timer_paused = True
+        pause_duration = (cv2.getTickCount() - pause_time) / cv2.getTickFrequency()
+        elapsed_time += pause_duration  # Add pause duration to elapsed time
+        pause_requested = False  # Reset pause request flag
+    else:
+        # Check if resuming is requested
+        if resume_requested:
+            if timer_paused:
+                resume_time = cv2.getTickCount()
+                pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
+                start_time += pause_duration  # Adjust start time to resume
+                timer_paused = False
+            resume_requested = False  # Reset resume request flag
 
-        if results_hands.multi_hand_landmarks:
-             for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
-                    label = MessageToDict(handedness_inner)['classification'][0]['label']
+    elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
+    remaining_time = max(0, countdown_time - elapsed_time)
+    remaining_time_continue = remaining_time
 
-                    thumb_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.THUMB_TIP]
-                    index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
-                    middle_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
-                    ring_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
-                    pinky_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_TIP]
-                    thumb_ip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.THUMB_IP]
-                    index_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_DIP]
-                    middle_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_DIP]
-                    ring_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.RING_FINGER_DIP]
-                    pinky_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_DIP]
-
-                    if label == 'Left':
-                        if thumb_tip.x < thumb_ip.x and index_tip.y > index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
-                            cv2.putText(frame, "Left great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                            
-                    if label == 'Right':
-                        if thumb_tip.x > thumb_ip.x and index_tip.y < index_dip.y and middle_tip.y > middle_dip.y and ring_tip.y > ring_dip.y and pinky_tip.y > pinky_dip.y:
-                            cv2.putText(frame, "Right great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                            
-                    mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)
-                
-    def set_zero(self):
-        global confirm_right, confirm_left
-        confirm_right, confirm_left = 0, 0
-
-
-detector = Hand_L_Detector()
-
-cap = cv2.VideoCapture(0)
-while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
-        break
-    detector.detect_and_count_finger_distance(frame)
-    
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
-
+text = f"Time left: {int(remaining_time_continue)} seconds"
+self.draw_text(frame, text, (frame.shape[1] // 2, 50))

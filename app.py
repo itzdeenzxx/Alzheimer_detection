@@ -7,6 +7,8 @@ app = Flask(__name__, static_folder="static")
 cam = VideoCamera()
 cam_game = VideoCamera_Game()
 
+count_present = 0
+
 
 @app.route("/")
 def index():
@@ -20,7 +22,7 @@ def fitness():
     return render_template("camera.html")
 
 
-@app.route("/video_feed")
+@app.route("/video_feed", methods=["POST", "GET"])
 def video_feed():
     return Response(cam.gen(), mimetype="multipart/x-mixed-replace; boundary=frame")
 

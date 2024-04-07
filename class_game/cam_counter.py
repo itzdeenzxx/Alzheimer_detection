@@ -25,7 +25,7 @@ class VideoCamera_Game(object):
 
         if not ret:
             return None
-        
+
         self.game.start_tracking(frame)
         self.game.show_number(frame)
         ret, jpeg = cv2.imencode(".jpg", frame)
@@ -36,7 +36,7 @@ class VideoCamera_Game(object):
 
     def gen(self):
         while True:
-            
+
             frame = self.get_frame()
 
             yield (
