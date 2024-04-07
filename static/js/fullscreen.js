@@ -13,7 +13,7 @@ function toggleFullscreen() {
 function checkOrientation() {
     if (window.orientation === 90 || window.orientation === -90) {
         const fullscreenElement = document.getElementById('fullscreen-cam');
-        
+
         if (fullscreenElement.requestFullscreen) {
             fullscreenElement.requestFullscreen().catch(err => {
                 console.error(`Error attempting to enable full-screen mode: ${err.message}`);

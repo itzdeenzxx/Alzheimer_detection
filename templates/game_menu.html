@@ -18,7 +18,7 @@
     href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
 
-  <title>ห้องออกกำลังกาย</title>
+  <title>ห้องเล่นเกม</title>
 </head>
 <!-- Responsive function  -->
 
@@ -28,11 +28,11 @@
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
-            <h1 class="title_main">ห้องแบบทดสอบ</h1>
+            <h1 class="title_main">ห้องเล่นเกม</h1>
             <div>
               <form action="/">
                 <button class="back-btn">
-                    กลับหน้าหลัก
+                  กลับหน้าหลัก
                 </button>
               </form>
             </div>
@@ -42,27 +42,31 @@
     </div>
   </header>
   <div class="container">
-    <div class="camera-div"> 
-      <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s" src="{{ url_for('static', filename='img/pre_start.jpg') }}">
+    <div class="camera-div">
+      <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
+        src="{{ url_for('static', filename='img/pre_start.jpg') }}">
     </div>
     <div>
-        <button id="toggle_camera" onclick="toggleCamera()" class="start-btn center_1 wow slideInUp" data-wow-duration="1s" data-wow-delay="0s">
-          <h4>เริ่มทำแบบทดสอบ</h4>
-        </button>
+      <button id="toggle_camera" onclick="toggleCameraGame()" class="start-btn center_1 wow slideInUp"
+        data-wow-duration="1s" data-wow-delay="0s">
+        <h4>เริ่มเล่นเกม</h4>
+      </button>
       <form action="">
-        <div class="fullscreen-div">   
-          <a class="fullscreen-btn" onclick="toggleFullscreen()" ><h5>เข้าสู่เต็มจอ</h5></a>
+        <div class="fullscreen-div">
+          <a class="fullscreen-btn" onclick="toggleFullscreenGame()">
+            <h5>เข้าสู่เต็มจอ</h5>
+          </a>
         </div>
       </form>
     </div>
   </div>
   <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
   <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
   <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
   <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fullscreengame.js') }}"></script>
 </body>
 
 </html>
