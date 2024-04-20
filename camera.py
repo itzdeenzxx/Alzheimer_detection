@@ -7,13 +7,20 @@ from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
 from class_fitness.ear_head import Head_Ear_Detector
+from class_fitness.video_player import VideoPlayer
 mp_hands = mp.solutions.hands
 
 # set in fitness
-set_of_Hand_L = 1
-set_of_thumb_pinky = 1
-set_of_Header = 1
-set_of_Ear = 1
+set_of_Hand_L = 0
+set_of_thumb_pinky = 0
+set_of_Header = 0
+set_of_Ear = 0
+
+#var tutorail
+select_player = 1
+pass_fitness = 0
+
+
 # var time 30sec
 confirm_timer = False
 timer_started = False
@@ -39,9 +46,16 @@ class VideoCamera(object):
         self.check_count = True
         self.count_final_main = 0
 
+        self.player = VideoPlayer()
+
     def __del__(self):
         self.video.release()
-        
+    
+    def tutorail(self,frame,select) :
+        # if select == 1 :
+        #     path = 'static/video/video-test.mp4'
+        #     self.player.insert_video(frame,path)
+        pass
     def draw_text(self,image, text, position, font_scale=1, font_thickness=2):
         font = cv2.FONT_HERSHEY_SIMPLEX
         text_size, _ = cv2.getTextSize(text, font, font_scale, font_thickness)
@@ -53,15 +67,21 @@ class VideoCamera(object):
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
         global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue , pause_requested , timer_paused ,pause_time , resume_requested , elapsed_time , start_stop
-        
+        global select_player , pass_fitness
+
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
-        if not ret:
-            return None
         
-        
+                
         if self.count_final_main < 10 and set_of_Hand_L <= 3:
-            self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
+            if set_of_Hand_L == 0 :
+                self.player.insert_video(frame, 'static\video\video-test.mp4')
+                if not ret:
+                    self.video.release()
+                    self.video = cv2.VideoCapture(0)
+                    set_of_Hand_L = 1
+            else :
+                self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
 
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
             # self.show_overlay()
