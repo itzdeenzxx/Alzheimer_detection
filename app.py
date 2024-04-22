@@ -1,5 +1,5 @@
-from flask import Flask, render_template, Response, request
-from camera import VideoCamera
+from flask import Flask, render_template, Response, request , url_for
+from camera import VideoCamera , select_player
 from class_game.cam_counter import VideoCamera_Game
 
 app = Flask(__name__, static_folder="static")
@@ -9,23 +9,26 @@ cam_game = VideoCamera_Game()
 
 count_present = 0
 
-
 @app.route("/")
 def index():
     return render_template(
         "index.html", sound_file_url="/static/sound/welcome_sound.wav"
     )
 
-
 @app.route("/fitness", methods=["GET", "POST"])
 def fitness():
-    return render_template("camera.html")
+    global select_player
+    print(select_player)
+    if select_player == 1 :
+        video_src = url_for('static', filename='video/video-test.mp4')
+        return render_template("camera.html" , queue=select_player , video_src=video_src)
+    else :
+        return render_template("camera.html" , queue=select_player)
 
 
 @app.route("/video_feed", methods=["POST", "GET"])
 def video_feed():
     return Response(cam.gen(), mimetype="multipart/x-mixed-replace; boundary=frame")
-
 
 # game
 @app.route("/game_counter", methods=["GET", "POST"])

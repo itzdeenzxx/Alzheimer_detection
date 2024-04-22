@@ -9,7 +9,6 @@ from class_fitness.header import Header_finger
 from class_fitness.ear_head import Head_Ear_Detector
 from class_fitness.video_player import VideoPlayer
 mp_hands = mp.solutions.hands
-
 # set in fitness
 set_of_Hand_L = 0
 set_of_thumb_pinky = 0
@@ -17,10 +16,9 @@ set_of_Header = 0
 set_of_Ear = 0
 
 #var tutorail
-select_player = 1
-pass_fitness = 0
-
-
+select_player = 0
+pass_checkvdo = 0
+video_path = "static/video/video-test3.mp4"
 # var time 30sec
 confirm_timer = False
 timer_started = False
@@ -51,11 +49,6 @@ class VideoCamera(object):
     def __del__(self):
         self.video.release()
     
-    def tutorail(self,frame,select) :
-        # if select == 1 :
-        #     path = 'static/video/video-test.mp4'
-        #     self.player.insert_video(frame,path)
-        pass
     def draw_text(self,image, text, position, font_scale=1, font_thickness=2):
         font = cv2.FONT_HERSHEY_SIMPLEX
         text_size, _ = cv2.getTextSize(text, font, font_scale, font_thickness)
@@ -67,20 +60,22 @@ class VideoCamera(object):
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
         global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue , pause_requested , timer_paused ,pause_time , resume_requested , elapsed_time , start_stop
-        global select_player , pass_fitness
+        global select_player , pass_checkvdo , video_path
 
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
         
-                
         if self.count_final_main < 10 and set_of_Hand_L <= 3:
-            if set_of_Hand_L == 0 :
-                self.player.insert_video(frame, 'static\video\video-test.mp4')
-                if not ret:
-                    self.video.release()
-                    self.video = cv2.VideoCapture(0)
-                    set_of_Hand_L = 1
+            if set_of_Hand_L == 0:
+                print("11")
+                if pass_checkvdo == 0 :
+                    self.video = cv2.VideoCapture(video_path)
+                    pass_checkvdo += 1
+                if not ret :
+                    self.video = cv2.VideoCapture(self.camera_index)
+                print(pass_checkvdo)
             else :
+                #เมื่อวิดีโอเล่นจบเข้าอันนี้
                 self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
 
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
@@ -153,6 +148,8 @@ class VideoCamera(object):
 
         if not ret:
             return None
+        
+        print("22")
         return jpeg.tobytes()
     
     def show_overlay(self):
