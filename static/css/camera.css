@@ -6,7 +6,10 @@ body, html {
     justify-content: center;
     align-items: center;
 }
-
+iframe {
+  width: 854px;
+  height: 480px;
+}
 .container {
   display: grid;
   grid-template-columns: 1fr;
@@ -37,7 +40,84 @@ body, html {
 }
 
 /*button */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.start-btn {
+  flex-grow: 1;
+  margin: 0 5px;
+}
+#toggle_camera {
+  flex-grow: 2;
+}
+.control-btn {
+  appearance: button;
+  background-color: #294B29;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Prompt", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+  margin-right: 10px;
+}
+.control-btn:after {
+  background-clip: padding-box;
+  background-color: #50623A;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
 
+.control-btn:main,
+.start-btn:focus {
+  user-select: auto;
+}
+
+.control-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.control-btn:disabled {
+  cursor: pointer;
+}
+
+.control-btn:active {
+  border-width: 4px 0 0;
+  background: none;
+}
+/* --------------- */
 .start-btn {
   appearance: button;
   background-color: #294B29;
@@ -67,6 +147,8 @@ body, html {
   vertical-align: middle;
   white-space: nowrap;
   width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .start-btn:after {
@@ -95,15 +177,124 @@ body, html {
 }
 
 .start-btn:disabled {
-  cursor: auto;
+  cursor: pointer;
 }
 
 .start-btn:active {
   border-width: 4px 0 0;
+  background-color: #294B29;
   background: none;
 }
 .back-btn-mobile {
   display: none;
+}
+.finished span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.finished span:after {
+  content: '\2714';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.finished:hover span {
+  padding-right: 25px;
+}
+
+.finished:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+ 
+.previous span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.previous span:after {
+  content: '\00AB';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -20px;
+  transition: 0.5s;
+}
+
+.previous:hover span {
+  padding-left: 25px;
+}
+
+.previous:hover span:after {
+  opacity: 1;
+  left: 0;
+}
+
+/* ----------------- */
+.next span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.next span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.next:hover span {
+  padding-right: 25px;
+}
+
+.next:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.popup-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tutorial-btn {
+  background-color: #789461;
+  border: 1px solid #DBE7C9;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Prompt", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.tutorial-btn:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
 }
 /* Fullscreen Button */
 .fullscreen-btn {
@@ -168,30 +359,36 @@ body, html {
   position: fixed; 
   top: 50%; 
   left: 50%; 
+  border-radius: 12px;
   transform: translate(-50%, -50%);
-  border: 2px solid #ccc;
-  background-color: #fff;
+  border: 2px solid #50623A;
+  background-color: #789461;
   padding: 20px;
   z-index: 1000;
 }
 
+
 /* จัดรูปแบบปุ่มปิด */
 .close {
-  color: #aaa;
+  color: rgb(163, 0, 0);
   float: right;
-  font-size: 28px;
+  font-size: 100px;
   font-weight: bold;
+  position: absolute; /* ตำแหน่งแบบสัมผัส */
+  z-index: 1100;
+  top: 0;
+  right: 0;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }
 
 /* responsive */
-  @media (max-width: 767px) {
+  @media (max-width: 1024px) {
     .title_main {
       font-size: 23px;
     }
@@ -199,6 +396,9 @@ body, html {
       width: 100vw;
       border-radius: 0cm;
       box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.31);
+    }
+    .tutorial-btn {
+      padding: 10px 30px;
     }
     .back-btn {
       display: none;
@@ -218,16 +418,37 @@ body, html {
       grid-template-rows: auto auto auto;
       gap: 10px;
     }
+    .btn-container {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+    .start-btn{
+      margin-left: 0px;
+      margin-right: 0px;
+      font-size: 18px;
+      padding: 7px 8px;
+      margin: 0;
+    }
+    .control-btn {
+      font-size: 18px;
+      padding: 7px 8px;
+    }
     .fullscreen-btn {
       display: contents;
       text-align: center;
       justify-content: center;
       align-items: center;
       padding-top: 20%;
+      font-size: 18px;
       
     }
     .fullscreen-div{
       margin-top: 5%;
+    }
+    iframe {
+      width: 352px;
+      height: 288px;
     }
   }
 
@@ -245,7 +466,22 @@ body, html {
     .back-btn {
       display: none;
     }
-    
+    .btn-container {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+    .start-btn{
+      margin-left: 0px;
+      margin-right: 0px;
+      font-size: 18px;
+      padding: 7px 8px;
+      margin: 0;
+    }
+    .control-btn {
+      font-size: 18px;
+      padding: 7px 8px;
+    }
     .container {
       display: grid;
       grid-template-columns: 1fr;

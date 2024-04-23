@@ -49,11 +49,13 @@ var cameraStarted = false;
 function toggleCamera() {
     if (!cameraStarted) {
         video.src = "/video_feed";
-        button.innerHTML = "พักการออกกำลังกาย";
+        // button.style.backgroundColor = "red";
+        button.textContent = "พักการออกกำลังกาย";
         cameraStarted = true;
     } else {
         video.src = "static/img/pre_start.jpg";
-        button.innerHTML = "เริ่มออกกำลังกาย";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
         cameraStarted = false;
     }
 }
