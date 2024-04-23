@@ -43,26 +43,55 @@
         </div>
     </header>
     <div class="container">
-        <div class="camera-div">
+    </div>
+    <div class="camera-div">
+        <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
+            src="{{ url_for('static', filename='img/pre_start.jpg') }}">
+    </div>
+
+    <div>
+        <button id="toggle_camera" onclick="toggleCamera()" class="start-btn center_1 wow slideInUp"
+            data-wow-duration="1s" data-wow-delay="0s">
+            <h4>เริ่มออกกำลังกาย</h4>
+        </button>
+        <div>
+            {% if queue == 1 %}
+            <form action="/fitness2">
+                <button class="start-btn">
+                    ต่อไป
+                </button>
+            </form>
+
+            {% elif queue == 2 %}
+            <form action="/fitness3">
+                <button class="start-btn">
+                    ต่อไป
+                </button>
+            </form>
+
+            {% elif queue == 3 %}
+            <form action="/fitness4">
+                <button class="start-btn">
+                    ต่อไป
+                </button>
+            </form>
+            {% endif %}
+        </div>
+        <div>
             <button onclick="openPopup()">เปิดวิดีโอ</button>
             <div id="videoPopup" class="popup">
                 <span class="close" onclick="closePopup()">&times;</span>
-                <iframe width="854" height="480" src="https://www.youtube.com/embed/slRDv2BUAPo?si=Bk9LEdYhQ3QEU271" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>            </div>
-            <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
-                src="{{ url_for('static', filename='img/pre_start.jpg') }}">
+                <iframe width="854" height="480" src="https://www.youtube.com/embed/slRDv2BUAPo?si=Bk9LEdYhQ3QEU271"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
         </div>
-
-        <div>
-            <button id="toggle_camera" onclick="toggleCamera()" class="start-btn center_1 wow slideInUp"
-                data-wow-duration="1s" data-wow-delay="0s">
-                <h4>เริ่มออกกำลังกาย</h4>
-            </button>
-            <form action="">
-                <div class="fullscreen-div">
-                    <a class="fullscreen-btn" onclick="toggleFullscreen()">
-                        <h5>เข้าสู่เต็มจอ</h5>
-                    </a>
-                </div>
+        <form action="">
+            <div class="fullscreen-div">
+                <a class="fullscreen-btn" onclick="toggleFullscreen()">
+                    <h5>เข้าสู่เต็มจอ</h5>
+                </a>
                 <div class="fullscreen-div">
                     <form action="/">
                         <a href="/" class="back-btn-mobile">
@@ -70,39 +99,39 @@
                         </a>
                     </form>
                 </div>
+        </form>
+        <div>
+            {% if queue == 1 %}
+            <form action="/fitness2">
+                <button class="back-btn">
+                    ต่อไป
+                </button>
             </form>
-            <div>
-                {% if queue == 1 %}
-                <form action="/fitness2">
-                    <button class="back-btn">
-                        ต่อไป
-                    </button>
-                </form>
 
-                {% elif queue == 2 %}
-                <form action="/fitness3">
-                    <button class="back-btn">
-                        ต่อไป
-                    </button>
-                </form>
+            {% elif queue == 2 %}
+            <form action="/fitness3">
+                <button class="back-btn">
+                    ต่อไป
+                </button>
+            </form>
 
-                {% elif queue == 3 %}
-                <form action="/fitness4">
-                    <button class="back-btn">
-                        ต่อไป
-                    </button>
-                </form>
-                {% endif %}
-            </div>
+            {% elif queue == 3 %}
+            <form action="/fitness4">
+                <button class="back-btn">
+                    ต่อไป
+                </button>
+            </form>
+            {% endif %}
         </div>
-        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-        <!-- <script src="{{ url_for('static', filename='js/time_countdown.js') }}"></script> -->
-        <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    </div>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/time_countdown.js') }}"></script> -->
+    <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
 </body>
 
 </html>

@@ -4,14 +4,11 @@ from class_game.cam_counter import VideoCamera_Game
 
 app = Flask(__name__, static_folder="static")
 
-def add_set_main(setm) :
-    global set_main
-    set_main = setm
+
 
 set_main = 1
 select_player = 0
 count_present = 0
-
 
 @app.route("/") 
 def index():
@@ -23,31 +20,31 @@ def index():
 def fitness():
     global set_main
     set_main = 1
-    add_set_main(set_main)
+    cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
     
 @app.route("/fitness2", methods=["GET", "POST"])
 def fitness2():
     global set_main
     set_main = 2
-    add_set_main(set_main)
+    cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
 
 @app.route("/fitness3", methods=["GET", "POST"])
 def fitness3():
     global set_main
     set_main = 3
-    add_set_main(set_main)
+    cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
 
 @app.route("/fitness4", methods=["GET", "POST"])
 def fitness4():
     global set_main
-    add_set_main(set_main)
     set_main = 4
+    cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
 
-cam = VideoCamera(set_main)
+cam = VideoCamera()
 cam_game = VideoCamera_Game()
 
 @app.route("/video_feed", methods=["POST", "GET"])

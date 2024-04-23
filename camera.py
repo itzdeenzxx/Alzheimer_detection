@@ -17,7 +17,7 @@ set_of_Header = 0
 set_of_Ear = 0
 #var tutorail
 select_player = True
-pass_checkvdo = 0
+pass_check = 0
 video_path = "static/video/video-test3.mp4"
 # var time 30sec
 confirm_timer = False
@@ -34,7 +34,7 @@ elapsed_time = 0
 start_stop = False
 
 class VideoCamera(object):
-    def __init__(self,setmain_var):
+    def __init__(self):
         self.camera_index = 0 
         self.video = cv2.VideoCapture(self.camera_index)
         self.L_pose = Hand_L_Detector()
@@ -43,7 +43,7 @@ class VideoCamera(object):
         self.ear = Head_Ear_Detector()
         self.check_count = True
         self.count_final_main = 0
-        self.set_main = setmain_var
+        self.set_main = 1
 
     def __del__(self):
         self.video.release()
@@ -59,8 +59,8 @@ class VideoCamera(object):
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
         global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue , pause_requested , timer_paused ,pause_time , resume_requested , elapsed_time , start_stop
-        global select_player , pass_checkvdo , video_path
-        global set_main
+        global select_player , pass_check , video_path
+        global set_main , pass_check
 
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
@@ -139,11 +139,11 @@ class VideoCamera(object):
         if not ret:
             return None
         
-        # print("22")
         return jpeg.tobytes()
     
-    def show_overlay(self):
-        time.sleep(2)
+    def set_of_main(self,check):
+        self.set_main = check
+        self.count_final_main = 0
             
     def gen(self):
         while True:
