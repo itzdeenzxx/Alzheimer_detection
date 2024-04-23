@@ -44,18 +44,14 @@
     </header>
     <div class="container">
         <div class="camera-div">
-            <!-- {% if queue == 1 %}
-            <video width="1280" height="720" controls autoplay class="camera-main wow slideInDown"
-                data-wow-duration="1s" data-wow-delay="0s" >
-                <source src="{{ video_src }}" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-            {% else %} -->
+            <button onclick="openPopup()">เปิดวิดีโอ</button>
+            <div id="videoPopup" class="popup">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <iframe width="854" height="480" src="https://www.youtube.com/embed/slRDv2BUAPo?si=Bk9LEdYhQ3QEU271" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>            </div>
             <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
                 src="{{ url_for('static', filename='img/pre_start.jpg') }}">
-            <!-- {% endif %} -->
         </div>
-        
+
         <div>
             <button id="toggle_camera" onclick="toggleCamera()" class="start-btn center_1 wow slideInUp"
                 data-wow-duration="1s" data-wow-delay="0s">
@@ -75,16 +71,38 @@
                     </form>
                 </div>
             </form>
+            <div>
+                {% if queue == 1 %}
+                <form action="/fitness2">
+                    <button class="back-btn">
+                        ต่อไป
+                    </button>
+                </form>
+
+                {% elif queue == 2 %}
+                <form action="/fitness3">
+                    <button class="back-btn">
+                        ต่อไป
+                    </button>
+                </form>
+
+                {% elif queue == 3 %}
+                <form action="/fitness4">
+                    <button class="back-btn">
+                        ต่อไป
+                    </button>
+                </form>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <!-- <script src="{{ url_for('static', filename='js/time_countdown.js') }}"></script> -->
-    <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <!-- <script src="{{ url_for('static', filename='js/time_countdown.js') }}"></script> -->
+        <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
 </body>
 
 </html>

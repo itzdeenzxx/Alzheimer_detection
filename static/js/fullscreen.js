@@ -61,4 +61,11 @@ function toggleCamera() {
 
 // ตรวจสอบรูปไหนที่กำลังอยู่หน้าสไลด์
 
-
+function openPopup() {
+    document.getElementById("videoPopup").style.display = "block";
+  }
+  
+  // ฟังก์ชันเพื่อปิดป็อปอัพ
+  function closePopup() {
+    document.getElementById("videoPopup").style.display = "none";
+  }
