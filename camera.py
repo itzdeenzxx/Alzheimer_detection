@@ -7,7 +7,7 @@ from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
 from class_fitness.ear_head import Head_Ear_Detector
-from class_fitness.video_player import VideoPlayer
+
       
 mp_hands = mp.solutions.hands
 # set in fitness
@@ -65,15 +65,16 @@ class VideoCamera(object):
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
         
-        if self.count_final_main < 10 and set_of_Hand_L <= 3 and self.set_main == 1:
+        if self.count_final_main < 10 and set_of_Hand_L < 3 and self.set_main == 1:
             self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
 
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
             # self.show_overlay()
             set_of_Hand_L +=1
+            print(set_of_Hand_L)
             self.count_final_main = 0
 
-        if self.count_final_main < 10 and set_of_thumb_pinky <= 3 and self.set_main == 2:
+        if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
 
         elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3 and set_of_Hand_L > 3:
@@ -81,42 +82,42 @@ class VideoCamera(object):
             set_of_thumb_pinky +=1
             self.count_final_main = 0
             
-        if self.set_main == 3 and set_of_Header <= 3:
+        if self.set_main == 3:
             self.header_finger.detect_and_head_finger_distance(frame)
-            if self.header_finger.confirm_left and self.header_finger.confirm_right:
-                start_stop = start_stop_continue
-                resume_requested = True
-            else : 
-                pause_requested = True
-            
-            if True:
-                if not timer_started:
-                    if start_stop:
-                        start_time = cv2.getTickCount()
-                        start_stop_continue = False
-                    timer_started = True
-                current_time = cv2.getTickCount()
+            # if self.header_finger.confirm_left and self.header_finger.confirm_right:
+            #     start_stop = start_stop_continue
+            #     resume_requested = True
+            # else : 
+            #     pause_requested = True
 
-                # Check if pausing is requested
-                if pause_requested:
-                    if not timer_paused:
-                        pause_time = cv2.getTickCount()
-                        timer_paused = True
-                        print("Paused at:", pause_time)
-                    pause_requested = False  # Reset pause request flag
-                else:
-                    if resume_requested:
-                        if timer_paused:
-                            resume_time = cv2.getTickCount()
-                            pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
-                            start_time += pause_duration  # Adjust start time to resume
-                            timer_paused = False
-                            print("Resumed at:", resume_time)
-                        resume_requested = False  # Reset resume request flag
+            # if True:
+            #     if not timer_started:
+            #         if start_stop:
+            #             start_time = cv2.getTickCount()
+            #             start_stop_continue = False
+            #         timer_started = True
+            #     current_time = cv2.getTickCount()
 
-                elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
-                remaining_time = max(0, countdown_time - elapsed_time)
-                remaining_time_continue = remaining_time
+            #     # Check if pausing is requested
+            #     if pause_requested:
+            #         if not timer_paused:
+            #             pause_time = cv2.getTickCount()
+            #             timer_paused = True
+            #             print("Paused at:", pause_time)
+            #         pause_requested = False  # Reset pause request flag
+            #     else:
+            #         if resume_requested:
+            #             if timer_paused:
+            #                 resume_time = cv2.getTickCount()
+            #                 pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
+            #                 start_time += pause_duration  # Adjust start time to resume
+            #                 timer_paused = False
+            #                 print("Resumed at:", resume_time)
+            #             resume_requested = False  # Reset resume request flag
+
+            #     elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
+            #     remaining_time = max(0, countdown_time - elapsed_time)
+            #     remaining_time_continue = remaining_time
                             
 
             text = f"Time left: {int(remaining_time_continue)} seconds"
@@ -126,7 +127,7 @@ class VideoCamera(object):
                 #reset countdown 30sec
                 # pause overlay 
                 
-        if self.set_main == 4 and set_of_Ear <= 3:
+        if self.set_main == 4 and set_of_Ear < 3:
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             
         elif self.count_final_main >= 10 and set_of_Ear <= 3 and set_of_Header > 3:
