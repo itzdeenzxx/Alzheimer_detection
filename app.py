@@ -44,6 +44,11 @@ def fitness4():
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
 
+@app.route("/certificate", methods=["GET", "POST"])
+def certificate() :
+    return render_template("certificate.html")
+
+
 cam = VideoCamera()
 cam_game = VideoCamera_Game()
 

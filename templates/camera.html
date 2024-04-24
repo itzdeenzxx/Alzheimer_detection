@@ -29,7 +29,15 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                        <h1 class="title_main">ห้องออกกำลังกาย</h1>
+                        {% if queue == 1 %}
+                        <h1 class="title_main">ห้องออกกำลังกาย - ท่าจีบแอล </h1>
+                        {% elif queue == 2 %}
+                        <h1 class="title_main">ห้องออกกำลังกาย - ท่าโป้งก้อย </h1>
+                        {% elif queue == 3 %}
+                        <h1 class="title_main">ห้องออกกำลังกาย - ท่านวดศรีษะผ่อนคลาย </h1>
+                        {% elif queue == 4 %}
+                        <h1 class="title_main">ห้องออกกำลังกาย - ท่าจีบสลับจับหู </h1>
+                        {% endif %}
                         <div>
                             <form action="/">
                                 <button class="back-btn">
@@ -98,7 +106,7 @@
                     </span>
                 </button>
             </form>
-            <button id="toggle_camera" onclick="toggleCamera()" class="start-btn center_1 wow slideInUp"
+            <button id="toggle_camera" onclick="toggleCamera(); playSound('../static/sound/relax.mp3')" class="start-btn center_1 wow slideInUp"
                 data-wow-duration="1s" data-wow-delay="0s">
                 <h4>เริ่มออกกำลังกาย</h4>
             </button>
@@ -121,7 +129,7 @@
                 data-wow-duration="1s" data-wow-delay="0s">
                 <h4>เริ่มออกกำลังกาย</h4>
             </button>
-            <form action="/fitness4">
+            <form action="/certificate">
                 <button class="control-btn wow slideInUp finished">
                     <span>
                         &nbsp;&nbsp;เสร็จสิ้น&nbsp;&nbsp;
@@ -163,6 +171,7 @@
     <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
     <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
     <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sound.js') }}"></script>
 </body>
 
 </html>

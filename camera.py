@@ -58,8 +58,7 @@ class VideoCamera(object):
         
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
-        global confirm_timer , countdown_time , start_time , timer_started , remaining_time_continue , start_stop_continue , pause_requested , timer_paused ,pause_time , resume_requested , elapsed_time , start_stop
-        global select_player , pass_check , video_path
+        global remaining_time_continue
         global set_main , pass_check
 
         remaining_time = remaining_time_continue
@@ -82,51 +81,12 @@ class VideoCamera(object):
             set_of_thumb_pinky +=1
             self.count_final_main = 0
             
-        if self.set_main == 3:
-            self.header_finger.detect_and_head_finger_distance(frame)
-            # if self.header_finger.confirm_left and self.header_finger.confirm_right:
-            #     start_stop = start_stop_continue
-            #     resume_requested = True
-            # else : 
-            #     pause_requested = True
-
-            # if True:
-            #     if not timer_started:
-            #         if start_stop:
-            #             start_time = cv2.getTickCount()
-            #             start_stop_continue = False
-            #         timer_started = True
-            #     current_time = cv2.getTickCount()
-
-            #     # Check if pausing is requested
-            #     if pause_requested:
-            #         if not timer_paused:
-            #             pause_time = cv2.getTickCount()
-            #             timer_paused = True
-            #             print("Paused at:", pause_time)
-            #         pause_requested = False  # Reset pause request flag
-            #     else:
-            #         if resume_requested:
-            #             if timer_paused:
-            #                 resume_time = cv2.getTickCount()
-            #                 pause_duration = (resume_time - pause_time) / cv2.getTickFrequency()
-            #                 start_time += pause_duration  # Adjust start time to resume
-            #                 timer_paused = False
-            #                 print("Resumed at:", resume_time)
-            #             resume_requested = False  # Reset resume request flag
-
-            #     elapsed_time = (current_time - start_time) / cv2.getTickFrequency()
-            #     remaining_time = max(0, countdown_time - elapsed_time)
-            #     remaining_time_continue = remaining_time
-                            
-
-            text = f"Time left: {int(remaining_time_continue)} seconds"
+        if self.set_main == 3 and set_of_Header == 0:
+            remaining_time_continue = self.header_finger.detect_and_head_finger_distance(frame)
+            text = f"Time : {int(remaining_time_continue)} seconds"
             self.draw_text(frame, text, (frame.shape[1] // 2, 50))
-            if remaining_time_continue == 0 :
+            if remaining_time_continue == 30 :
                 set_of_Header += 1
-                #reset countdown 30sec
-                # pause overlay 
-                
         if self.set_main == 4 and set_of_Ear < 3:
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             
