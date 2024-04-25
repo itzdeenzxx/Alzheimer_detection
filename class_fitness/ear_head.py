@@ -75,5 +75,5 @@ class Head_Ear_Detector:
                             if count_left == count_right and count_right % 2 == 0 and count_left % 2 == 0:
                                 count_final = count_left
                                 confirm_right , confirm_left = 0,0
-                            
+                                
             return count_final

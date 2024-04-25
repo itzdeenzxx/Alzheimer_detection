@@ -49,13 +49,14 @@ class VideoCamera(object):
     def __del__(self):
         self.video.release()
     
-    def draw_text(self,image, text, position, font_scale=1, font_thickness=2):
+    def draw_text(self,image, text , position):
         pil_im = Image.fromarray(image) 
         draw = ImageDraw.Draw(pil_im)
         font = ImageFont.truetype("static/font/Prompt-Regular.ttf", 50)  
-        draw.text((50, 50), text, font=font)  
+        draw.text(position, text, font=font)  
         cv2_im_processed = np.array(pil_im)
         return cv2_im_processed
+    
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
         global remaining_time_continue
@@ -66,6 +67,12 @@ class VideoCamera(object):
         
         if self.count_final_main < 10 and set_of_Hand_L < 3 and self.set_main == 1:
             self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
+            text_Lpose = f"สำเร็จ : {str(self.count_final_main)}"
+            text_Lpose_round = f"รอบ : {str(self.count_final_main)}"
+            position_Lpose = (50,50)
+            position_Lpose_round = (53,150)
+            frame = self.draw_text(frame, text_Lpose , position_Lpose)
+            frame = self.draw_text(frame, text_Lpose_round , position_Lpose_round)
 
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
             # self.show_overlay()
@@ -75,7 +82,13 @@ class VideoCamera(object):
 
         if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
-
+            text_thumb = f"สำเร็จ : {str(self.count_final_main)}"
+            text_thumb_round = f"รอบ : {str(set_of_Hand_L)}"
+            position_thumb = (50,50)
+            position_thumb_round = (53,150)
+            frame = self.draw_text(frame, text_thumb , position_thumb)
+            frame = self.draw_text(frame, text_thumb_round , position_thumb_round)
+            
         elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3 and set_of_Hand_L > 3:
             # self.show_overlay()
             set_of_thumb_pinky +=1
@@ -83,8 +96,9 @@ class VideoCamera(object):
             
         if self.set_main == 3 and set_of_Header == 0:
             remaining_time_continue = self.header_finger.detect_and_head_finger_distance(frame)
-            text = f"เวลา : {int(remaining_time_continue)} วินาที"
-            frame = self.draw_text(frame, text, (frame.shape[1] // 2, 50))
+            text_header = f"เวลา : {int(remaining_time_continue)} วินาที"
+            position_header = (50,50)
+            frame = self.draw_text(frame, text_header,position_header)
             if remaining_time_continue == 30 :
                 set_of_Header += 1
         if self.set_main == 4 and set_of_Ear < 3:

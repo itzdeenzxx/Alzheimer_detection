@@ -16,9 +16,9 @@ window.onload = function() {
 function submitText() {
     var userInput = document.getElementById("name").value;
     if(userInput.trim() === "") {
-      alert("Please enter some text before submitting.");
+      alert("กรุณากรอกชื่อ");
     } else {
-      if(confirm("Are you sure you want to submit the following text?\n\n" + userInput)) {
+      if(confirm("ยืนยันการส่งชื่อ\n\n" + userInput)) {
         closePopup();
       }
     }
@@ -32,18 +32,18 @@ function submitText() {
   
   var image = new Image()
   image.crossOrigin="Nerosafezone";
-  image.src = "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1nACq6.img?w=696&h=392&m=6" //เป็นลิ้งบน website
+  image.src = "https://i.ibb.co/KL87YJm/certificate.jpg" //เป็นลิ้งบน website
   image.onload = function () {
       drawImage()
   }
   
   function drawImage() {
-      // ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
-      ctx.font = '30px K2D'
-      ctx.fillStyle = '#29e'
-      ctx.fillText(nameInput.value, 40, 180)
-  }
+      ctx.font = '15px Prompt, sans-serif';
+      ctx.fillStyle = '#000'
+      ctx.fillText(nameInput.value, 120, 290)
+    }
+  
   
   nameInput.addEventListener('input', function () {
       drawImage()

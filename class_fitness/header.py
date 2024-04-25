@@ -54,9 +54,6 @@ class Header_finger:
             if self.count == 0 :
                 starting_time = time.time()
                 self.count += 1
-
-        else:
-            cv2.putText(frame, "NO success", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2) 
         if self.count >= 1 :
             elapsed_time = int(time.time() - starting_time) + 1
         if results_pose.pose_landmarks:

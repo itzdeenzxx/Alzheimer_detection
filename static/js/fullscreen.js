@@ -53,7 +53,7 @@ function toggleCamera() {
         button.textContent = "พักการออกกำลังกาย";
         cameraStarted = true;
     } else {
-        video.src = "static/img/pre_start.jpg";
+        video.src = "static/img/pre-fitness-test.jpg";
         // button.style.backgroundColor = "";
         button.textContent = "เริ่มออกกำลังกาย";
         cameraStarted = false;

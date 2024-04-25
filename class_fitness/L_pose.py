@@ -31,15 +31,15 @@ class Hand_L_Detector:
         results_hands = self.hands.process(rgb_frame)
         cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
         
-        text = f"ครั้งที่ : {str(count_final)}"
-        pil_im = Image.fromarray(rgb_frame) 
-        draw = ImageDraw.Draw(pil_im)
-        font_path = "Prompt-Regular.ttf"
-        print("Font file path:", font_path)
-        font = ImageFont.truetype(font_path, 50)    
-        draw.text((50, 50), text, font=font)  
-        frame = np.array(pil_im)
-        print(text)
+        # text = f"ครั้งที่ : {str(count_final)}"
+        # pil_im = Image.fromarray(rgb_frame) 
+        # draw = ImageDraw.Draw(pil_im)
+        # font_path = "Prompt-Regular.ttf"
+        # print("Font file path:", font_path)
+        # font = ImageFont.truetype(font_path, 50)    
+        # draw.text((50, 50), text, font=font)  
+        # frame = np.array(pil_im)
+        # print(text)
 
         if count_final == 10 :
             return 10
