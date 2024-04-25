@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import mediapipe as mp
 import time
+from PIL import ImageFont, ImageDraw, Image 
 from datetime import datetime, timedelta
 from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
@@ -49,13 +50,12 @@ class VideoCamera(object):
         self.video.release()
     
     def draw_text(self,image, text, position, font_scale=1, font_thickness=2):
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        text_size, _ = cv2.getTextSize(text, font, font_scale, font_thickness)
-        text_width, text_height = text_size
-        text_x = position[0] - text_width // 2
-        text_y = position[1] + text_height // 2
-        cv2.putText(image, text, (text_x, text_y), font, font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
-        
+        pil_im = Image.fromarray(image) 
+        draw = ImageDraw.Draw(pil_im)
+        font = ImageFont.truetype("static/font/Prompt-Regular.ttf", 50)  
+        draw.text((50, 50), text, font=font)  
+        cv2_im_processed = np.array(pil_im)
+        return cv2_im_processed
     def get_frame(self):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
         global remaining_time_continue
@@ -83,8 +83,8 @@ class VideoCamera(object):
             
         if self.set_main == 3 and set_of_Header == 0:
             remaining_time_continue = self.header_finger.detect_and_head_finger_distance(frame)
-            text = f"Time : {int(remaining_time_continue)} seconds"
-            self.draw_text(frame, text, (frame.shape[1] // 2, 50))
+            text = f"เวลา : {int(remaining_time_continue)} วินาที"
+            frame = self.draw_text(frame, text, (frame.shape[1] // 2, 50))
             if remaining_time_continue == 30 :
                 set_of_Header += 1
         if self.set_main == 4 and set_of_Ear < 3:
