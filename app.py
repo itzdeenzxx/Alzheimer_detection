@@ -44,6 +44,13 @@ def fitness4():
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
 
+@app.route("/fitness5", methods=["GET", "POST"])
+def fitness5():
+    global set_main
+    set_main = 5
+    cam.set_of_main(set_main)
+    return render_template("camera.html", queue = set_main)
+
 @app.route("/certificate", methods=["GET", "POST"])
 def certificate() :
     return render_template("certificate.html")

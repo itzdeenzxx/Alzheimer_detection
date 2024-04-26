@@ -35,8 +35,6 @@ class Head_Ear_Detector:
                                 landmark_drawing_spec=mp_drawing.DrawingSpec(color=(255,255,255), thickness=2, circle_radius=1),
                                 connection_drawing_spec=mp_drawing.DrawingSpec(color=(255,255,255), thickness=2, circle_radius=1))
                 
-                
-                
                 # cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
 
                 if count_final == 10 :

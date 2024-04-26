@@ -37,6 +37,8 @@
                         <h1 class="title_main">ห้องออกกำลังกาย - ท่านวดศรีษะผ่อนคลาย </h1>
                         {% elif queue == 4 %}
                         <h1 class="title_main">ห้องออกกำลังกาย - ท่าจีบสลับจับหู </h1>
+                        {% elif queue == 5 %}
+                        <h1 class="title_main">ห้องออกกำลังกาย - ท่านวดไหปลาร้า </h1>
                         {% endif %}
                         <div>
                             <form action="/">
@@ -119,6 +121,25 @@
             </form>
             {% elif queue == 4 %}
             <form action="/fitness3">
+                <button class="control-btn wow slideInUp previous">
+                    <span>
+                        ถอยกลับ
+                    </span>
+                </button>
+            </form>
+            <button id="toggle_camera" onclick="toggleCamera(); playSound('../static/sound/relax.mp3')" class="start-btn center_1 wow slideInUp"
+                data-wow-duration="1s" data-wow-delay="0s">
+                <h4>เริ่มออกกำลังกาย</h4>
+            </button>
+            <form action="/fitness5">
+                <button class="control-btn wow slideInUp next">
+                    <span>
+                        &nbsp;&nbsp;ต่อไป&nbsp;&nbsp;
+                    </span>
+                </button>
+            </form>
+            {% elif queue == 5 %}
+            <form action="/fitness5">
                 <button class="control-btn wow slideInUp previous">
                     <span>
                         ถอยกลับ

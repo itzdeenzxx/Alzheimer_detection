@@ -8,7 +8,7 @@ from class_fitness.L_pose import Hand_L_Detector
 from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
 from class_fitness.ear_head import Head_Ear_Detector
-
+from class_fitness.collarbone import Colarbone_finger
       
 mp_hands = mp.solutions.hands
 # set in fitness
@@ -16,6 +16,7 @@ set_of_Hand_L = 0
 set_of_thumb_pinky = 0
 set_of_Header = 0
 set_of_Ear = 0
+set_of_collar = 0
 #var tutorail
 select_player = True
 pass_check = 0
@@ -42,6 +43,7 @@ class VideoCamera(object):
         self.thumb_pink = thumb_pinky()
         self.header_finger = Header_finger()
         self.ear = Head_Ear_Detector()
+        self.collar = Colarbone_finger()
         self.check_count = True
         self.count_final_main = 0
         self.set_main = 1
@@ -96,11 +98,12 @@ class VideoCamera(object):
             
         if self.set_main == 3 and set_of_Header == 0:
             remaining_time_continue = self.header_finger.detect_and_head_finger_distance(frame)
-            text_header = f"เวลา : {int(remaining_time_continue)} วินาที"
+            text_header = f"เวลาที่เหลือ : {int(30 - remaining_time_continue)} วินาที"
             position_header = (50,50)
             frame = self.draw_text(frame, text_header,position_header)
             if remaining_time_continue == 30 :
                 set_of_Header += 1
+                remaining_time_continue = 0
         if self.set_main == 4 and set_of_Ear < 3:
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             text_Ear = f"สำเร็จ : {str(self.count_final_main)}"
@@ -114,7 +117,16 @@ class VideoCamera(object):
             # self.show_overlay()
             set_of_thumb_pinky +=1
             self.count_final_main = 0
-            
+        
+        if self.set_main == 5 and set_of_collar == 0:
+            remaining_time_continue = self.collar.detect_and_coloarbone_finger_distance(frame)
+            text_collar = f"เวลาที่เหลือ : {int(30 - remaining_time_continue)} วินาที"
+            position_collar = (50,50)
+            frame = self.draw_text(frame, text_collar,position_collar)
+            if remaining_time_continue == 30 :
+                set_of_Header += 1
+                remaining_time_continue = 0
+            pass
         ret, jpeg = cv2.imencode('.jpg', frame)
 
         if not ret:
