@@ -50,7 +50,7 @@ class Header_finger:
         
             
         if self.confirm_left and self.confirm_right:
-            cv2.putText(frame, "success", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            # cv2.putText(frame, "success", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             if self.count == 0 :
                 starting_time = time.time()
                 self.count += 1

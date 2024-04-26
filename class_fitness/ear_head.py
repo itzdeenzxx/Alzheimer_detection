@@ -36,21 +36,22 @@ class Head_Ear_Detector:
                                 connection_drawing_spec=mp_drawing.DrawingSpec(color=(255,255,255), thickness=2, circle_radius=1))
                 
                 
-                #เพิ่มจุด 15 16 ใช้แกน y คำนวณจากท่า
-                cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
+                
+                # cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
 
                 if count_final == 10 :
                     return 10
-            
-                right_index_knuckle = results_pose.pose_landmarks.landmark[20]
-                left_index_knuckle = results_pose.pose_landmarks.landmark[19]
+
+                nose = results_pose.pose_landmarks.landmark[0]
+                
+                right_hand = results_pose.pose_landmarks.landmark[20]
+                left_hand = results_pose.pose_landmarks.landmark[19]
                 right_ear = results_pose.pose_landmarks.landmark[8]
                 left_ear = results_pose.pose_landmarks.landmark[7]
                 if confirm_left == 0 or confirm_right == 0 : 
-                        distance1 = self.calculate_distance(right_index_knuckle, left_ear)
-                        distance2 = self.calculate_distance(left_index_knuckle, right_ear)
-                        if distance1 < self.threshold and distance2 < self.threshold:
-                            cv2.putText(frame, "great1", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                        if right_hand.y > nose.y and left_hand.y < nose.y and  right_hand.x > nose.x and left_hand.x < nose.x:
+                            print("condition 1 ")
+                            # cv2.putText(frame, "great1", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_right += 1
                             if confirm_right == 1 :
                                 count_right += 1
@@ -60,20 +61,27 @@ class Head_Ear_Detector:
                         if count_left == count_right:
                             count_final = count_left
 
-                elif confirm_left >= 1 and confirm_right >= 1 :
-                            distance1 = self.calculate_distance(right_index_knuckle, left_ear)
-                            distance2 = self.calculate_distance(left_index_knuckle, right_ear)
-                            if distance1 < self.threshold and distance2 < self.threshold:
-                                cv2.putText(frame, "great2", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                                confirm_right += 1
+                elif confirm_left == 1 and confirm_right == 1 :
+                            if right_hand.y < nose.y and left_hand.y > nose.y and right_hand.x > nose.x and left_hand.x < nose.x:
+                                print("condition 2 ")
+                                # cv2.putText(frame, "great2", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                                 if confirm_right == 1 :
                                     count_right += 1
-                                confirm_left += 1
                                 if confirm_left == 1 :
                                     count_left += 1
-                                    
+                                confirm_left += 1
+                                confirm_right += 1
+                                # print("con right " , confirm_right)
+                                # print("con left " , confirm_left)
+                                # print("count right " , count_right)
+                                # print("count left " , count_left)
                             if count_left == count_right and count_right % 2 == 0 and count_left % 2 == 0:
+                                print("1111")
                                 count_final = count_left
                                 confirm_right , confirm_left = 0,0
-                                
+            if results_pose.pose_landmarks:
+                for landmark in results_pose.pose_landmarks.landmark:
+                    height, width, _ = frame.shape
+                    cx, cy = int(landmark.x * width), int(landmark.y * height)
+                    cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)             
             return count_final

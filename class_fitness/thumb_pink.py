@@ -30,15 +30,15 @@ class thumb_pinky:
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results_hands = self.hands.process(rgb_frame)
 
-        cv2.putText(
-            frame,
-            str(count_final),
-            (100, 130),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            2,
-            (255, 255, 255),
-            7,
-        )
+        # cv2.putText(
+        #     frame,
+        #     str(count_final),
+        #     (100, 130),
+        #     cv2.FONT_HERSHEY_SIMPLEX,
+        #     2,
+        #     (255, 255, 255),
+        #     7,
+        # )
 
         if count_final == 10:
             return 10
@@ -103,15 +103,15 @@ class thumb_pinky:
                             and middle_pip.y < ring_pip.y
                             and ring_pip.y < pinky_pip.y
                         ):
-                            cv2.putText(
-                                frame,
-                                "Right great",
-                                (10, 200),
-                                cv2.FONT_HERSHEY_SIMPLEX,
-                                1,
-                                (0, 255, 0),
-                                2,
-                            )
+                            # cv2.putText(
+                            #     frame,
+                            #     "Right great",
+                            #     (10, 200),
+                            #     cv2.FONT_HERSHEY_SIMPLEX,
+                            #     1,
+                            #     (0, 255, 0),
+                            #     2,
+                            # )
                             confirm_right += 1
                             if confirm_right == 1:
                                 count_right += 1
@@ -124,15 +124,15 @@ class thumb_pinky:
                             and index_tip.y > index_dip.y
                             and thumb_tip.x < thumb_ip.x
                         ):
-                            cv2.putText(
-                                frame,
-                                "Left great",
-                                (10, 100),
-                                cv2.FONT_HERSHEY_SIMPLEX,
-                                1,
-                                (0, 255, 0),
-                                2,
-                            )
+                            # cv2.putText(
+                            #     frame,
+                            #     "Left great",
+                            #     (10, 100),
+                            #     cv2.FONT_HERSHEY_SIMPLEX,
+                            #     1,
+                            #     (0, 255, 0),
+                            #     2,
+                            # )
                             confirm_left += 1
                             if confirm_left == 1:
                                 count_left += 1
@@ -238,9 +238,9 @@ class thumb_pinky:
                     ):
                         count_final = count_left
                         confirm_right, confirm_left = 0, 0
-            mp.solutions.drawing_utils.draw_landmarks(
-                frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS
-            )
+            # mp.solutions.drawing_utils.draw_landmarks(
+            #     frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS
+            # )
         return count_final
 
 

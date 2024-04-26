@@ -68,7 +68,7 @@ class VideoCamera(object):
         if self.count_final_main < 10 and set_of_Hand_L < 3 and self.set_main == 1:
             self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
             text_Lpose = f"สำเร็จ : {str(self.count_final_main)}"
-            text_Lpose_round = f"รอบ : {str(self.count_final_main)}"
+            text_Lpose_round = f"รอบ : {str(set_of_Hand_L + 1)}"
             position_Lpose = (50,50)
             position_Lpose_round = (53,150)
             frame = self.draw_text(frame, text_Lpose , position_Lpose)
@@ -83,7 +83,7 @@ class VideoCamera(object):
         if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
             text_thumb = f"สำเร็จ : {str(self.count_final_main)}"
-            text_thumb_round = f"รอบ : {str(set_of_Hand_L)}"
+            text_thumb_round = f"รอบ : {str(set_of_thumb_pinky + 1)}"
             position_thumb = (50,50)
             position_thumb_round = (53,150)
             frame = self.draw_text(frame, text_thumb , position_thumb)
@@ -103,6 +103,12 @@ class VideoCamera(object):
                 set_of_Header += 1
         if self.set_main == 4 and set_of_Ear < 3:
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
+            text_Ear = f"สำเร็จ : {str(self.count_final_main)}"
+            text_Ear_round = f"รอบ : {str(set_of_thumb_pinky + 1)}"
+            position_Ear = (50,50)
+            position_Ear_round = (53,150)
+            frame = self.draw_text(frame, text_Ear , position_Ear)
+            frame = self.draw_text(frame, text_Ear_round , position_Ear_round)
             
         elif self.count_final_main >= 10 and set_of_Ear <= 3 and set_of_Header > 3:
             # self.show_overlay()
