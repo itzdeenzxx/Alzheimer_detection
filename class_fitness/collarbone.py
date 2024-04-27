@@ -35,8 +35,6 @@ class Colarbone_finger:
                 label = MessageToDict(handedness_inner)['classification'][0]['label']
 
                 index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
-                
-                
                 if label == 'Left':
                     if self.calculate_distance(index_tip, landmark) < self.threshold:
                         self.confirm_left = True

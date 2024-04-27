@@ -1,8 +1,12 @@
 body {
-    margin: 0;
-    padding: 0;
-    /* background-image: url(../img/bg-cert2.gif); */
+  margin: 0;
+  padding: 0;
+  background-image: url(../img/bg-cert.jpg);
+  background-size: 0%;
+  background-position: center;
+  background-repeat: repeat;
 }
+
 .title-head {
     display: flex;
     align-items: center;
@@ -10,6 +14,13 @@ body {
     right: 50%;
     left: 50%;
     margin-top: 30px;
+}
+
+.give {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 /* Popup container */
 .popup {
@@ -40,7 +51,7 @@ body {
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 30px;
-  border-top: 10px;
+  border-top: 5px;
   border-color: #294B29;
   border-style:solid;
   padding-top: 25px;
@@ -212,10 +223,8 @@ canvas {
   margin-bottom: 0%;
 }
 .button-back {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  font-size: 17px;
-  padding: 1em 2.7em;
+  font-size: 20px;
+  padding: 1em 2em;
   font-weight: 500;
   background: #294B29;
   color: white;
@@ -265,3 +274,5 @@ button:active {
   padding: 10px;
 
 }
+
+

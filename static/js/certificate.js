@@ -47,7 +47,13 @@ function submitText() {
       ctx.font = 'bold 30px Prompt, sans-serif';
       ctx.fillStyle = '#294B29'
       ctx.fillText(nameInput.value, 110, 120)
-      
+      var currentDate = new Date();
+      var dateString = currentDate.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      ctx.font = 'italic 18px Prompt, sans-serif';
+      ctx.fillStyle = '#FFECBF';
+      ctx.fillText(dateString, 140, 465);
+
       if (overlayInput.files && overlayInput.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -90,40 +96,11 @@ overlayInput.addEventListener('change', function () {
 
 downloadBtn.addEventListener('click', function () {
   downloadBtn.href = canvas.toDataURL('image/jpg')
-  downloadBtn.download = nameInput.value
+  downloadBtn.download = "NRSZ - " + nameInput.value
 })
 
 
 
-
-// var canvas = document.getElementById('canvas')
-// var ctx = canvas.getContext('2d')
-// var nameInput = document.getElementById('name')
-// var downloadBtn = document.getElementById('download-btn')
-
-// var image = new Image()
-// image.crossOrigin="anonymous";
-// image.src = 'certificate.jpg'
-// image.onload = function () {
-// 	drawImage()
-// }
-
-// function drawImage() {
-// 	// ctx.clearRect(0, 0, canvas.width, canvas.height)
-// 	ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
-// 	ctx.font = '40px monotype corsiva'
-// 	ctx.fillStyle = '#29e'
-// 	ctx.fillText(nameInput.value, 40, 180)
-// }
-
-// nameInput.addEventListener('input', function () {
-// 	drawImage()
-// })
-
-// downloadBtn.addEventListener('click', function () {
-// 	downloadBtn.href = canvas.toDataURL('image/jpg')
-// 	downloadBtn.download = 'Certificate - ' + nameInput.value
-// })
 
 
 function handleFileUpload(event) {
@@ -136,3 +113,18 @@ document.getElementById('customFileInput').addEventListener('change', function (
   var fileName = e.target.files[0].name;
   document.getElementById('customFileLabel').innerText = fileName;
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const fileInput = document.getElementById('customFileInput');
+
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    const fileType = file.type.split('/')[0];
+    if (fileType !== 'image') {
+      alert('กรุณาเลือกไฟล์รูปภาพเท่านั้น');
+      this.value = '';
+      document.getElementById('customFileLabel').innerText = "เลือกไฟล์";
+    }
+  });
+});
+

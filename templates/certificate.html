@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/certificate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/congreat.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon_io/favicon.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -34,45 +36,51 @@
             <div class="container">
                 <div class="form wow slideInDown" data-wow-duration="2s" data-wow-delay="0s">
                     <div class="title">ยินดีด้วย !<br><span>กับการฝึกบริหารสมอง</span></div>
-                    <input type="name" placeholder="กรอกชื่อ" class="input" id="name">
+                    <input type="name" placeholder="กรอกชื่อ" class="input" id="name" maxlength="10">
                     <div class="container">
                         <div class="form-group" x-data="{ fileName: '' }">
-                          <div class="input-group shadow">
-                            <input type="file" x-ref="file" @change="fileName = $refs.file.files[0].name" name="img[]" class="input file" id="customFileInput">
-                            <label class="input-label" for="customFileInput" id="customFileLabel">เลือกไฟล์</label>
-                        </div>
+                            <div class="input-group shadow">
+                                <input type="file" x-ref="file" @change="fileName = $refs.file.files[0].name"
+                                    name="img[]" class="input file" id="customFileInput">
+                                <label class="input-label" for="customFileInput" id="customFileLabel">เลือกไฟล์</label>
+                            </div>
                         </div>
                     </div>
-                    <button class="button-confirm" onclick="submitText();playSound('../static/sound/finished.mp3')">ต่อไป →</button>
+                    <button class="button-confirm"
+                        onclick="submitText();playSound('../static/sound/finished.mp3')">ต่อไป →</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="canvas">
-        <canvas id="canvas" height="565.625px" width="400px" ></canvas>
-    </div>
-    <div class="button-download">
+    <br><br>
 
-        <a href="#" id="download-btn">
-            <button class="button">
-                <p class="text">
-                    ดาวน์โหลด
-                </p>
-                <div class="svg">
+        <div class="give">
+            <h4>คุณได้รับ "การ์ดรักสุขภาพสมอง" !</h4>
+        </div>
+        <div class="canvas">
+            <canvas id="canvas" height="565.625px" width="400px"></canvas>
+        </div>
+        <div class="button-download">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
-                        <path
-                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
-                        </path>
-                        <path
-                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
-                        </path>
-                    </svg>
-                </div>
-    </div>
-    </button>
-    </a>
-    </div>
+            <a href="#" id="download-btn">
+                <button class="button">
+                    <p class="text">
+                        ดาวน์โหลด
+                    </p>
+                    <div class="svg">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
+                            <path
+                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+                            </path>
+                            <path
+                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+                            </path>
+                        </svg>
+                    </div>
+                </button>
+            </a>
+        </div>
     <div class="back-btn">
         <form action="/">
             <button class="button-back">
@@ -81,8 +89,6 @@
                 <span class="label">กลับหน้าหลัก</span>
             </button>
         </form>
-    </div>
-
     </div>
 
 
@@ -100,6 +106,7 @@
     <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
     <script src="{{ url_for('static', filename='js/certificate.js') }}"></script>
     <script src="{{ url_for('static', filename='js/sound.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/congreat.js') }}"></script>
 </body>
 
 </html>
