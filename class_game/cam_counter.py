@@ -3,6 +3,7 @@ import numpy as np
 import mediapipe as mp
 import time
 from class_game.gamereal import HandTracker
+import random as rd
 
 mp_hands = mp.solutions.hands
 
@@ -12,10 +13,18 @@ countdown_time = 10
 
 
 class VideoCamera_Game(object):
+    global Number_random
     def __init__(self):
         self.camera_index = 0
         self.video = cv2.VideoCapture(self.camera_index)
         self.game = HandTracker()
+        self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+
+        
+        
+   
+            
+        
 
     def __del__(self):
         self.video.release()
@@ -25,9 +34,10 @@ class VideoCamera_Game(object):
 
         if not ret:
             return None
-
-        self.game.start_tracking(frame)
-        self.game.show_number(frame)
+        
+        self.game.start_tracking(frame, self.Number_random) 
+        self.game.show_number(frame, self.Number_random)
+        self.game.show_number_allrd(frame, self.Number_random)
         ret, jpeg = cv2.imencode(".jpg", frame)
 
         if not ret:
@@ -36,7 +46,7 @@ class VideoCamera_Game(object):
 
     def gen(self):
         while True:
-
+            
             frame = self.get_frame()
 
             yield (
