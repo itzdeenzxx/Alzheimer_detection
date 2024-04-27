@@ -66,7 +66,7 @@ def video_feed():
 # game
 @app.route("/game_counter", methods=["GET", "POST"])
 def game_counter():
-    return render_template("game_menu.html")
+    return render_template("game_room.html")
 
 
 @app.route("/cam_game_count")
