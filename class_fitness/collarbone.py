@@ -33,18 +33,16 @@ class Colarbone_finger:
         if results_hands.multi_hand_landmarks and results_pose.pose_landmarks:
             for hand_landmarks_inner, handedness_inner in zip(results_hands.multi_hand_landmarks, results_hands.multi_handedness):
                 label = MessageToDict(handedness_inner)['classification'][0]['label']
-            
-                index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
 
-                for landmark in results_pose.pose_landmarks.landmark:
-                    if label == 'Left':
-                        # position 7 of the torso
-                        if self.calculate_distance(index_tip, landmark) < self.threshold:
-                            self.confirm_left = True
-                    elif label == 'Right':
-                        # position 8 of the torso
-                        if self.calculate_distance(index_tip, landmark) < self.threshold:
-                            self.confirm_right = True
+                index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+                
+                
+                if label == 'Left':
+                    if self.calculate_distance(index_tip, landmark) < self.threshold:
+                        self.confirm_left = True
+                elif label == 'Right':
+                    if self.calculate_distance(index_tip, landmark) < self.threshold:
+                        self.confirm_right = True
             #mark
         
             

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(../img/bg-cert2.gif);
+    /* background-image: url(../img/bg-cert2.gif); */
 }
 .title-head {
     display: flex;
@@ -40,6 +40,14 @@ body {
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 30px;
+  border-top: 10px;
+  border-color: #294B29;
+  border-style:solid;
+  padding-top: 25px;
+}
+canvas {
+  border-radius: 10px;
+  box-shadow: 3px 2px 8px 3px rgba(0, 0, 0, 0.09);
 }
 
 .container {
@@ -246,4 +254,14 @@ button:hover .transition {
 
 button:active {
   transform: scale(0.97);
+}
+
+.file {
+    display: none;
+}
+.input-label {
+  color: #ffffff;
+  background-color: #50623A;
+  padding: 10px;
+
 }

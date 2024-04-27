@@ -32,16 +32,24 @@
     <div id="popup" class="popup">
         <div class="popup-content">
             <div class="container">
-                <div class="form">
+                <div class="form wow slideInDown" data-wow-duration="2s" data-wow-delay="0s">
                     <div class="title">ยินดีด้วย !<br><span>กับการฝึกบริหารสมอง</span></div>
                     <input type="name" placeholder="กรอกชื่อ" class="input" id="name">
+                    <div class="container">
+                        <div class="form-group" x-data="{ fileName: '' }">
+                          <div class="input-group shadow">
+                            <input type="file" x-ref="file" @change="fileName = $refs.file.files[0].name" name="img[]" class="input file" id="customFileInput">
+                            <label class="input-label" for="customFileInput" id="customFileLabel">เลือกไฟล์</label>
+                        </div>
+                        </div>
+                    </div>
                     <button class="button-confirm" onclick="submitText();playSound('../static/sound/finished.mp3')">ต่อไป →</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="canvas">
-        <canvas id="canvas" height="565.625px" width="400px"></canvas>
+        <canvas id="canvas" height="565.625px" width="400px" ></canvas>
     </div>
     <div class="button-download">
 
