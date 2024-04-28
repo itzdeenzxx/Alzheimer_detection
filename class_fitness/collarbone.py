@@ -9,6 +9,7 @@ mp_pose = mp.solutions.pose
 starting_time = 0
 continue_time = 0
 elapsed_time = 0
+set_time = 1
 class Colarbone_finger:
     def __init__(self):
         self.hands = mp_hands.Hands(min_detection_confidence=0.3)
@@ -16,13 +17,14 @@ class Colarbone_finger:
         self.confirm_left = False
         self.confirm_right = False
         self.count = 0
+        self.threshold = 0.05
         self.continue_count = 0
 
     def calculate_distance(self, lm1, lm2):
         return math.sqrt((lm1.x - lm2.x)**2 + (lm1.y - lm2.y)**2)
 
     def detect_and_coloarbone_finger_distance(self, frame):
-        global starting_time , continue_time , elapsed_time
+        global starting_time , continue_time , elapsed_time , set_time
         self.confirm_left = False
         self.confirm_right = False
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -35,13 +37,16 @@ class Colarbone_finger:
                 label = MessageToDict(handedness_inner)['classification'][0]['label']
 
                 index_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
-                if label == 'Left':
-                    if self.calculate_distance(index_tip, landmark) < self.threshold:
-                        self.confirm_left = True
-                elif label == 'Right':
-                    if self.calculate_distance(index_tip, landmark) < self.threshold:
-                        self.confirm_right = True
-            #mark
+                thumb_tip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.THUMB_TIP]
+                for landmark in results_pose.pose_landmarks.landmark:
+                    if label == 'Left':
+                        if self.calculate_distance(index_tip, landmark) < self.threshold:
+                            self.confirm_left = True
+                    
+                    elif label == 'Right':
+                        if self.calculate_distance(index_tip, landmark) < self.threshold:
+                            self.confirm_right = True
+                #mark
         
             
         if self.confirm_left and self.confirm_right:

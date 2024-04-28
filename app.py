@@ -68,14 +68,15 @@ def video_feed():
 def game_counter():
     return render_template("game_room.html")
 
-
 @app.route("/cam_game_count")
 def cam_game_count():
     return Response(
         cam_game.gen(), mimetype="multipart/x-mixed-replace; boundary=frame"
     )
-    
 
+@app.route("/game_menu" , methods=["GET","POST"])
+def game_menu():
+    return render_template("game_menu.html")
 
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
