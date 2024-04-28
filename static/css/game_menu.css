@@ -26,6 +26,9 @@ body {
 .box1 {
   background-image:url(../img/bg-counter-game.jpg) ;
 } 
+.box2 {
+  background-image:url(../img/bg-color-game.jpg) ;
+} 
 
 .card_box {
     width: 300px;

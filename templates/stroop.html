@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stroop Test</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #container {
+        display: none;
+    }
+    #text {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #score {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<h2>Stroop Test</h2>
+<button id="startButton" onclick="startGame()">Start</button>
+<div id="container">
+    <div id="time"></div>
+    <div id="text"></div>
+    <div id="text-en" style="display: none;"></div>
+    <button onclick="checkAnswer('Correct')">Correct</button>
+    <button onclick="checkAnswer('Incorrect')">Incorrect</button>
+</div>
+<div id="score">
+    <h3>Score</h3>
+    <p>Total Questions: <span id="total"></span></p>
+    <p>Correct Answers: <span id="correct"></span></p>
+    <p>Percentage: <span id="percentage"></span>%</p>
+    <button onclick="restartGame()">Restart</button>
+</div>
+<script src="{{ url_for('static', filename='js/game/stroop.js') }}"></script>
+</body>
+</html>

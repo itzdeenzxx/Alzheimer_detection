@@ -68,6 +68,10 @@ def video_feed():
 def game_counter():
     return render_template("game_room.html")
 
+@app.route("/stroop_game", methods=["GET", "POST"])
+def stroop_game():
+    return render_template("stroop.html")
+
 @app.route("/cam_game_count")
 def cam_game_count():
     return Response(
