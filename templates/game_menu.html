@@ -43,39 +43,41 @@
         </div>
     </header>
     <div class="container">
-        <div class="row">
+        <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
+            <div class="col-lg-3 mb-3">
+                <form action="/game_counter">
+                    <button class="card-btn">
+                        <div class="card_box box1">
+                            <span class="nav-box1"></span>
+                        </div>
+                    </button>
+                </form>
+            </div>
             <div class="col-lg-3 mb-3">
                 <button class="card-btn">
-                    <div class="card_box">
+                    <div class="card_box box2">
+                        <span class="nav-box2"></span>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <button class="card-btn">
+                    <div class="card_box box3">
                         <span></span>
                     </div>
                 </button>
             </div>
             <div class="col-lg-3 mb-3">
                 <button class="card-btn">
-                    <div class="card_box">
+                    <div class="card_box box4">
                         <span></span>
                     </div>
                 </button>
             </div>
-            <div class="col-lg-3 mb-3">
-                <button class="card-btn">
-                    <div class="card_box">
-                        <span></span>
-                    </div>
-                </button>
-            </div>
-            <div class="col-lg-3 mb-3">
-                <button class="card-btn">
-                    <div class="card_box">
-                        <span></span>
-                    </div>
-                </button>
-            </div>
-            
+
         </div>
     </div>
-    
+
 
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
