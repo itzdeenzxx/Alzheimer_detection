@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/camera.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/game_room.css') }}">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -28,7 +29,7 @@
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
-            <h1 class="title_main">ห้องเล่นเกม</h1>
+            <h1 class="title_main">เกมจำและชู</h1>
             <div>
               <form action="/">
                 <button class="back-btn">
@@ -44,7 +45,10 @@
   <div class="container">
     <div class="camera-div">
       <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
-        src="{{ url_for('static', filename='img/pre_start.jpg') }}">
+        src="{{ url_for('static', filename='img/bg-game-count.jpg') }}">
+        <div class="overlay-btn" onclick="togglePopUp()">
+          <h5>วิธีเล่น</h5>
+        </div>
     </div>
     <div>
       <button id="toggle_camera" onclick="toggleCameragame()" class="start-btn center_1 wow slideInUp"

@@ -47,7 +47,7 @@ function toggleCameragame() {
         button.innerHTML = "พักการเล่นเกม";
         cameraStarted = true;
     } else {
-        video.src = "static/img/pre_start.jpg";
+        video.src = "static/img/bg-game-count.jpg";
         button.innerHTML = "เริ่มเล่นเกม";
         cameraStarted = false;
     }
