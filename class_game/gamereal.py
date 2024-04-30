@@ -1,6 +1,7 @@
 import cv2
 import mediapipe as mp
 import time
+from PIL import ImageFont, ImageDraw, Image 
 from class_game.cam_counter import *
 
 class HandTracker:
@@ -198,43 +199,43 @@ class HandTracker:
             )
         
 
-
+    def draw_text(self,image, text , position):
+        pil_im = Image.fromarray(image) 
+        draw = ImageDraw.Draw(pil_im)
+        font = ImageFont.truetype("../static/font/Prompt-Regular.ttf", 50)  
+        draw.text(position, text, font=font)  
+        cv2_im_processed = np.array(pil_im)
+        return cv2_im_processed
+    
     def show_number_allrd(self, frame, Number_random):
         # คำนวณความกว้างและความสูงของภาพ
         height, width, _ = frame.shape
         
         # ขนาดของข้อความ
-        text = f"handful to start {str(Number_random[0])} "
+        text = f"ต้องการเริ่มทำมือท่า 0 {str(Number_random[0])} "
         text1 = f"Number:{str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
         text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
-        
         
         # คำนวณตำแหน่งที่จะวางข้อความให้อยู่ตรงกลาง
         text_x = int((width - text_size[0]) / 2)
         text_y = int((height + text_size[1]) / 2)
         
         if self.i <= 0 :
-            cv2.putText(
-                frame,
-                text,
-                
+            cv2.putText(frame,text,
                 (250, 300),
                 cv2.FONT_HERSHEY_PLAIN,
                 2,
-                (255, 0, 0),
+                (255, 255, 255),
                 2,
             )
-            cv2.putText(
-                frame,
-                text1,
-                
+            cv2.putText(frame,text1,
                 (265, 250),
                 cv2.FONT_HERSHEY_PLAIN,
                 2,
                 (255, 0, 0),
                 2,
             )
-        
+            self.draw_text(frame,text,(250, 300)) #แก้
 
 
 

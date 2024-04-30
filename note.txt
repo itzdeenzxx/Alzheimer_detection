@@ -5,13 +5,13 @@
     7 แก้ responsive มือถือ ** //deen
     8 connect game.py disconnect cam_count.py
     6 link game with flask หน้า html ให้เข้า flask  //deen 
+    6 ทำการสุ่มเลขและคำตอบใช้ได้จริง //tang
+    5 หน้าเกมต่างๆ //deen
 
 
 ยังไม่เสร็จ
     2 overlay pause (times up) //deen
     3 how to use app //tang
-    5 หน้าเกมต่างๆ //tang
-    6 ทำการสุ่มเลขและคำตอบใช้ได้จริง //tang
     7 เกมอื่นๆ หลังส่ง แบบข้อเสนอ //tang
     8 รูปภาพ cert ให้สวยงามเหมาะกับวัย //deen
     9 รูปภาพ แต่ละโปรแกรมท่า (pim) //deen
