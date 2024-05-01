@@ -60,9 +60,11 @@ class HandTracker:
                         and hand_landmarks.landmark[12].y < hand_landmarks.landmark[9].y
                         and hand_landmarks.landmark[16].y < hand_landmarks.landmark[13].y  
                         and hand_landmarks.landmark[20].y < hand_landmarks.landmark[17].y  
-                        and hand_landmarks.landmark[4].y < hand_landmarks.landmark[5].y
+                        and hand_landmarks.landmark[4].x > hand_landmarks.landmark[5].x
                     ):
                         fingers = 5
+
+                    
                     if self.i < 5 :
                         if Number_random[self.i] == 0:
                             if(
@@ -77,7 +79,11 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
+
                         if Number_random[self.i] == 1:
                             if(
                                 fingers == 1
@@ -91,7 +97,10 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
                         if Number_random[self.i] == 2:
                             if (
                                 fingers == 2
@@ -105,7 +114,10 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
                         if Number_random[self.i] == 3:
                             if (
                                 fingers == 3
@@ -119,7 +131,10 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
                         if Number_random[self.i] == 4:
                             if (
                                 fingers == 4
@@ -133,7 +148,10 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
                         if Number_random[self.i] == 5:
                             if (
                                 fingers == 5
@@ -147,7 +165,10 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                self.i += 1
+                                if self.i + 1 < len(Number_random):
+                                    self.i += 1
+                                else:
+                                    return 0
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 self.mp_drawing.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS)

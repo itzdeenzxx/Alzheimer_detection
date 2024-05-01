@@ -62,12 +62,9 @@ class VideoCamera_Game(object):
         if frame is None:
             return None
         
-        # คำนวณความกว้างและความสูงของภาพ
-        # ขนาดของข้อความ
         text = f"ทำมือเลข {str(Number_random[0])} เพื่อเริ่มเกม"
         text_num = f"จงจำเลข :{str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
         text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
-        # คำนวณตำแหน่งที่จะวางข้อความให้อยู่ตรงกล
         if self.i <= 0:
             processed_frame = self.draw_text(frame, text, (250, 300))
             if processed_frame is not None:
