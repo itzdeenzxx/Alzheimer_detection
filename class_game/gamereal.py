@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 from class_game.cam_counter import *
+import random as rd
 
 class HandTracker:
     global i
@@ -79,10 +80,17 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
+
 
                         if Number_random[self.i] == 1:
                             if(
@@ -97,10 +105,16 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
                         if Number_random[self.i] == 2:
                             if (
                                 fingers == 2
@@ -114,10 +128,16 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
                         if Number_random[self.i] == 3:
                             if (
                                 fingers == 3
@@ -131,10 +151,16 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
                         if Number_random[self.i] == 4:
                             if (
                                 fingers == 4
@@ -148,10 +174,16 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
                         if Number_random[self.i] == 5:
                             if (
                                 fingers == 5
@@ -165,10 +197,16 @@ class HandTracker:
                                     (255, 0, 0),
                                     3,
                                 )
-                                if self.i + 1 < len(Number_random):
-                                    self.i += 1
+                                self.i += 1
+                                if self.i < 5:
+                                    # If there are more numbers, return current index
+                                    return self.i , Number_random
                                 else:
-                                    return 0
+                                    # If all numbers are answered, reset and return 0
+                                    self.i = 0
+                                    # Reset Number_random for new set of random numbers
+                                    Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                                    return 999
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 self.mp_drawing.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS)

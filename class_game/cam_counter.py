@@ -74,6 +74,8 @@ class VideoCamera_Game(object):
                 return frame
         else:
             return frame
+    def set_random(self , number) :
+        self.Number_random = number
 
     def get_frame(self):
         ret, frame = self.video.read()
@@ -87,6 +89,9 @@ class VideoCamera_Game(object):
             return None
 
         self.i = self.game.start_tracking(frame, self.Number_random) 
+        if self.i == 999 :
+            self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+            self.i = 0
         frame = self.show_number(frame, self.Number_random)
         frame = self.show_number_allrd(frame, self.Number_random)
 
@@ -107,3 +112,6 @@ class VideoCamera_Game(object):
             yield (
                 b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n\r\n"
             )
+            if self.i == len(self.Number_random):
+                self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                self.i = 0
