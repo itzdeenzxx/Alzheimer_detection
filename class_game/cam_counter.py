@@ -89,7 +89,7 @@ class VideoCamera_Game(object):
         if frame is None:
             print("Error: Received None frame")
             return None
-        
+
         self.i = self.game.start_tracking(frame, self.Number_random) 
         if self.i == 999 :
             self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
@@ -97,7 +97,6 @@ class VideoCamera_Game(object):
         frame = self.show_number(frame, self.Number_random)
         frame = self.show_number_allrd(frame, self.Number_random)
         
-
         ret, jpeg = cv2.imencode(".jpg", frame)
 
         if not ret:

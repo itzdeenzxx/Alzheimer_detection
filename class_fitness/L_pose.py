@@ -29,17 +29,6 @@ class Hand_L_Detector:
             count_left , count_right = 0 , 0
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results_hands = self.hands.process(rgb_frame)
-        # cv2.putText(frame, str(count_final), (100, 130), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 7)
-        
-        # text = f"ครั้งที่ : {str(count_final)}"
-        # pil_im = Image.fromarray(rgb_frame) 
-        # draw = ImageDraw.Draw(pil_im)
-        # font_path = "Prompt-Regular.ttf"
-        # print("Font file path:", font_path)
-        # font = ImageFont.truetype(font_path, 50)    
-        # draw.text((50, 50), text, font=font)  
-        # frame = np.array(pil_im)
-        # print(text)
 
         if count_final == 10 :
             return 10
@@ -95,14 +84,14 @@ class Hand_L_Detector:
 
                     if label == 'Left':
                         if thumb_tip.x > thumb_ip.x and index_tip.y > index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
-                            cv2.putText(frame, "Left great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                            # cv2.putText(frame, "Left great", (10, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_right += 1
                             if confirm_right >= 1 and count_right % 2 == 1:
                                 count_right += 1
 
                     if label == 'Right': 
                         if thumb_tip.x < thumb_ip.x and index_tip.y < index_dip.y and middle_tip.y > middle_dip.y and ring_tip.y > ring_dip.y and pinky_tip.y > pinky_dip.y:
-                            cv2.putText(frame, "Right great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                            # cv2.putText(frame, "Right great", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                             confirm_left += 1
                             if confirm_left >= 1 and count_left % 2 == 1 :
                                 count_left += 1
