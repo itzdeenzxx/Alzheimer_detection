@@ -42,6 +42,8 @@ class VideoCamera_Game(object):
         
         text = ""
         for idx, num in enumerate(Number_random):
+            print(self.i)
+            print(idx)
             if idx == self.i and self.i > 0:
                 text += "- "
             elif idx < self.i:
@@ -87,13 +89,14 @@ class VideoCamera_Game(object):
         if frame is None:
             print("Error: Received None frame")
             return None
-
+        
         self.i = self.game.start_tracking(frame, self.Number_random) 
         if self.i == 999 :
             self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
             self.i = 0
         frame = self.show_number(frame, self.Number_random)
         frame = self.show_number_allrd(frame, self.Number_random)
+        
 
         ret, jpeg = cv2.imencode(".jpg", frame)
 

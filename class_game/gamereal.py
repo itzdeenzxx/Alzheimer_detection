@@ -83,12 +83,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
                                     return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
 
@@ -108,12 +105,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
                                     return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
                         if Number_random[self.i] == 2:
@@ -131,12 +125,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
                                     return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
                         if Number_random[self.i] == 3:
@@ -154,12 +145,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
                                     return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
                         if Number_random[self.i] == 4:
@@ -177,12 +165,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
                                     return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
                         if Number_random[self.i] == 5:
@@ -200,12 +185,9 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    # If there are more numbers, return current index
-                                    return self.i , Number_random
+                                    return self.i
                                 else:
-                                    # If all numbers are answered, reset and return 0
                                     self.i = 0
-                                    # Reset Number_random for new set of random numbers
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                                     return 999
         if results.multi_hand_landmarks:
@@ -216,48 +198,8 @@ class HandTracker:
     
         
 
-<<<<<<< HEAD
-    def draw_text(self,image, text , position):
-        pil_im = Image.fromarray(image) 
-        draw = ImageDraw.Draw(pil_im)
-        font = ImageFont.truetype("../static/font/Prompt-Regular.ttf", 50)  
-        draw.text(position, text, font=font)  
-        cv2_im_processed = np.array(pil_im)
-        return cv2_im_processed
-    
-    def show_number_allrd(self, frame, Number_random):
-        # คำนวณความกว้างและความสูงของภาพ
-        height, width, _ = frame.shape
-        
-        # ขนาดของข้อความ
-        text = f"ต้องการเริ่มทำมือท่า 0 {str(Number_random[0])} "
-        text1 = f"Number:{str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
-        text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
-        
-        # คำนวณตำแหน่งที่จะวางข้อความให้อยู่ตรงกลาง
-        text_x = int((width - text_size[0]) / 2)
-        text_y = int((height + text_size[1]) / 2)
-        
-        if self.i <= 0 :
-            cv2.putText(frame,text,
-                (250, 300),
-                cv2.FONT_HERSHEY_PLAIN,
-                2,
-                (255, 255, 255),
-                2,
-            )
-            cv2.putText(frame,text1,
-                (265, 250),
-                cv2.FONT_HERSHEY_PLAIN,
-                2,
-                (255, 0, 0),
-                2,
-            )
-            self.draw_text(frame,text,(250, 300)) #แก้
-=======
 
     
         
->>>>>>> 37122fcfaefa08fdaf30d9977d73a441b060fff5
 
 
