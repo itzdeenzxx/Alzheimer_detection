@@ -15,7 +15,7 @@ function generateRandomStroop() {
     const color = colors[colorIndex];
     const text = texts[textIndex];
     const textth = textsth[textIndex]
-    return { color, text , textth };
+    return { color, text, textth };
 }
 
 function updateStroop() {
@@ -36,7 +36,7 @@ function checkAnswer(buttonClicked) {
     console.log(colorOfText)
     console.log(textContent)
     const isCorrect = (buttonClicked === "Correct" && textContent === colorOfText) ||
-                      (buttonClicked === "Incorrect" && textContent !== colorOfText);
+        (buttonClicked === "Incorrect" && textContent !== colorOfText);
 
     if (isCorrect) {
         correctAnswers++;
@@ -59,7 +59,7 @@ function updateScore() {
 
 function startCountdown(seconds) {
     let timeLeft = seconds;
-    countdown = setInterval(function() {
+    countdown = setInterval(function () {
         if (timeLeft <= 0) {
             clearInterval(countdown);
             document.getElementById("container").style.display = "none";
