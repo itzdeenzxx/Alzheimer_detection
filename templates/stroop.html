@@ -12,32 +12,34 @@
 </head>
 <body>
     <div class="game">
-    <h2 class="title">เกมซ่อนสีอักษร</h2>
-    <button id="startButton" onclick="startGame()"><span class="shadow"></span>
-        <span class="edge"></span>
-        <span class="front">
-          เริ่มเกม
-        </span></button>
-        <h2>
-            <!-- วิธีการเล่นเกม -->
-        </h2>
-    <div id="container">
-        <div id="time"></div>
-        <div id="text"></div>
-        <div id="text-en" style="display: none;"></div>
-        <button onclick="checkAnswer('Correct')" class="correct">ถูก</button>
-        <button onclick="checkAnswer('Incorrect')" class="incorrect">ผิด</button>
-    </div>
-    <div id="score">
-        <h3>คะแนน</h3>
-        <p>จำนวนคำถามที่ตอบ: <span id="total"></span></p>
-        <p>จำนวนข้อที่ตอบถูก: <span id="correct"></span></p>
-        <p>คิดเป็นเปอร์เซ็นได้ทั้งหมด => <span id="percentage"></span>%</p>
-        <button onclick="restartGame()" class="correct">เริ่มใหม่</button>
-        <h3>
-            กลับหน้าหลัก
-        </h3>
-    </div>
+    <div class="border-center">
+        <h2 class="title">เกมซ่อนสีอักษร</h2>
+        <button id="startButton" onclick="startGame()"><span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front">
+                เริ่มเกม
+            </span></button>
+            <h2>
+                วิธีการเล่นเกม
+            </h2>
+            <div id="container">
+                <div id="time"></div>
+                <div id="text"></div>
+                <div id="text-en" style="display: none;"></div>
+                <button onclick="checkAnswer('Correct')" class="correct">ถูก</button>
+                <button onclick="checkAnswer('Incorrect')" class="incorrect">ผิด</button>
+            </div>
+            <div id="score">
+                <h3>คะแนน</h3>
+                <p>จำนวนคำถามที่ตอบ: <span id="total"></span></p>
+                <p>จำนวนข้อที่ตอบถูก: <span id="correct"></span></p>
+                <p>คิดเป็นเปอร์เซ็นได้ทั้งหมด => <span id="percentage"></span>%</p>
+                <button onclick="restartGame()" class="correct">เริ่มใหม่</button>
+                <h3>
+                    กลับหน้าหลัก
+                </h3>
+            </div>
+        </div>
 </div>
 <script src="{{ url_for('static', filename='js/game/stroop.js') }}"></script>
 </body>

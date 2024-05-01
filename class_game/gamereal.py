@@ -18,7 +18,7 @@ class HandTracker:
     def start_tracking(self,frame,Number_random):
         results = self.hands.process(frame)
         if results.multi_hand_landmarks:
-                hand_landmarks = results.multi_hand_landmarks[0]
+            for hand_landmarks in results.multi_hand_landmarks:
                 for id, lm in enumerate(hand_landmarks.landmark):
                     fingers = 0
                     if id == 0:
@@ -65,12 +65,18 @@ class HandTracker:
                         and hand_landmarks.landmark[4].x > hand_landmarks.landmark[5].x
                     ):
                         fingers = 5
+                    if(hand_landmarks.landmark[8].y < hand_landmarks.landmark[5].y
+                       and hand_landmarks.landmark[12].y > hand_landmarks.landmark[9].y
+                       and hand_landmarks.landmark[16].y > hand_landmarks.landmark[13].y  
+                       and hand_landmarks.landmark[20].y < hand_landmarks.landmark[17].y
+                       and hand_landmarks.landmark[4].x > hand_landmarks.landmark[5].x):
+                        fingers = 9
 
                     
                     if self.i < 5 :
                         if Number_random[self.i] == 0:
                             if(
-                                fingers == 0
+                                fingers == 9
                             ):
                                 cv2.putText(
                                     frame,

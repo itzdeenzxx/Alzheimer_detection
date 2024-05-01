@@ -42,14 +42,12 @@ class VideoCamera_Game(object):
         
         text = ""
         for idx, num in enumerate(Number_random):
-            print(self.i)
-            print(idx)
-            if idx == self.i and self.i > 0:
+            
+            if idx == self.i and self.i > 1:
                 text += "- "
-            elif idx < self.i:
+            elif idx < self.i and num !=0:
                 text += f"{num} "
-            else:
-                text += "- "
+            
 
         if self.i < len(Number_random):
             processed_frame = self.draw_text(frame, text.strip(), (50, 50))
@@ -64,17 +62,21 @@ class VideoCamera_Game(object):
         if frame is None:
             return None
         
-        text = f"ทำมือเลข {str(Number_random[0])} เพื่อเริ่มเกม"
+        text_tell = f"โปรดชูมือให้ถูกต้องตามตัวเลขปรากฏ"
+        
+        text = f"ทำ เลิฟยูเพื่อ เพื่อเริ่มเกม"
         text_num = f"จงจำเลข :{str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
         text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
         if self.i <= 0:
-            processed_frame = self.draw_text(frame, text, (250, 300))
+            processed_frame = self.draw_text(frame, text, (400, 300))
             if processed_frame is not None:
-                processed_frame = self.draw_text(processed_frame, text_num, (265, 250))
+                processed_frame = self.draw_text(processed_frame, text_num, (480, 250))
                 return processed_frame
             else:
+                
                 return frame
         else:
+            frame = self.draw_text(frame , text_tell , (280,600))
             return frame
     def set_random(self , number) :
         self.Number_random = number
@@ -97,11 +99,13 @@ class VideoCamera_Game(object):
         frame = self.show_number(frame, self.Number_random)
         frame = self.show_number_allrd(frame, self.Number_random)
         
+
         ret, jpeg = cv2.imencode(".jpg", frame)
 
         if not ret:
             print("Error: Failed to encode frame as JPEG")
             return None
+        
 
         return jpeg.tobytes()
 

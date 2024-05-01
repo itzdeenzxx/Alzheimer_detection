@@ -7,6 +7,9 @@ body {
   justify-content: center;
   align-items: center; /* จัดตำแหน่งตามแนวตั้ง (แกน y) */
   height: 100vh;
+  background-image: url(../img/bg-stroop.gif);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 #container {
   display: none;
@@ -82,10 +85,10 @@ body {
   border-radius: 8px;
   background: linear-gradient(
     to right,
-    hsl(248, 39%, 39%) 0%,
-    hsl(248, 39%, 49%) 8%,
-    hsl(248, 39%, 39%) 92%,
-    hsl(248, 39%, 29%) 100%
+    rgb(202, 135, 135) 0%,
+    rgb(210, 111, 111) 8%,
+    rgb(202, 96, 96) 92%,
+    rgb(199, 88, 88) 100%
   );
 }
 
@@ -93,7 +96,7 @@ body {
   display: block;
   position: relative;
   border-radius: 8px;
-  background: hsl(248, 53%, 58%);
+  background: rgb(202, 135, 135);
   padding: 16px 32px;
   color: white;
   font-weight: 600;
@@ -109,7 +112,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* ทำให้เต็มจอ */
+  height: 100vh;
+}
+.border-center {
+  background-color: white;
+  padding: 35px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 9px 9px rgba(166, 60, 60, 0.3);
+
 }
 .header {
   display: grid;
