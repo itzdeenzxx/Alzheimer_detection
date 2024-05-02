@@ -103,6 +103,8 @@ class VideoCamera_Game(object):
             frame = self.show_number(frame, self.Number_random)
             frame = self.show_number_allrd(frame, self.Number_random)
             frame = self.draw_text(frame , text_score , (500,30))
+            if times == 60 :
+                self.confirm_game = False
             frame = self.draw_text(frame , str(60-times) , (1080,50))
         else :
             pass 
