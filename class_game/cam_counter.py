@@ -11,7 +11,7 @@ mp_hands = mp.solutions.hands
 
 # var break time 10sec
 countdown_time = 10
-times = 60
+
 
 class VideoCamera_Game(object):
     global Number_random
@@ -22,6 +22,7 @@ class VideoCamera_Game(object):
         self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
         self.i = 0
         self.score = 0
+        self.confirm_game = True
 
     def __del__(self):
         self.video.release()
@@ -92,16 +93,20 @@ class VideoCamera_Game(object):
         if frame is None:
             print("Error: Received None frame")
             return None
-        self.i , times = self.game.start_tracking(frame, self.Number_random) 
-        if self.i == 999 :
-            self.score += 1
-            self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-            self.i = 0
-        text_score = f"จำนวนแต้ม : {str(self.score)}"
-        frame = self.show_number(frame, self.Number_random)
-        frame = self.show_number_allrd(frame, self.Number_random)
-        frame = self.draw_text(frame , text_score , (500,30))
-        frame = self.draw_text(frame , str(60-times) , (1080,50))
+        if self.confirm_game :
+            self.i , times = self.game.start_tracking(frame, self.Number_random) 
+            if self.i == 999 :
+                self.score += 1
+                self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
+                self.i = 0
+            text_score = f"จำนวนแต้ม : {str(self.score)}"
+            frame = self.show_number(frame, self.Number_random)
+            frame = self.show_number_allrd(frame, self.Number_random)
+            frame = self.draw_text(frame , text_score , (500,30))
+            frame = self.draw_text(frame , str(60-times) , (1080,50))
+        else :
+            pass 
+            # ทำฟังชันก์ใน gamereal ให้สามารถ restart และ บอกคะแนนทั้งหมดที่ได้ ได้ โดย ถ้าเงื่อนไขที่ return ออกมา เป็น true ให้ restart ได้ 
         
         
 
