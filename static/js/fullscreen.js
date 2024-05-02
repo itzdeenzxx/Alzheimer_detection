@@ -63,11 +63,21 @@ function toggleCamera() {
 
 // ตรวจสอบรูปไหนที่กำลังอยู่หน้าสไลด์
 
-function openPopup() {
-    document.getElementById("videoPopup").style.display = "block";
-  }
+$(document).ready(function(){
   
-  // ฟังก์ชันเพื่อปิดป็อปอัพ
-  function closePopup() {
-    document.getElementById("videoPopup").style.display = "none";
-  }
+    $('.popup-btn').on('click', function(){
+      $('.video-popup').fadeIn('slow');
+      return false;
+    });
+    
+    $('.popup-bg').on('click', function(){
+      $('.video-popup').slideUp('slow');
+      return false;
+    });
+    
+     $('.close-btn').on('click', function(){
+       $('.video-popup').fadeOut('slow');
+        return false;
+     });
+    
+  });

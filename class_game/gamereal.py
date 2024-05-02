@@ -5,6 +5,9 @@ from PIL import ImageFont, ImageDraw, Image
 from class_game.cam_counter import *
 import random as rd
 
+starting_time = 0
+elapsed_time = 0
+
 class HandTracker:
     global i
     def __init__(self):
@@ -14,8 +17,10 @@ class HandTracker:
         self.hands = self.mp_hands.Hands()
         self.pTime = 0
         self.i= 0
+        self.confirm_time = True
     
     def start_tracking(self,frame,Number_random):
+        global starting_time , elapsed_time
         results = self.hands.process(frame)
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -71,13 +76,17 @@ class HandTracker:
                        and hand_landmarks.landmark[20].y < hand_landmarks.landmark[17].y
                        and hand_landmarks.landmark[4].x > hand_landmarks.landmark[5].x):
                         fingers = 9
-
                     
+
                     if self.i < 5 :
                         if Number_random[self.i] == 0:
                             if(
                                 fingers == 9
-                            ):
+                            ):  
+                                if self.confirm_time:
+                                    starting_time = time.time()
+                                    self.confirm_time = False
+                                
                                 cv2.putText(
                                     frame,
                                     f"START!!!",
@@ -89,11 +98,11 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
 
 
                         if Number_random[self.i] == 1:
@@ -111,11 +120,11 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
                         if Number_random[self.i] == 2:
                             if (
                                 fingers == 2
@@ -131,11 +140,11 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
                         if Number_random[self.i] == 3:
                             if (
                                 fingers == 3
@@ -151,11 +160,11 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
                         if Number_random[self.i] == 4:
                             if (
                                 fingers == 4
@@ -171,11 +180,11 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
                         if Number_random[self.i] == 5:
                             if (
                                 fingers == 5
@@ -191,16 +200,17 @@ class HandTracker:
                                 )
                                 self.i += 1
                                 if self.i < 5:
-                                    return self.i
+                                    return self.i , elapsed_time
                                 else:
                                     self.i = 0
                                     Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
-                                    return 999
+                                    return 999 , elapsed_time
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 self.mp_drawing.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS)
-
-        return self.i
+        if self.confirm_time == False :
+            elapsed_time = int(time.time() - starting_time) + 1
+        return self.i , elapsed_time
     
         
 

@@ -11,7 +11,7 @@ mp_hands = mp.solutions.hands
 
 # var break time 10sec
 countdown_time = 10
-
+times = 60
 
 class VideoCamera_Game(object):
     global Number_random
@@ -21,6 +21,7 @@ class VideoCamera_Game(object):
         self.game = HandTracker()
         self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
         self.i = 0
+        self.score = 0
 
     def __del__(self):
         self.video.release()
@@ -62,26 +63,26 @@ class VideoCamera_Game(object):
         if frame is None:
             return None
         
-        text_tell = f"โปรดชูมือให้ถูกต้องตามตัวเลขปรากฏ"
+        text_tell = f"โปรดชูมือให้ถูกต้องตามตัวเลขปรากฏก่อนหน้า"
         
         text = f"ทำ เลิฟยูเพื่อ เพื่อเริ่มเกม"
-        text_num = f"จงจำเลข :{str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
+        text_num = f"จงจำเลข : {str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
         text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
         if self.i <= 0:
-            processed_frame = self.draw_text(frame, text, (400, 300))
+            processed_frame = self.draw_text(frame, text, (400, 500))
             if processed_frame is not None:
                 processed_frame = self.draw_text(processed_frame, text_num, (480, 250))
                 return processed_frame
             else:
-                
                 return frame
         else:
-            frame = self.draw_text(frame , text_tell , (280,600))
+            frame = self.draw_text(frame , text_tell , (200,600))
             return frame
     def set_random(self , number) :
         self.Number_random = number
 
     def get_frame(self):
+      
         ret, frame = self.video.read()
 
         if not ret:
@@ -91,13 +92,17 @@ class VideoCamera_Game(object):
         if frame is None:
             print("Error: Received None frame")
             return None
-
-        self.i = self.game.start_tracking(frame, self.Number_random) 
+        self.i , times = self.game.start_tracking(frame, self.Number_random) 
         if self.i == 999 :
+            self.score += 1
             self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
             self.i = 0
+        text_score = f"จำนวนแต้ม : {str(self.score)}"
         frame = self.show_number(frame, self.Number_random)
         frame = self.show_number_allrd(frame, self.Number_random)
+        frame = self.draw_text(frame , text_score , (500,30))
+        frame = self.draw_text(frame , str(60-times) , (1080,50))
+        
         
 
         ret, jpeg = cv2.imencode(".jpg", frame)

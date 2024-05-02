@@ -1,17 +1,21 @@
+body {
+  background-color: #000;
+  /* background-image: url(../img/bg-count-game.jpg); */
+}
 .overlay-btn {
     position: absolute;
-    top: 20px; /* ปรับตำแหน่งตามต้องการ */
-    right: 20px; /* ปรับตำแหน่งตามต้องการ */
+    top: 20px; 
+    right: 20px;
     z-index: 1000; /* ให้ปุ่มอยู่ด้านบนสุด */
-    background-color: rgba(255, 255, 255, 0.7); /* สีพื้นหลังของปุ่ม */
-    padding: 10px 20px; /* ขนาดของปุ่ม */
-    border-radius: 5px; /* ขอบโค้งของปุ่ม */
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
   }
   
   .overlay-btn h5 {
     margin: 0;
-    color: #000; /* สีของตัวหนังสือ */
-    font-size: 16px; /* ขนาดตัวหนังสือ */
+    color: #000;
+    font-size: 16px;
   }
   

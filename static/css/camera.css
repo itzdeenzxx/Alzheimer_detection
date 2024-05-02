@@ -419,38 +419,73 @@ iframe {
   /* transform: translate(1px, 1px); */
 }
 
-.popup {
-  display: none; /* ซ่อนป็อปอัพเริ่มต้น */
-  position: fixed; 
-  top: 50%; 
-  left: 50%; 
-  border-radius: 12px;
-  transform: translate(-50%, -50%);
-  border: 2px solid #50623A;
-  background-color: #789461;
-  padding: 20px;
-  z-index: 1000;
+.video {
+  width: 100%;
+  height: 400px;
+  margin: auto;
+  display: block;
+  border: none;
 }
-
-
-/* จัดรูปแบบปุ่มปิด */
-.close {
-  color: rgb(163, 0, 0);
-  float: right;
-  font-size: 100px;
-  font-weight: bold;
-  position: absolute; /* ตำแหน่งแบบสัมผัส */
-  z-index: 1100;
-  top: 0;
-  right: 0;
-}
-
-.close:hover,
-.close:focus {
-  color: white;
-  text-decoration: none;
+.close-btn {
+  display: block;
+  margin: 50px auto;
+  cursor: pointer; 
+  padding: 9px 12px;
+  gap: 8px;
+  border: none;
+  background: #FF2849;
+  border-radius: 20px;
   cursor: pointer;
 }
+.close-btn span {
+  line-height: 22px;
+  letter-spacing: 1px;
+  font-size: 20px;
+  color: #fff;
+  font-family: "Prompt", sans-serif;
+  letter-spacing: 1px;
+}
+.close-btn:hover {
+  background: #e52441;
+}
+
+.close-btn:hover .svg-icon {
+  animation: flickering 2s linear infinite;
+}
+
+
+.video-popup {
+  display: none;
+  border-radius: 10px;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  box-shadow: 10px 10px 10px 10px black;
+}
+.popup-bg {
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+.popup-content {
+  background: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: auto;
+}
+.popup-title {
+  padding: 30px;
+  margin: 0 auto;
+  color: red;
+  text-transform: uppercase;
+}
+
 
 /* responsive */
   @media (max-width: 1024px) {
@@ -562,5 +597,55 @@ iframe {
     }
     .fullscreen-div{
       margin-top: 5%;
+    }
+  }
+  
+  @keyframes flickering {
+    0% {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  
+    52% {
+      opacity: 1;
+    }
+  
+    54% {
+      opacity: 0;
+    }
+  
+    56% {
+      opacity: 1;
+    }
+  
+    90% {
+      opacity: 1;
+    }
+  
+    92% {
+      opacity: 0;
+    }
+  
+    94% {
+      opacity: 1;
+    }
+  
+    96% {
+      opacity: 0;
+    }
+  
+    98% {
+      opacity: 1;
+    }
+  
+    99% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
     }
   }
