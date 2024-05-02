@@ -66,7 +66,7 @@ class VideoCamera_Game(object):
         
         text_tell = f"โปรดชูมือให้ถูกต้องตามตัวเลขปรากฏก่อนหน้า"
         
-        text = f"ทำ เลิฟยูเพื่อ เพื่อเริ่มเกม"
+        text = f'ทำมือ "เลิฟยู" จึงเริ่มเกม'
         text_num = f"จงจำเลข : {str(Number_random[1])},{str(Number_random[2])},{str(Number_random[3])},{str(Number_random[4])}"
         text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_PLAIN, 3, 3)
         if self.i <= 0:
