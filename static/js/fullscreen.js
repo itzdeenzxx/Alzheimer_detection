@@ -61,7 +61,7 @@ function toggleCamera() {
 }
 
 
-// ตรวจสอบรูปไหนที่กำลังอยู่หน้าสไลด์
+
 
 $(document).ready(function(){
   

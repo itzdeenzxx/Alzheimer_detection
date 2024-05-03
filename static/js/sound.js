@@ -1,6 +1,4 @@
 var isPlaying = false;
-
-
     function playSound(line) {
       if (!isPlaying) {
         isPlaying = true;

@@ -54,6 +54,22 @@ function toggleCameragame() {
 }
 
 
-// ตรวจสอบรูปไหนที่กำลังอยู่หน้าสไลด์
 
-
+$(document).ready(function(){
+  
+    $('.button-tutorail').on('click', function(){
+      $('.tutorial-popup').fadeIn('slow');
+      return false;
+    });
+    
+    // $('.tutorial-bg').on('click', function(){
+    //   $('.tutorial-popup').slideUp('slow');
+    //   return false;
+    // });
+    
+     $('.close-btn').on('click', function(){
+       $('.tutorial-popup').fadeOut('slow');
+        return false;
+     });
+    
+  });
