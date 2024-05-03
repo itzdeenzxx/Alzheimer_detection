@@ -18,4 +18,25 @@ body {
     color: #000;
     font-size: 16px;
   }
+  .button-tutorail {
+    padding: 9px 12px;
+    gap: 8px;
+    border: none;
+    background: #FF342B;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .button-tutorail span{
+    line-height: 22px;
+    font-size: 17px;
+    color: #fff;
+    font-family: "Prompt", sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .button-tutorail:hover {
+    background: #e52e26;
+  }
   

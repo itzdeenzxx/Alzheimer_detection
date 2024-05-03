@@ -56,11 +56,11 @@ class Header_finger:
                 self.count += 1
         if self.count >= 1 :
             elapsed_time = int(time.time() - starting_time) + 1
-        if results_pose.pose_landmarks:
-            for landmark in results_pose.pose_landmarks.landmark:
-                height, width, _ = frame.shape
-                cx, cy = int(landmark.x * width), int(landmark.y * height)
-                cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)
+        # if results_pose.pose_landmarks:
+        #     for landmark in results_pose.pose_landmarks.landmark:
+        #         height, width, _ = frame.shape
+        #         cx, cy = int(landmark.x * width), int(landmark.y * height)
+        #         cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)
         print(elapsed_time)
         return elapsed_time
         
