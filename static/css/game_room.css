@@ -22,7 +22,7 @@ body {
     padding: 9px 12px;
     gap: 8px;
     border: none;
-    background: #FF342B;
+    background: #50623A;
     border-radius: 20px;
     cursor: pointer;
     margin-bottom: 20px;
@@ -37,6 +37,6 @@ body {
   }
   
   .button-tutorail:hover {
-    background: #e52e26;
+    background: #3d4b2c;
   }
   
