@@ -428,7 +428,8 @@ iframe {
 }
 .close-btn {
   display: block;
-  margin: 50px auto;
+  margin: 20px auto;
+  margin-bottom: 40px;
   cursor: pointer; 
   padding: 9px 12px;
   gap: 8px;

@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เกมซ่อนสีอักษร</title>
-<link
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมซ่อนสีอักษร</title>
+    <link
         href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/stroop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stroop.css') }}">
 </head>
+
 <body>
     <div class="game">
-    <div class="border-center">
-        <h2 class="title">เกมซ่อนสีอักษร</h2>
-        <button id="startButton" onclick="startGame()"><span class="shadow"></span>
-            <span class="edge"></span>
-            <span class="front">
-                เริ่มเกม
-            </span></button>
+        <div class="border-center">
+            <h2 class="title">เกมซ่อนสีอักษร</h2>
+            <button id="startButton" onclick="startGame()"><span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">
+                    เริ่มเกม
+                </span></button>
             <h2>
                 วิธีการเล่นเกม
             </h2>
@@ -35,12 +37,17 @@
                 <p>จำนวนข้อที่ตอบถูก: <span id="correct"></span></p>
                 <p>คิดเป็นเปอร์เซ็นได้ทั้งหมด => <span id="percentage"></span>%</p>
                 <button onclick="restartGame()" class="correct">เริ่มใหม่</button>
-                <h3>
-                    กลับหน้าหลัก
-                </h3>
+                <a href="/">
+                    <h3>
+                        กลับหน้าหลัก
+                    </h3>
+                </a>
+                
+
             </div>
         </div>
-</div>
-<script src="{{ url_for('static', filename='js/game/stroop.js') }}"></script>
+    </div>
+    <script src="{{ url_for('static', filename='js/game/stroop.js') }}"></script>
 </body>
+
 </html>

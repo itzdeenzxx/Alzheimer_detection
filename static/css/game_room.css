@@ -30,7 +30,7 @@ body {
   
   .button-tutorail span{
     line-height: 30px;
-    font-size: 17px;
+    font-size: 20px;
     color: #fff;
     font-family: "Prompt", sans-serif;
     letter-spacing: 1px;
@@ -50,6 +50,7 @@ body {
 }
 .text-popup {
   color: #fff;
+  margin-top: 20px;
 }
 .text-popup:hover {
   color: #fff;

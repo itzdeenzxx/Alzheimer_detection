@@ -77,9 +77,9 @@ class Head_Ear_Detector:
                                 print("1111")
                                 count_final = count_left
                                 confirm_right , confirm_left = 0,0
-            if results_pose.pose_landmarks:
-                for landmark in results_pose.pose_landmarks.landmark:
-                    height, width, _ = frame.shape
-                    cx, cy = int(landmark.x * width), int(landmark.y * height)
-                    cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)             
+            # if results_pose.pose_landmarks:
+            #     for landmark in results_pose.pose_landmarks.landmark:
+            #         height, width, _ = frame.shape
+            #         cx, cy = int(landmark.x * width), int(landmark.y * height)
+            #         cv2.circle(frame, (cx, cy), 5, (255, 0, 0), -1)             
             return count_final
