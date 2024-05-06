@@ -1,0 +1,12 @@
+.model-3d {
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    
+}
+model-viewer{
+    width:80%;
+    height:600px;
+    background-color:rgb(255, 255, 255);
+    border-radius: 20px;
+    }
