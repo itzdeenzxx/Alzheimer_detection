@@ -60,7 +60,7 @@ class VideoCamera(object):
         return cv2_im_processed
     
     def get_frame(self):
-        global set_of_Hand_L , set_of_thumb_pinky , set_of_Header
+        global set_of_Hand_L , set_of_thumb_pinky , set_of_Header , set_of_collar
         global remaining_time_continue
         global set_main , pass_check
 
@@ -124,7 +124,7 @@ class VideoCamera(object):
             position_collar = (50,50)
             frame = self.draw_text(frame, text_collar,position_collar)
             if remaining_time_continue == 30 :
-                set_of_Header += 1
+                set_of_collar += 1
                 remaining_time_continue = 0
             pass
         ret, jpeg = cv2.imencode('.jpg', frame)
