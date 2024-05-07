@@ -82,5 +82,10 @@ def cam_game_count():
 def game_menu():
     return render_template("game_menu.html")
 
+#infomation
+@app.route("/info_brain" , methods=["GET","POST"])
+def info_brain():
+    return render_template("info_brain.html")
+
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
