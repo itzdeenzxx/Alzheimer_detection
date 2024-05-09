@@ -4,8 +4,6 @@ from class_game.cam_counter import VideoCamera_Game
 
 app = Flask(__name__, static_folder="static")
 
-
-
 set_main = 1
 select_player = 0
 count_present = 0
@@ -83,9 +81,9 @@ def game_menu():
     return render_template("game_menu.html")
 
 #infomation
-@app.route("/info_brain" , methods=["GET","POST"])
-def info_brain():
-    return render_template("info_brain.html")
+@app.route("/infomation" , methods=["GET","POST"])
+def infomation():
+    return render_template("infomation.html")
 
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
