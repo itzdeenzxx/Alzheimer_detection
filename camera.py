@@ -9,7 +9,7 @@ from class_fitness.thumb_pink import thumb_pinky
 from class_fitness.header import Header_finger
 from class_fitness.ear_head import Head_Ear_Detector
 from class_fitness.collarbone import Colarbone_finger
-      
+from class_fitness.finished import Finish
 mp_hands = mp.solutions.hands
 # set in fitness
 set_of_Hand_L = 0
@@ -35,6 +35,9 @@ resume_requested = False
 elapsed_time = 0
 start_stop = False
 
+#finish
+check_finish = False
+
 class VideoCamera(object):
     def __init__(self):
         self.camera_index = 0 
@@ -44,6 +47,7 @@ class VideoCamera(object):
         self.header_finger = Header_finger()
         self.ear = Head_Ear_Detector()
         self.collar = Colarbone_finger()
+        self.finish = Finish()
         self.check_count = True
         self.count_final_main = 0
         self.set_main = 1
@@ -63,11 +67,12 @@ class VideoCamera(object):
         global set_of_Hand_L , set_of_thumb_pinky , set_of_Header , set_of_collar
         global remaining_time_continue
         global set_main , pass_check
+        global check_finish
 
         remaining_time = remaining_time_continue
         ret, frame = self.video.read()
         
-        if self.count_final_main < 10 and set_of_Hand_L < 3 and self.set_main == 1:
+        if self.count_final_main < 10 and set_of_Hand_L < 3 and self.set_main == 1 :
             self.count_final_main = self.L_pose.detect_and_count_finger_distance(frame,self.count_final_main)
             text_Lpose = f"สำเร็จ : {str(self.count_final_main)}"
             text_Lpose_round = f"รอบ : {str(set_of_Hand_L + 1)}"
@@ -81,7 +86,23 @@ class VideoCamera(object):
             set_of_Hand_L +=1
             print(set_of_Hand_L)
             self.count_final_main = 0
-
+            
+        elif set_of_Hand_L == 3 and self.set_main == 1:
+            check_finish = self.finish.check_finish(frame , check_finish)
+            if check_finish :
+                set_of_Hand_L = 0
+                self.count_final_main = 0
+                text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
+                frame = self.draw_text(frame, text_finish, (400, 500))
+                time.sleep(1)
+            else :
+                text_finish = f"จบการออกกำลังกาย"
+                text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
+                text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
+                frame = self.draw_text(frame, text_finish, (400, 500))
+                frame = self.draw_text(frame, text_finish_con, (400, 700))
+                frame = self.draw_text(frame, text_finish_emote, (400, 900))
+         
         if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
             text_thumb = f"สำเร็จ : {str(self.count_final_main)}"
