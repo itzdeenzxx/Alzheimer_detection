@@ -55,8 +55,16 @@
     <div class="container">
     </div>
     <div class="camera-div">
+        {% if queue == 1 %}
+        <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
+            src="{{ url_for('static', filename='img/jib-cover2.jpg') }}">
+        {% elif queue == 2 %}
+        <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
+            src="{{ url_for('static', filename='img/thumb-cover2.jpg') }}">
+        {% else %}
         <img id="fullscreen-cam" class="camera-main wow slideInDown" data-wow-duration="1s" data-wow-delay="0s"
             src="{{ url_for('static', filename='img/pre-fitness-test.jpg') }}">
+        {% endif %}
     </div>
 
     <div>

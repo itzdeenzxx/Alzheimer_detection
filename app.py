@@ -1,8 +1,12 @@
 from flask import Flask, render_template, Response, request , url_for
+from waitress import serve
 from camera import VideoCamera
 from class_game.cam_counter import VideoCamera_Game
 
 app = Flask(__name__, static_folder="static")
+
+#develop mode
+mode = "dev"
 
 set_main = 1
 select_player = 0
@@ -80,10 +84,19 @@ def cam_game_count():
 def game_menu():
     return render_template("game_menu.html")
 
+@app.route("/matrix_game" , methods=["GET","POST"])
+def matrix_game():
+    return render_template("matrix-game.html")
+
 #infomation
 @app.route("/infomation" , methods=["GET","POST"])
 def infomation():
     return render_template("infomation.html")
 
+
+
 if __name__ == "__main__":
-    app.run(debug=True,port=8080)
+    if mode == "dev":
+        app.run(debug=True,port=8080,host='0.0.0.0')
+    else :
+        serve(app, host='0.0.0.0', port=8080, threads=1)
