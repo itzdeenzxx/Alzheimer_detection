@@ -55,3 +55,14 @@ body {
 .text-popup:hover {
   color: #fff;
 }
+
+ @media (max-width: 414px) or (max-height: 414px) {
+  .tutorial-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .popup-content {
+    width: 420px;
+  }
+ }

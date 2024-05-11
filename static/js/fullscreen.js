@@ -1,6 +1,8 @@
 function toggleFullscreen() {
     const element = document.getElementById('fullscreen-cam');
-
+    if (isSafari()) {
+        alert("ขออภัย คุณกำลังใช้ Safari ซึ่งไม่สามารถเปิดหน้าเต็มจอได้ในบางกรณี กรุณาลองใช้เบราว์เซอร์อื่นเพื่อเปิดเต็มจอ");
+    }
     if (document.fullscreenElement) {
         document.exitFullscreen();
     } else {
@@ -9,6 +11,10 @@ function toggleFullscreen() {
         });
     }
 }
+function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+ 
 
 function checkOrientation() {
     if (window.orientation === 90 || window.orientation === -90) {

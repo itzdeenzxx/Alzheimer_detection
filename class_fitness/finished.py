@@ -24,7 +24,7 @@ class Finish:
                     pinky_dip = hand_landmarks_inner.landmark[mp_hands.HandLandmark.PINKY_DIP]
 
                     if thumb_tip.x < thumb_ip.x and index_tip.y > index_dip.y and middle_tip.y < middle_dip.y and ring_tip.y < ring_dip.y and pinky_tip.y < pinky_dip.y:
-                       finished = True
+                       finished = False 
 
                 # mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks_inner, mp_hands.HAND_CONNECTIONS)/-ตภคึ/-ภถตค
             
