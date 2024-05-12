@@ -10,35 +10,34 @@
     
 </head>
 <body>
-   
    <div class="wrapper">
        <div id="options" class="options">
            <div class="title">Choose the Board</div>
        <label class="radio-container">
-           3x3
+           ง่าย
             <input type="radio" name="tiles-number" value="9">
             <span class="checkmark"></span>
        </label>
        <label class="radio-container">
-            4x4
+            ปานกลาง
             <input type="radio" name="tiles-number" checked="checked" value="16">
             <span class="checkmark"></span>
         </label>
         <label class="radio-container">
-            5x5
+            ยาก
             <input  type="radio" name="tiles-number" value="25">
             <span class="checkmark"></span>
         </label>
-        <button id="show-board" class="btn middle" onclick="options()" >Show Board</button>
+        <button id="show-board" class="btn middle" onclick="options()" >เข้าสู่เกม</button>
     </div> 
     <div id="board" class="slide middle">  
     <div class="matrix">
-      <div id="start" class="popup start"><p onclick="matrix()">START</p></div>
+      <div id="start" class="popup start"><p onclick="matrix()">เริ่มเกม</p></div>
       
         <div id="end" class="popup end">
             <div class="end-content">
-                <p id="lose" class="end-msg">Game Over</p>
-                <p id="win" class="end-msg">You win!</p>
+                <p id="lose" class="end-msg">แพ้แล้ว TT</p>
+                <p id="win" class="end-msg">คุณชนะ !</p>
                 <i class="fas fa-redo button" onclick="continu()"></i>
             </div>
        </div>
@@ -47,7 +46,7 @@
         <div id="score" class="score">score : 0</div>
         <div id="tiles" class="tiles"></div>
     </div>
-    <button class="btn h-float-left" onclick="removeEl()" >Back to options</button>
+    <button class="btn h-float-left" onclick="removeEl()" >กลับไปหน้าหลัก</button>
 </div> 
     </div>
     

@@ -133,10 +133,10 @@
 	/* for firefox 31 */
 	transform: rotateY(0deg);
     background: #CCD1D9;
-}
+} 
 .back {
 	transform: rotateY(180deg);
-    background: #FC6E51;
+    background: #00eeff;
 }
 .front:hover{
     background: #E6E9ED;

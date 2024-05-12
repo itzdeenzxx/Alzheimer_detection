@@ -83,11 +83,10 @@ function showTiles(){
            
            box.classList.add('hover');
     }  
-}
+} 
 function showTiles_n(){
     for(var i=0 ; i<tileId.length ; i++){
            var box = document.getElementById(tileId[i]);
-           
            box.classList.add('hover');
     }  
 }
@@ -115,7 +114,6 @@ function choose(num){
     }else{
          //the false choice 
         clickedTile.querySelector('.back').style.backgroundColor = "#ED5565";
-        
         falseCh--;
         score -=20;
         if(falseCh == 0){

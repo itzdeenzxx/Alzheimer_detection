@@ -64,7 +64,7 @@ class VideoCamera(object):
         return cv2_im_processed
     
     def get_frame(self):
-        global set_of_Hand_L , set_of_thumb_pinky , set_of_Header , set_of_collar
+        global set_of_Hand_L , set_of_thumb_pinky , set_of_Header , set_of_collar , set_of_Ear
         global remaining_time_continue
         global set_main , pass_check
         global check_finish
@@ -94,14 +94,13 @@ class VideoCamera(object):
                 self.count_final_main = 0
                 text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
                 frame = self.draw_text(frame, text_finish, (400, 500))
-                time.sleep(1)
             else :
                 text_finish = f"จบการออกกำลังกาย"
                 text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
                 text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
-                frame = self.draw_text(frame, text_finish, (400, 500))
-                frame = self.draw_text(frame, text_finish_con, (400, 700))
-                frame = self.draw_text(frame, text_finish_emote, (400, 900))
+                frame = self.draw_text(frame, text_finish, (200, 200))
+                frame = self.draw_text(frame, text_finish_con, (400, 400))
+                frame = self.draw_text(frame, text_finish_emote, (400, 500))
          
         if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2:
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
@@ -112,12 +111,27 @@ class VideoCamera(object):
             frame = self.draw_text(frame, text_thumb , position_thumb)
             frame = self.draw_text(frame, text_thumb_round , position_thumb_round)
             
-        elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3 and set_of_Hand_L > 3:
-            # self.show_overlay()
+        elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3:
+            check_finish = False
             set_of_thumb_pinky +=1
             self.count_final_main = 0
-            
+        elif set_of_thumb_pinky == 3 and self.set_main == 2:
+            check_finish = self.finish.check_finish(frame , check_finish)
+            if check_finish :
+                set_of_thumb_pinky = 0
+                self.count_final_main = 0
+                text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
+                frame = self.draw_text(frame, text_finish, (400, 500))
+            else :
+                text_finish = f"จบการออกกำลังกาย"
+                text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
+                text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
+                frame = self.draw_text(frame, text_finish, (200, 200))
+                frame = self.draw_text(frame, text_finish_con, (400, 400))
+                frame = self.draw_text(frame, text_finish_emote, (400, 500))
+                
         if self.set_main == 3 and set_of_Header == 0:
+            check_finish = False
             remaining_time_continue = self.header_finger.detect_and_head_finger_distance(frame)
             text_header = f"เวลาที่เหลือ : {int(30 - remaining_time_continue)} วินาที"
             position_header = (50,50)
@@ -125,7 +139,24 @@ class VideoCamera(object):
             if remaining_time_continue == 30 :
                 set_of_Header += 1
                 remaining_time_continue = 0
+                
+        # elif set_of_Header != 0 and self.set_main == 3:
+        #     check_finish = self.finish.check_finish(frame , check_finish)
+        #     if check_finish :
+        #         set_of_Header = 0
+        #         self.count_final_main = 0
+        #         text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
+        #         frame = self.draw_text(frame, text_finish, (400, 500))
+        #     else :
+        #         text_finish = f"จบการออกกำลังกาย"
+        #         text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
+        #         text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
+        #         frame = self.draw_text(frame, text_finish, (200, 200))
+        #         frame = self.draw_text(frame, text_finish_con, (400, 400))
+        #         frame = self.draw_text(frame, text_finish_emote, (400, 500))
+                
         if self.set_main == 4 and set_of_Ear < 3:
+            check_finish = False
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             text_Ear = f"สำเร็จ : {str(self.count_final_main)}"
             text_Ear_round = f"รอบ : {str(set_of_thumb_pinky + 1)}"
@@ -134,12 +165,28 @@ class VideoCamera(object):
             frame = self.draw_text(frame, text_Ear , position_Ear)
             frame = self.draw_text(frame, text_Ear_round , position_Ear_round)
             
-        elif self.count_final_main >= 10 and set_of_Ear <= 3 and set_of_Header > 3:
+        elif self.count_final_main >= 10 and set_of_Ear <= 3 :
             # self.show_overlay()
             set_of_thumb_pinky +=1
             self.count_final_main = 0
-        
+            
+        elif set_of_Ear == 3 and self.set_main == 4:
+            check_finish = self.finish.check_finish(frame , check_finish)
+            if check_finish :
+                set_of_Ear = 0
+                self.count_final_main = 0
+                text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
+                frame = self.draw_text(frame, text_finish, (400, 500))
+            else :
+                text_finish = f"จบการออกกำลังกาย"
+                text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
+                text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
+                frame = self.draw_text(frame, text_finish, (200, 200))
+                frame = self.draw_text(frame, text_finish_con, (400, 400))
+                frame = self.draw_text(frame, text_finish_emote, (400, 500))
+                
         if self.set_main == 5 and set_of_collar == 0:
+            check_finish = False
             remaining_time_continue = self.collar.detect_and_coloarbone_finger_distance(frame)
             text_collar = f"เวลาที่เหลือ : {int(30 - remaining_time_continue)} วินาที"
             position_collar = (50,50)
@@ -148,6 +195,20 @@ class VideoCamera(object):
                 set_of_collar += 1
                 remaining_time_continue = 0
             pass
+        # elif set_of_collar != 0 and self.set_main == 3:
+        #     check_finish = self.finish.check_finish(frame , check_finish)
+        #     if check_finish :
+        #         set_of_collar = 0
+        #         self.count_final_main = 0
+        #         text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
+        #         frame = self.draw_text(frame, text_finish, (400, 500))
+        #     else :
+        #         text_finish = f"จบการออกกำลังกาย"
+        #         text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
+        #         text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
+        #         frame = self.draw_text(frame, text_finish, (200, 200))
+        #         frame = self.draw_text(frame, text_finish_con, (400, 400))
+        #         frame = self.draw_text(frame, text_finish_emote, (400, 500))
         ret, jpeg = cv2.imencode('.jpg', frame)
 
         if not ret:
