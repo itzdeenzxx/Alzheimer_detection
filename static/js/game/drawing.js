@@ -7,6 +7,7 @@ const canvas = document.getElementById('canvas');
         let brushSize = 5;
         let opacity = 1;
         let drawingHistory = [];
+        let eraser = false
         context.fillStyle = '#FFFFFF';
         context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -62,6 +63,7 @@ const canvas = document.getElementById('canvas');
         });
 
         function clearCanvas() {
+            document.getElementById('eraser').style.backgroundColor = 'white'
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillStyle = '#FFFFFF';
             context.fillRect(0, 0, canvas.width, canvas.height);
@@ -69,6 +71,7 @@ const canvas = document.getElementById('canvas');
         }
 
         function undo() {
+            document.getElementById('eraser').style.backgroundColor = 'white'
             if (drawingHistory.length > 1) {
                 drawingHistory.pop();
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -79,12 +82,14 @@ const canvas = document.getElementById('canvas');
         }
 
         function setColor(color) {
+            document.getElementById('eraser').style.backgroundColor = 'white'
             hue = color;
             document.getElementById('colorPicker').value = color;
         }
 
         const colorPicker = document.getElementById('colorPicker');
         colorPicker.addEventListener('input', () => {
+            document.getElementById('eraser').style.backgroundColor = 'white'
             hue = colorPicker.value;
         });
 
@@ -112,5 +117,10 @@ const canvas = document.getElementById('canvas');
             document.body.removeChild(link);
         }
         function erase() {
-            setColor("#fff")
+            // eraser = !eraser
+            if(!eraser) {
+                document.getElementById('eraser').style.backgroundColor = '#000'
+                hue = '#fff';
+                
+            }
         }
