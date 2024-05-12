@@ -36,8 +36,19 @@ body {
 #tools button {
     margin-bottom: 10px;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
+}
+.button-tools {
+  
+}
+
+#tools p {
+    color: aliceblue;
+    font-size: 20px;
+}
+#colorPicker {
+    margin-bottom: 10px;
 }

@@ -12,18 +12,21 @@ const canvas = document.getElementById('canvas');
 
         function draw(e) {
             if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             context.strokeStyle = hue;
             context.lineWidth = brushSize;
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.globalAlpha = opacity;
             context.beginPath();
-
+        
             context.moveTo(lastX, lastY);
-
-            context.lineTo(e.offsetX, e.offsetY);
+        
+            context.lineTo(x, y);
             context.stroke();
-            [lastX, lastY] = [e.offsetX, e.offsetY];
+            [lastX, lastY] = [x, y];
         }
 
         canvas.addEventListener('mousedown', (e) => {
@@ -42,12 +45,17 @@ const canvas = document.getElementById('canvas');
 
         canvas.addEventListener('touchstart', (e) => {
             isDrawing = true;
-            [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
+            const rect = canvas.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const y = e.touches[0].clientY - rect.top;
+            [lastX, lastY] = [x, y];
         });
+        
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
-            draw({ offsetX: e.touches[0].clientX, offsetY: e.touches[0].clientY });
+            draw({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
         });
+        
         canvas.addEventListener('touchend', () => {
             isDrawing = false;
             saveDrawingState();
@@ -102,4 +110,7 @@ const canvas = document.getElementById('canvas');
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+        function erase() {
+            setColor("#fff")
         }
