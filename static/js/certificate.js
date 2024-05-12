@@ -107,7 +107,7 @@ function handleFileUpload(event) {
   const fileName = event.target.files[0].name;
   this.fileName = fileName;
   this.uploadStatus = "เสร็จสิ้น";
-}
+} 
 
 document.getElementById('customFileInput').addEventListener('change', function (e) {
   var fileName = e.target.files[0].name;
@@ -128,3 +128,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+var isPlaying = false;
+    function playSound_cert(line) {
+      if (!isPlaying && document.getElementById('customFileLabel').innerText != "เลือกไฟล์") {
+        isPlaying = true;
+        var audio = new Audio(line);
+
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
+
+        audio.onended = function () {
+          isPlaying = false;
+        };
+      }
+    }
+
+    

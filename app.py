@@ -93,7 +93,10 @@ def matrix_game():
 def infomation():
     return render_template("infomation.html")
 
-
+#drawing
+@app.route("/drawing" , methods=["GET","POST"])
+def drawing():
+    return render_template("drawing.html")
 
 if __name__ == "__main__":
     if mode == "dev":

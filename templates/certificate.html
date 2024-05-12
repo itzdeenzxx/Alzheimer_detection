@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <button class="button-confirm"
-                        onclick="submitText();playSound('../static/sound/finished.mp3')">ต่อไป →</button>
+                        onclick="submitText();playSound_cert('../static/sound/finished.mp3')">ต่อไป →</button>
                 </div>
             </div>
         </div>
@@ -81,6 +81,9 @@
                 </button>
             </a>
         </div>
+        <a href="#" onclick="shareToLine()">แชร์ไปยัง Line</a>
+        <a href="#" onclick="shareToFacebook()">แชร์ไปยัง Facebook</a>
+
     <div class="back-btn">
         <form action="/">
             <button class="button-back">
@@ -105,7 +108,7 @@
     <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/certificate.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/sound.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/sound.js') }}"></script> -->
     <script src="{{ url_for('static', filename='js/congreat.js') }}"></script>
 </body>
 

@@ -58,7 +58,7 @@ body {
   
   .card_box .nav-box1::before {
     font-family: "Prompt", sans-serif;
-    content: 'ระดับง่าย';
+    content: 'การจดจำ';
     font-size: 25px;
     position: absolute;
     width: 150%;
@@ -87,7 +87,7 @@ body {
   }
   .card_box .nav-box2::before {
     font-family: "Prompt", sans-serif;
-    content: 'ระดับกลาง';
+    content: 'การสังเกต';
     font-size: 25px;
     position: absolute;
     width: 150%;
@@ -116,7 +116,7 @@ body {
   }
   .card_box .nav-box3::before {
     font-family: "Prompt", sans-serif;
-    content: 'ระดับยาก';
+    content: '(demo)';
     font-size: 25px;
     position: absolute;
     width: 150%;
