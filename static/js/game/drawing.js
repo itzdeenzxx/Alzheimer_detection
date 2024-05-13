@@ -1,4 +1,5 @@
 const canvas = document.getElementById('canvas');
+
         const context = canvas.getContext('2d');
         let isDrawing = false;
         let lastX = 0;
@@ -21,6 +22,7 @@ const canvas = document.getElementById('canvas');
             context.lineJoin = 'round';
             context.lineCap = 'round';
             context.globalAlpha = opacity;
+            // console.log(opacity)
             context.beginPath();
         
             context.moveTo(lastX, lastY);
@@ -63,15 +65,17 @@ const canvas = document.getElementById('canvas');
         });
 
         function clearCanvas() {
-            document.getElementById('eraser').style.backgroundColor = 'white'
+            context.globalAlpha = 1
+            document.getElementById('eraser').style.backgroundColor = '#FFFFFF'
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillStyle = '#FFFFFF';
             context.fillRect(0, 0, canvas.width, canvas.height);
+            context.globalAlpha = opacity
             saveDrawingState();
         }
 
         function undo() {
-            document.getElementById('eraser').style.backgroundColor = 'white'
+            document.getElementById('eraser').style.backgroundColor = '#FFFFFF'
             if (drawingHistory.length > 1) {
                 drawingHistory.pop();
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -82,14 +86,15 @@ const canvas = document.getElementById('canvas');
         }
 
         function setColor(color) {
-            document.getElementById('eraser').style.backgroundColor = 'white'
+            canvas.style.cursor = 'url("/static/img/cursor/pen.svg"), auto';
+            document.getElementById('eraser').style.backgroundColor = '#FFFFFF'
             hue = color;
             document.getElementById('colorPicker').value = color;
         }
 
         const colorPicker = document.getElementById('colorPicker');
         colorPicker.addEventListener('input', () => {
-            document.getElementById('eraser').style.backgroundColor = 'white'
+            document.getElementById('eraser').style.backgroundColor = '#FFFFFF'
             hue = colorPicker.value;
         });
 
@@ -118,8 +123,9 @@ const canvas = document.getElementById('canvas');
         }
         function erase() {
             // eraser = !eraser
+            canvas.style.cursor = 'url("/static/img/cursor/eraser.svg"), auto';
             if(!eraser) {
-                document.getElementById('eraser').style.backgroundColor = '#000'
+                document.getElementById('eraser').style.backgroundColor = '#39818f'
                 hue = '#fff';
                 
             }
