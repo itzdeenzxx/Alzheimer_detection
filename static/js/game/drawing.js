@@ -82,7 +82,7 @@ const canvas = document.getElementById('canvas');
                 context.putImageData(drawingHistory[drawingHistory.length - 1], 0, 0);
             } else {
                 clearCanvas()
-            }
+            } 
         }
 
         function setColor(color) {

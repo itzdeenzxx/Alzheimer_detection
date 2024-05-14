@@ -13,6 +13,7 @@ body {
 }
 
 #canvasContainer {
+    display: none;
     position: relative;
     margin-right: 20px;
 }
@@ -27,7 +28,7 @@ body {
 }
 
 #tools {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -57,3 +58,81 @@ body {
 #colorPicker {
     margin-bottom: 10px;
 }
+/* .free-draw {
+    display: flex;
+} */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-lg-3 {
+    flex: 0 0 calc(25% - 10px); /* หรือความกว้างที่คุณต้องการ */
+    margin-right: 10px; /* ระยะห่างระหว่างคอลัมน์ */
+    margin-bottom: 10px; /* ระยะห่างด้านล่างของคอลัมน์ */
+    
+}
+
+.col-lg-3:last-child {
+    margin-right: 0; /* ไม่มีระยะห่างด้านขวาสุด */
+}
+
+.card-btn {
+    background: none;
+    border: none;
+}
+
+.box1 {
+  background-image:url(../img/bg-counter-game.jpg) ;
+} 
+.box2 {
+  background-image:url(../img/bg-color-game-3.png) ;
+} 
+
+.card_box {
+    width: 300px;
+    height: 350px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: all .3s;
+  }
+  
+  .card_box:hover {
+    transform: scale(0.9);
+  }
+  
+  .card_box span {
+    position: absolute;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    top: -10px;
+    left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  
+  
+
+  @media (max-width: 414px) or (max-width: 375px) {
+    .container {
+      margin-top: 150px;
+      top: 10%;
+      left: 10%;
+      transform: translate(10%, 10%);
+    }
+    
+  }
+  @media (max-width: 1180px) {
+    .container {
+      top: 50%;
+      left: 50%;
+      transform: translate(15%, 0%);
+    }
+    
+  }
