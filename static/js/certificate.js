@@ -37,7 +37,7 @@ function submitText() {
   
   var image = new Image()
   image.crossOrigin="Nerosafezone";
-  image.src = "static/img/certificate-ez.jpg" //เป็นลิ้งบน website
+  image.src = "static/img/certificate-ez.jpg"
   image.onload = function () {
       drawImage()
   }
@@ -143,5 +143,5 @@ var isPlaying = false;
         };
       }
     }
-
+ 
     

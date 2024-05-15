@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/drawing.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='img/favicon_io/favicon.ico') }}" type="image/x-icon">
-    
+
 
 </head>
 
@@ -16,7 +16,7 @@
     <div class="container" id="card-container">
         <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
             <div class="col-lg-3 mb-3">
-                <button class="card-btn" id="card-btn-draw" onclick="select_draw()">
+                <button class="card-btn" id="card-btn-draw" onclick="select_draw(); draw_select_bg(); return false;">
                     <div class="card_box box1">
                     </div>
                 </button>
@@ -32,43 +32,54 @@
     <div class="select_paint" id="select_paint">
         <main>
             <div class="input-container">
-                <input type="text" placeholder='ลองค้นหา ปลา, ต้นไม้, บ้าน...' id='input'>
-            </div>
-            
+                <input type="text" placeholder="ค้นหารูปภาพ" name="text" class="input" id='input'>
+                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+              </svg>
+              </div>
+
             <div class="gallery_title">
                 <h1>รูปภาพแนะนำ</h1>
             </div>
-            
+
             <article class='gallery'>
-                <a href="" data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.' class='item' title='Hay Bales'>
-                    <img src="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="first image">
+                <a href="#"
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1);gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
                 </a>
-                <a href="" data-caption='A lake is a landscape’s most beautiful and expressive feature. It is Earth’s eye; looking into which the beholder measures the depth of his own nature.' class='item' title='Lake'>
-                    <img src="https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="second image">
+                <a href="#"
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1); gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
                 </a>
-                <a href="" data-caption='The human desire to obtain more is a sieve that can never be filled with all the water from the world’s oceans' title='Canyon' class='item'>
-                    <img src="https://images.pexels.com/photos/2775196/pexels-photo-2775196.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="third image">
+                <a href="#"
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1); gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
                 </a>
-                <a href="" data-caption="Knowing trees, I understand the meaning of patience. Knowing grass, I can appreciate persistence." title='Iceberg' class='item'>
-                    <img src="https://images.pexels.com/photos/20045/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="fourth image">
+                <a href="#"
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1); gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
                 </a>
-                <a href="" data-caption="Life is like a train track, full of possibilities and happiness" title='Desert' class='item'>
-              <img src="https://images.pexels.com/photos/6004828/pexels-photo-6004828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="fifth image">
-            </a>
-            <a href="" data-caption='Hell is a swamp, to me - not as something fiery, but as something dank, moist, and wet' title='Fall' class='item'>
-                <img src="https://images.pexels.com/photos/1533060/pexels-photo-1533060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="sixth image">
-            </a>
-            <a href="" data-caption="Knowing trees, I understand the meaning of patience. Knowing grass, I can appreciate persistence." title='Iceberg' class='item'>
-                <img src="https://images.pexels.com/photos/20045/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="fourth image">
-            </a>
-            <a href="" data-caption='A lake is a landscape’s most beautiful and expressive feature. It is Earth’s eye; looking into which the beholder measures the depth of his own nature.' class='item' title='Lake'>
-                <img src="https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="second image">
-            </a>
-        </article>
-    </main>
-        
+                <a href="#"
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1); gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
+                </a>
+                <a href=""
+                    data-caption='The great thing about reaching the top of the mountain is realising that there’s space for more than one person. And you’re now in the prime position to help others up.'
+                    class='item' title='Hay Bales' onclick="paint_select(1); gallery_select()">
+                    <img src="{{ url_for('static', filename='img/paint/paint1.png') }}" alt="first image">
+                </a>
+                
+                
+            </article>
+        </main>
+
     </div>
-    
+
     <div id="canvasContainer">
         <canvas id="canvas" width="1280" height="720" class="wow slideInUp" data-wow-duration="1s"
             data-wow-delay="0s"></canvas>
@@ -120,7 +131,7 @@
     <script src="{{ url_for('static', filename='js/game/menu-drawing.js') }}"></script>
     <script src="{{ url_for('static', filename='js/game/drawing.js') }}"></script>
     <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
-    
+
 </body>
 
 </html>

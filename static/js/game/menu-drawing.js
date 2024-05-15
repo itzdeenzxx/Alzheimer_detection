@@ -42,3 +42,10 @@ window.addEventListener("load", function () {
 window.addEventListener("load", function () {
     baguetteBox.run(".gallery");
   });
+
+function gallery_select() {
+  card_main.style.display = 'none'
+  canvas_container.style.display = 'block'
+  tools.style.display = 'flex'   
+  paint.style.display = 'none'
+}
