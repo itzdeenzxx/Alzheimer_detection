@@ -13,6 +13,18 @@
 </head>
 
 <body>
+    <script>
+        var audio = new Audio('{{ sound_file_url }}');
+        audio.loop = true;
+        window.onload = function () {
+          console.log("Page loaded. Playing audio...");
+          audio.play().then(function () {
+            console.log("Audio played successfully!");
+          }).catch(function (error) {
+            console.error("Error playing audio:", error);
+          });
+        };
+      </script>
     <div class="game">
         <div class="border-center">
             <h2 class="title">เกมซ่อนสีอักษร</h2>

@@ -72,7 +72,7 @@ def game_counter():
 
 @app.route("/stroop_game", methods=["GET", "POST"])
 def stroop_game():
-    return render_template("stroop.html")
+    return render_template("stroop.html",sound_file_url="/static/sound/stroop-bgm.mp3")
 
 @app.route("/cam_game_count")
 def cam_game_count():
@@ -96,7 +96,7 @@ def infomation():
 #drawing
 @app.route("/drawing" , methods=["GET","POST"])
 def drawing():
-    return render_template("drawing.html")
+    return render_template("drawing.html" ,sound_file_url="/static/sound/draw-relax.mp3")
 
 if __name__ == "__main__":
     if mode == "dev":

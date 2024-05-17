@@ -55,7 +55,7 @@ const canvas = document.getElementById('canvas');
                 if (!eraser) {
                     image_detect = true;
                     let RestoreImage = new Image();
-                    RestoreImage.src = `static/img/paint/paint${index}re.png`;
+                    RestoreImage.src = `static/img/paint/remove/paint${index}re.png`;
                     // console.log(1);
                     context.drawImage(RestoreImage, 0, 0, canvas.width, canvas.height);
                 }
