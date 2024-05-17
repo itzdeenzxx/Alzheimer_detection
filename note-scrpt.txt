@@ -20,7 +20,7 @@
     11 เกมงูผ่าน mediapipe //tang
     12 วาดรูปผ่าน mediapipe //tang and deen
     13 รูปภาพการระบายสี //tang
-
+    14 ออกกำลังกายสามารถเล่นเสียงได้ 
     == last ==
     tutorial -- (กด next แล้ววงแนะนำปุ่ม อาจเป็นรูปภาพพื้นหลังดำโปร่งใส มีวงกลมแนะนำ)
     footer index.html credit -- //tang

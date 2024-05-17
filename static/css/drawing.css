@@ -13,7 +13,12 @@ body {
     align-items: center;
     height: 100vh;
     /* background-color: #DBE7C9; */
-    background-image: url(/static/img/bg-drawing.png);
+    background-image: url(/static/img/bg-draw3.png);
+    /* background: radial-gradient(#4f46e4 15%, transparent 16%), repeating-linear-gradient(0deg, transparent 6.5%, #ffffff 7%, #ffffff 9%, transparent 10%), linear-gradient(45deg, transparent 49%, #4f46e4 49%, #4f46e4 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, #4f46e4 49%, #4f46e4 51%, transparent 51%);
+        background-size: 3em 3em;
+        background-color: #ffffff; */
+       
+
 }
 
 #canvasContainer {
@@ -87,10 +92,12 @@ body {
 }
 
 .box1 {
-  background-image:url(../img/bg-counter-game.jpg) ;
+  background-image:url(../img/banner-drawing/banner-draw.gif) ;
+  background-size: cover;
 } 
 .box2 {
-  background-image:url(../img/bg-color-game-3.png) ;
+  background-image:url(../img/banner-drawing/banner-paint.gif) ;
+  background-size: cover;
 } 
 
 .card_box {
@@ -101,6 +108,7 @@ body {
     box-shadow: 0 25px 50px rgba(0,0,0,0.55);
     cursor: pointer;
     transition: all .3s;
+    margin-right: 15px;
   }
   
   .card_box:hover {
