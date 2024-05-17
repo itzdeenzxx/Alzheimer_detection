@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
     <title>เกมซ่อนสีอักษร</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -13,9 +15,11 @@
 </head>
 
 <body>
+    <div class="hover-area"></div> 
     <script>
         var audio = new Audio('{{ sound_file_url }}');
         audio.loop = true;
+        audio.volume = 0.3;
         window.onload = function () {
           console.log("Page loaded. Playing audio...");
           audio.play().then(function () {
@@ -33,9 +37,22 @@
                 <span class="front">
                     เริ่มเกม
                 </span></button>
-            <h2>
-                วิธีการเล่นเกม
-            </h2>
+                <div class="box-tutorial" id="box-tutorial">
+                    <a class="button" href="#popup1" id="popup-btn" >วิธีการเล่นเกม</a>
+                </div>
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+                        <h2>วิธีการเล่นเกม</h2>
+                        <a class="close" href="#">&times;</a>
+                        <div class="content">
+                            <img src="{{ url_for('static', filename='img/tutorial/stroop-t.png') }}" alt="" style="width: 600px;">
+                            <img src="{{ url_for('static', filename='img/tutorial/stroop-t2.png') }}" alt="" style="width: 600px;" >
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <a class="button" id="restart-btn" onclick="restartGame()" >ย้อนกลับ</a>
+                </div>
             <div id="container">
                 <div id="time"></div>
                 <div id="text"></div>
@@ -54,8 +71,7 @@
                         กลับหน้าหลัก
                     </h3>
                 </a>
-                
-
+            
             </div>
         </div>
     </div>

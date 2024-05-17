@@ -12,7 +12,7 @@ function getRandomInt(max) {
 function generateRandomStroop() {
     const colorIndex = getRandomInt(colors.length);
     const textIndex = getRandomInt(texts.length);
-    const color = colors[colorIndex];
+    const color = colors[colorIndex]; 
     const text = texts[textIndex];
     const textth = textsth[textIndex]
     return { color, text, textth };
@@ -64,6 +64,7 @@ function startCountdown(seconds) {
             clearInterval(countdown);
             document.getElementById("container").style.display = "none";
             document.getElementById("score").style.display = "block";
+            document.getElementById("restart-btn").style.display = "none"
         } else {
             document.getElementById("time").textContent = timeLeft;
             timeLeft--;
@@ -78,6 +79,10 @@ function restartGame() {
     document.getElementById("container").style.display = "none";
     document.getElementById("score").style.display = "none";
     document.getElementById("startButton").style.display = "inline-block";
+    document.getElementById("popup-btn").style.display = "block"
+    document.getElementById("restart-btn").style.display = "none"
+    document.getElementById("box-tutorial").style.display = "block"
+
 }
 
 function startGame() {
@@ -85,11 +90,57 @@ function startGame() {
     correctAnswers = 0;
     document.getElementById("container").style.display = "inline-block";
     document.getElementById("startButton").style.display = "none";
+    document.getElementById("popup-btn").style.display = "none"
+    document.getElementById("restart-btn").style.display = "block"
+    document.getElementById("box-tutorial").style.display = "none"
+    
     updateStroop();
     updateScore();
     startCountdown(30);
 }
 
-// Initial setup
 updateStroop();
 updateScore();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const dotSize = parseInt(getComputedStyle(body).getPropertyValue('--dot-size'));
+    const dotSpace = parseInt(getComputedStyle(body).getPropertyValue('--dot-space'));
+    
+    const numCols = Math.ceil(window.innerWidth / dotSpace);
+    const numRows = Math.ceil(window.innerHeight / dotSpace);
+
+    for (let i = 0; i < numCols; i++) {
+      for (let j = 0; j < numRows; j++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.style.left = `${i * dotSpace}px`;
+        dot.style.top = `${j * dotSpace}px`;
+        body.appendChild(dot);
+      }
+    }
+
+    body.addEventListener('mousemove', (e) => {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach(dot => {
+        const rect = dot.getBoundingClientRect();
+        const distance = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
+
+        if (distance < 150) {
+          const angle = Math.atan2(rect.top - e.clientY, rect.left - e.clientX);
+          const moveDistance = 25;
+          dot.style.transform = `translate(${Math.cos(angle) * moveDistance}px, ${Math.sin(angle) * moveDistance}px)`;
+        } else {
+          dot.style.transform = '';
+        }
+      });
+    });
+
+    body.addEventListener('mouseleave', () => {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach(dot => {
+        dot.style.transform = '';
+      });
+    });
+  });
+   

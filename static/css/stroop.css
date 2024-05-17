@@ -1,15 +1,28 @@
 body {
   font-family: "Prompt", sans-serif;
   text-align: center;
-  margin: 0; /* Reset default margin */
+  margin: 0;
   display: flex;
-  flex-direction: column; /* เรียงแนวตั้ง */
+  flex-direction: column;
   justify-content: center;
-  align-items: center; /* จัดตำแหน่งตามแนวตั้ง (แกน y) */
+  align-items: center;
   height: 100vh;
-  background-image: url(../img/bg-stroop.gif);
-  background-repeat: no-repeat;
-  background-size: 100%;
+  --dot-bg: rgb(0, 0, 0);
+  --dot-color: rgb(255, 255, 255);
+  --dot-size: 1px;
+  --dot-space: 62px;
+ background-color: var(--dot-bg);
+  position: relative;
+  overflow: hidden;
+}
+.dot {
+  position: absolute;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background-color: var(--dot-color);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 0.2s, top 0.2s, left 0.2s;
 }
 #container {
   display: none;
@@ -113,13 +126,13 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  z-index: 99999;
 }
 .border-center {
   background-color: white;
   padding: 35px;
   border-radius: 10px;
-  box-shadow: 1px 0px 9px 9px rgba(166, 60, 60, 0.3);
-
+  box-shadow: 0px 4px 20px 6px rgba(255, 255, 255, 0.6);
 }
 .header {
   display: grid;
@@ -186,4 +199,100 @@ body {
   }
   #time {
     font-size: 20px;
+  }
+  #restart-btn {
+    display: none;
+  }
+  /* popup */
+  .box {
+    width: 50%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 0px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+  .box-tutorial {
+    width: 50%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+  
+  .button {
+    font-size: 22px;
+    font-weight: 400px;
+    padding: 10px;
+    color: #000000;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .button:hover {
+    background: rgb(202, 135, 135);
+    color: #fff;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  .popup .close {
+    position: absolute;
+    top: 4px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: rgb(210, 111, 111);
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .popup{
+      width: 70%;
+    }
   }

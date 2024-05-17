@@ -61,8 +61,6 @@ function toggleCameragame() {
     }
 }
 
-
-
 $(document).ready(function(){
   
     $('.button-tutorail').on('click', function(){
