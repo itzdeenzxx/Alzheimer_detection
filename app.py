@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, jsonify
 from waitress import serve
 import threading
-from camera import VideoCamera
+from camera import VideoCamera , get_queue_cam , set_queue_cam
 from class_game.cam_counter import VideoCamera_Game
 
 app = Flask(__name__, static_folder="static")
@@ -23,6 +23,7 @@ def index():
 @app.route("/fitness", methods=["GET", "POST"])
 def fitness():
     global set_main
+    set_queue_cam(0)
     set_main = 1
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
@@ -30,6 +31,7 @@ def fitness():
 @app.route("/fitness2", methods=["GET", "POST"])
 def fitness2():
     global set_main
+    set_queue_cam(0)
     set_main = 2
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
@@ -37,6 +39,7 @@ def fitness2():
 @app.route("/fitness3", methods=["GET", "POST"])
 def fitness3():
     global set_main
+    set_queue_cam(0)
     set_main = 3
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
@@ -44,6 +47,7 @@ def fitness3():
 @app.route("/fitness4", methods=["GET", "POST"])
 def fitness4():
     global set_main
+    set_queue_cam(0)
     set_main = 4
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
@@ -51,6 +55,7 @@ def fitness4():
 @app.route("/fitness5", methods=["GET", "POST"])
 def fitness5():
     global set_main
+    set_queue_cam(0)
     set_main = 5
     cam.set_of_main(set_main)
     return render_template("camera.html", queue = set_main)
@@ -72,7 +77,7 @@ def video_feed():
 def sound_on_cam():
     global queue_cam
     with lock:
-        count = queue_cam
+        count = get_queue_cam()
     return jsonify({'count': count})
 
 # game

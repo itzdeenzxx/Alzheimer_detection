@@ -151,7 +151,7 @@ const canvas = document.getElementById('canvas');
             const dataURL = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.href = dataURL;
-            link.download = 'drawing-nrsz.png';
+            link.download = 'Art-nuero-picture.png';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

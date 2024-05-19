@@ -38,6 +38,7 @@ start_stop = False
 #finish
 check_finish = False
 
+queue_cam = 0
 class VideoCamera(object):
     def __init__(self):
         self.camera_index = 0 
@@ -80,10 +81,12 @@ class VideoCamera(object):
             position_Lpose_round = (53,150)
             frame = self.draw_text(frame, text_Lpose , position_Lpose)
             frame = self.draw_text(frame, text_Lpose_round , position_Lpose_round)
-
+            if self.count_final_main == 5 :
+                set_queue_cam(1)
         elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
             # self.show_overlay()
             set_of_Hand_L +=1
+            #this
             print(set_of_Hand_L)
             self.count_final_main = 0
             
@@ -225,4 +228,14 @@ class VideoCamera(object):
             frame = self.get_frame()
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    
+queue_cam = 0
+
+def get_queue_cam():
+    global queue_cam
+    return queue_cam
+
+def set_queue_cam(value):
+    global queue_cam
+    queue_cam = value
     

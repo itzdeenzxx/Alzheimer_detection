@@ -87,3 +87,36 @@ $(document).ready(function(){
      });
     
   });
+
+  let lastPlayedCount = 0;
+
+function checkFingerCount() {
+    fetch('/sound_on_cam')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data : ", data.count)
+            console.log("Last Data : ",lastPlayedCount)
+            if (data.count !== lastPlayedCount) {
+                lastPlayedCount = data.count;
+                playSoundBasedOnCount(data.count);
+
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function playSoundBasedOnCount(count) {
+    var bellSound = document.getElementById('bellSound');
+    var duckSound = document.getElementById('duckSound');
+    var carSound = document.getElementById('carSound');
+
+    if (count === 1) {
+        bellSound.play();
+    } else if (count === 2) {
+        duckSound.play();
+    } else if (count === 3) {
+        carSound.play();
+    }
+}
+
+setInterval(checkFingerCount, 1000);
