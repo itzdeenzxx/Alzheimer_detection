@@ -109,6 +109,7 @@ def drawing():
     return render_template("drawing.html" ,sound_file_url="/static/sound/draw-relax.mp3")
 
 if __name__ == "__main__":
+    
     if mode == "dev":
         app.run(debug=True,port=8080,host='0.0.0.0')
     else :
