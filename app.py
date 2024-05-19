@@ -93,9 +93,8 @@ def matrix_game():
 def infomation():
     return render_template("infomation.html")
 
-
-
 if __name__ == "__main__":
+    
     if mode == "dev":
         app.run(debug=True,port=8080,host='0.0.0.0')
     else :
