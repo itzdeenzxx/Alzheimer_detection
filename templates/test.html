@@ -1,150 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Canvas with Background Image</title>
-    <script>
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let hue = '#000000';
-        let brushSize = 5;
-        let opacity = 1;
-        let drawingHistory = [];
-        let eraser = false;
-
-        let backgroundImage = new Image();
-        backgroundImage.src = './static/img/paint/paint1.png'; // ระบุเส้นทางของภาพพื้นหลังที่ต้องการ
-
-        backgroundImage.onload = function() {
-            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-            saveDrawingState();
-        };
-
-        function draw(e) {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            context.strokeStyle = hue;
-            context.lineWidth = brushSize;
-            context.lineJoin = 'round';
-            context.lineCap = 'round';
-            context.globalAlpha = opacity;
-            context.beginPath();
-            context.moveTo(lastX, lastY);
-            context.lineTo(x, y);
-            context.stroke();
-            [lastX, lastY] = [x, y];
-        }
-
-        canvas.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            [lastX, lastY] = [e.offsetX, e.offsetY];
-        });
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', () => {
-            isDrawing = false;
-            saveDrawingState();
-        });
-        canvas.addEventListener('mouseout', () => {
-            isDrawing = false;
-        });
-
-        canvas.addEventListener('touchstart', (e) => {
-            isDrawing = true;
-            const rect = canvas.getBoundingClientRect();
-            const x = e.touches[0].clientX - rect.left;
-            const y = e.touches[0].clientY - rect.top;
-            [lastX, lastY] = [x, y];
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            draw({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
-        });
-
-        canvas.addEventListener('touchend', () => {
-            isDrawing = false;
-            saveDrawingState();
-        });
-
-        function clearCanvas() {
-            context.globalAlpha = 1;
-            document.getElementById('eraser').style.backgroundColor = '#FFFFFF';
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-            context.globalAlpha = opacity;
-            saveDrawingState();
-        }
-
-        function undo() {
-            document.getElementById('eraser').style.backgroundColor = '#FFFFFF';
-            if (drawingHistory.length > 1) {
-                drawingHistory.pop();
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                context.putImageData(drawingHistory[drawingHistory.length - 1], 0, 0);
-            } else {
-                clearCanvas();
-            }
-        }
-
-        function setColor(color) {
-            canvas.style.cursor = 'url("/static/img/cursor/pen.svg"), auto';
-            document.getElementById('eraser').style.backgroundColor = '#FFFFFF';
-            hue = color;
-            document.getElementById('colorPicker').value = color;
-        }
-
-        const colorPicker = document.getElementById('colorPicker');
-        colorPicker.addEventListener('input', () => {
-            document.getElementById('eraser').style.backgroundColor = '#FFFFFF';
-            hue = colorPicker.value;
-        });
-
-        const brushSizeInput = document.getElementById('brushSize');
-        brushSizeInput.addEventListener('input', () => {
-            brushSize = brushSizeInput.value;
-        });
-
-        const opacityInput = document.getElementById('opacity');
-        opacityInput.addEventListener('input', () => {
-            opacity = opacityInput.value;
-        });
-
-        function saveDrawingState() {
-            let currentState = context.getImageData(0, 0, canvas.width, canvas.height);
-            drawingHistory.push(currentState);
-        }
-
-        function downloadCanvas() {
-            const dataURL = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'drawing-nrsz.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function erase() {
-            canvas.style.cursor = 'url("/static/img/cursor/eraser.svg"), auto';
-            if (!eraser) {
-                document.getElementById('eraser').style.backgroundColor = '#39818f';
-                hue = '#fff';
-            }
-        }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Detection</title>
 </head>
+
 <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
-    <input type="color" id="colorPicker">
-    <input type="range" id="brushSize" min="1" max="50" value="5">
-    <input type="range" id="opacity" min="0.1" max="1" step="0.1" value="1">
-    <button onclick="clearCanvas()">Clear</button>
-    <button onclick="undo()">Undo</button>
-    <button onclick="downloadCanvas()">Download</button>
-    <button id="eraser" onclick="erase()">Eraser</button>
+    <h1>Hand Detection with Mediapipe</h1>
+    <div>
+        <img src="{{ url_for('video_feed') }}" width="720" height="480">
+    </div>
+    <audio id="bellSound" src="{{ url_for('static', filename='sound/bell.mp3') }}"></audio>
+    <audio id="duckSound" src="{{ url_for('static', filename='sound/duck.mp3') }}"></audio>
+    <audio id="carSound" src="{{ url_for('static', filename='sound/car.mp3') }}"></audio>
+    <script>
+        function checkFingerCount() {
+            fetch('/finger_count')
+                .then(response => response.json())
+                .then(data => {
+                    playSoundBasedOnCount(data.count);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function playSoundBasedOnCount(count) {
+            var bellSound = document.getElementById('bellSound');
+            var duckSound = document.getElementById('duckSound');
+            var carSound = document.getElementById('carSound');
+
+            // หยุดเสียงที่เล่นอยู่ก่อนเพื่อป้องกันการเล่นซ้ำกัน
+            bellSound.pause();
+            bellSound.currentTime = 0;
+            duckSound.pause();
+            duckSound.currentTime = 0;
+            carSound.pause();
+            carSound.currentTime = 0;
+
+            if (count === 1) {
+                bellSound.play();
+            } else if (count === 2) {
+                duckSound.play();
+            } else if (count === 3) {
+                carSound.play();
+            }
+        }
+
+        setInterval(checkFingerCount, 1000);
+
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
-from flask import Flask, render_template, Response, request , url_for
+from flask import Flask, render_template, Response, jsonify
 from waitress import serve
+import threading
 from camera import VideoCamera
 from class_game.cam_counter import VideoCamera_Game
 
@@ -7,6 +8,7 @@ app = Flask(__name__, static_folder="static")
 
 #develop mode
 mode = "dev"
+lock = threading.Lock()
 
 set_main = 1
 select_player = 0
@@ -64,6 +66,14 @@ cam_game = VideoCamera_Game()
 @app.route("/video_feed", methods=["POST", "GET"])
 def video_feed():
     return Response(cam.gen(), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+#send to sound
+@app.route('/sound_on_cam')
+def sound_on_cam():
+    global queue_cam
+    with lock:
+        count = queue_cam
+    return jsonify({'count': count})
 
 # game
 @app.route("/game_counter", methods=["GET", "POST"])
