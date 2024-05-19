@@ -99,6 +99,7 @@ function checkFingerCount() {
             if (data.count !== lastPlayedCount) {
                 lastPlayedCount = data.count;
                 playSoundBasedOnCount(data.count);
+                
 
             }
         })
@@ -106,17 +107,45 @@ function checkFingerCount() {
 }
 
 function playSoundBasedOnCount(count) {
-    var bellSound = document.getElementById('bellSound');
-    var duckSound = document.getElementById('duckSound');
-    var carSound = document.getElementById('carSound');
+    var start_ex = document.getElementById('start_ex');
+    var one_set_finish = document.getElementById('one_set_finish');
+    var last_finish = document.getElementById('last_finish');
+    var five_finish = document.getElementById('five_finish');
+    var finish_jib = document.getElementById('finish_jib');
+    var finish_thumb = document.getElementById('finish_thumb');
+    var finish_header = document.getElementById('finish_header');
+    var finish_ear_head = document.getElementById('finish_ear_head');
+    var finish_collar_bone = document.getElementById('finish_collar_bone');
+    var ten_later = document.getElementById('ten_later');
+    var finish_time = document.getElementById('finish_time');
+    
+    console.log("play sound!!")
 
     if (count === 1) {
-        bellSound.play();
+        start_ex.play();
     } else if (count === 2) {
-        duckSound.play();
+        one_set_finish.play();
     } else if (count === 3) {
-        carSound.play();
+        last_finish.play();
+    } else if (count === 4) {
+        five_finish.play();
+    } else if (count === 5) {
+        finish_jib.play();
+    } else if (count === 6) {
+        finish_thumb.play();
+    } else if (count === 7) {
+        finish_header.play();
+    } else if (count === 8) {
+        finish_ear_head.play();
+    } else if (count === 9) {
+        finish_collar_bone.play();
+    } else if (count === 10) {
+        ten_later.play();
+    }else if (count === 11) {
+        finish_time.play();
     }
 }
+    
+
 
 setInterval(checkFingerCount, 1000);

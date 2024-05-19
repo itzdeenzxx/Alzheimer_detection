@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder="static")
 #develop mode
 mode = "dev"
 lock = threading.Lock()
-
+count = 0
 set_main = 1
 select_player = 0
 count_present = 0
@@ -22,7 +22,9 @@ def index():
 
 @app.route("/fitness", methods=["GET", "POST"])
 def fitness():
-    global set_main
+    global set_main , count
+    count = 0
+    cam.reset_all()
     set_queue_cam(0)
     set_main = 1
     cam.set_of_main(set_main)
@@ -30,7 +32,9 @@ def fitness():
     
 @app.route("/fitness2", methods=["GET", "POST"])
 def fitness2():
-    global set_main
+    global set_main , count
+    count = 0
+    cam.reset_all()
     set_queue_cam(0)
     set_main = 2
     cam.set_of_main(set_main)
@@ -38,7 +42,9 @@ def fitness2():
 
 @app.route("/fitness3", methods=["GET", "POST"])
 def fitness3():
-    global set_main
+    global set_main , count
+    count = 0
+    cam.reset_all()
     set_queue_cam(0)
     set_main = 3
     cam.set_of_main(set_main)
@@ -46,7 +52,9 @@ def fitness3():
 
 @app.route("/fitness4", methods=["GET", "POST"])
 def fitness4():
-    global set_main
+    global set_main , count
+    count = 0
+    cam.reset_all()
     set_queue_cam(0)
     set_main = 4
     cam.set_of_main(set_main)
@@ -54,7 +62,9 @@ def fitness4():
 
 @app.route("/fitness5", methods=["GET", "POST"])
 def fitness5():
-    global set_main
+    global set_main , count
+    count = 0
+    cam.reset_all()
     set_queue_cam(0)
     set_main = 5
     cam.set_of_main(set_main)
@@ -75,9 +85,13 @@ def video_feed():
 #send to sound
 @app.route('/sound_on_cam')
 def sound_on_cam():
-    global queue_cam
+    global count
     with lock:
+        print(get_queue_cam())
+        print(count)
         count = get_queue_cam()
+        print(count)
+        
     return jsonify({'count': count})
 
 # game

@@ -66,7 +66,20 @@
             src="{{ url_for('static', filename='img/pre-fitness-test.jpg') }}">
         {% endif %}
     </div>
-    <audio id="bellSound" src="{{ url_for('static', filename='sound/bell.mp3') }}"></audio>
+    <audio id="start_ex" src="{{ url_for('static', filename='sound/exercise/start_ex.wav') }}"></audio>
+
+    <audio id="one_set_finish" src="{{ url_for('static', filename='sound/exercise/one_set_finish.wav') }}"></audio>
+    <audio id="last_finish" src="{{ url_for('static', filename='sound/exercise/last_finish.wav') }}"></audio>
+    <audio id="five_finish" src="{{ url_for('static', filename='sound/exercise/five_finish.wav') }}"></audio>
+    <!-- finish -->
+    <audio id="finish_jib" src="{{ url_for('static', filename='sound/exercise/finish_jib.wav') }}"></audio>
+    <audio id="finish_thumb" src="{{ url_for('static', filename='sound/exercise/finish_thumb.wav') }}"></audio>
+    <audio id="finish_header" src="{{ url_for('static', filename='sound/exercise/finish_header.wav') }}"></audio>
+    <audio id="finish_ear_head" src="{{ url_for('static', filename='sound/exercise/finish_ear_head.wav') }}"></audio>
+    <audio id="finish_collar_bone" src="{{ url_for('static', filename='sound/exercise/finish_collar_bone.wav') }}"></audio>
+
+    <audio id="ten_later" src="{{ url_for('static', filename='sound/exercise/ten_later.wav') }}"></audio>
+    <audio id="finish_time" src="{{ url_for('static', filename='sound/exercise/finish_time.wav') }}"></audio>
     <div>
         <div class="btn-container">
             {% if queue == 1 %}

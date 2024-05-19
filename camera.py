@@ -37,10 +37,11 @@ start_stop = False
 
 #finish
 check_finish = False
-
 queue_cam = 0
+
 class VideoCamera(object):
     def __init__(self):
+        global queue_cam 
         self.camera_index = 0 
         self.video = cv2.VideoCapture(self.camera_index)
         self.L_pose = Hand_L_Detector()
@@ -52,6 +53,7 @@ class VideoCamera(object):
         self.check_count = True
         self.count_final_main = 0
         self.set_main = 1
+        queue_cam = 0
 
     def __del__(self):
         self.video.release()
@@ -81,20 +83,31 @@ class VideoCamera(object):
             position_Lpose_round = (53,150)
             frame = self.draw_text(frame, text_Lpose , position_Lpose)
             frame = self.draw_text(frame, text_Lpose_round , position_Lpose_round)
-            if self.count_final_main == 5 :
+            if self.count_final_main == 0 and set_of_Hand_L == 0:
+                print("11111111111111")
                 set_queue_cam(1)
-        elif self.count_final_main >= 10 and set_of_Hand_L <= 3:
+            elif self.count_final_main == 0 and set_of_Hand_L == 1 :
+                set_queue_cam(2)
+            elif self.count_final_main == 0 and set_of_Hand_L == 2 :
+                set_queue_cam(3)
+           
+                
+            # print("set" , set_of_Hand_L)
+            # print("count" , self.count_final_main)
+        if self.count_final_main >= 10 and set_of_Hand_L <= 3:
             # self.show_overlay()
+            print("11")
             set_of_Hand_L +=1
-            #this
             print(set_of_Hand_L)
             self.count_final_main = 0
             
-        elif set_of_Hand_L == 3 and self.set_main == 1:
+        if set_of_Hand_L == 3 and self.set_main == 1:
+            set_queue_cam(5)
             check_finish = self.finish.check_finish(frame , check_finish)
             if check_finish :
                 set_of_Hand_L = 0
                 self.count_final_main = 0
+                check_finish = False
                 text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
                 frame = self.draw_text(frame, text_finish, (400, 500))
             else :
@@ -113,16 +126,25 @@ class VideoCamera(object):
             position_thumb_round = (53,150)
             frame = self.draw_text(frame, text_thumb , position_thumb)
             frame = self.draw_text(frame, text_thumb_round , position_thumb_round)
-            
+            if self.count_final_main == 0 and set_of_thumb_pinky == 0:
+                set_queue_cam(1)
+                print("2222222222222222222")
+            elif self.count_final_main == 0 and set_of_thumb_pinky == 1 :
+                set_queue_cam(2)
+            elif self.count_final_main == 0 and set_of_thumb_pinky == 2 :
+                set_queue_cam(3)
+                
         elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3:
             check_finish = False
             set_of_thumb_pinky +=1
             self.count_final_main = 0
         elif set_of_thumb_pinky == 3 and self.set_main == 2:
+            set_queue_cam(6)
             check_finish = self.finish.check_finish(frame , check_finish)
             if check_finish :
                 set_of_thumb_pinky = 0
                 self.count_final_main = 0
+                check_finish = False
                 text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
                 frame = self.draw_text(frame, text_finish, (400, 500))
             else :
@@ -142,38 +164,35 @@ class VideoCamera(object):
             if remaining_time_continue == 30 :
                 set_of_Header += 1
                 remaining_time_continue = 0
-                
-        # elif set_of_Header != 0 and self.set_main == 3:
-        #     check_finish = self.finish.check_finish(frame , check_finish)
-        #     if check_finish :
-        #         set_of_Header = 0
-        #         self.count_final_main = 0
-        #         text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
-        #         frame = self.draw_text(frame, text_finish, (400, 500))
-        #     else :
-        #         text_finish = f"จบการออกกำลังกาย"
-        #         text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
-        #         text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
-        #         frame = self.draw_text(frame, text_finish, (200, 200))
-        #         frame = self.draw_text(frame, text_finish_con, (400, 400))
-        #         frame = self.draw_text(frame, text_finish_emote, (400, 500))
-                
-        if self.set_main == 4 and set_of_Ear < 3:
+            if remaining_time_continue == 20 :
+                set_queue_cam(10)
+        elif set_of_Header != 0 and self.set_main == 3:
+            set_queue_cam(11)
+            text_finish = f"ออกกำลังกายท่าบริหารปุ่มขมับเสร็จสิ้น"
+            frame = self.draw_text(frame, text_finish, (400, 500))
+           
+        if self.set_main == 4 and set_of_Ear < 3 and self.count_final_main < 10:
             check_finish = False
             self.count_final_main = self.ear.detect_and_head_finger_distance(frame,self.count_final_main)
             text_Ear = f"สำเร็จ : {str(self.count_final_main)}"
-            text_Ear_round = f"รอบ : {str(set_of_thumb_pinky + 1)}"
+            text_Ear_round = f"รอบ : {str(set_of_Ear + 1)}"
             position_Ear = (50,50)
             position_Ear_round = (53,150)
             frame = self.draw_text(frame, text_Ear , position_Ear)
             frame = self.draw_text(frame, text_Ear_round , position_Ear_round)
-            
-        elif self.count_final_main >= 10 and set_of_Ear <= 3 :
+            if self.count_final_main == 0 and set_of_Ear == 0:
+                set_queue_cam(1)
+            elif self.count_final_main == 0 and set_of_Ear == 1 :
+                set_queue_cam(2)
+            elif self.count_final_main == 0 and set_of_Ear == 2 :
+                set_queue_cam(3)
+        if self.count_final_main >= 10 and set_of_Ear <= 3 :
             # self.show_overlay()
-            set_of_thumb_pinky +=1
+            set_of_Ear +=1
             self.count_final_main = 0
             
-        elif set_of_Ear == 3 and self.set_main == 4:
+        if set_of_Ear == 3 and self.set_main == 4:
+            set_queue_cam(8)
             check_finish = self.finish.check_finish(frame , check_finish)
             if check_finish :
                 set_of_Ear = 0
@@ -196,29 +215,32 @@ class VideoCamera(object):
             frame = self.draw_text(frame, text_collar,position_collar)
             if remaining_time_continue == 30 :
                 set_of_collar += 1
+                print("1111111111111111111111111111111111111111")
                 remaining_time_continue = 0
-            pass
-        # elif set_of_collar != 0 and self.set_main == 3:
-        #     check_finish = self.finish.check_finish(frame , check_finish)
-        #     if check_finish :
-        #         set_of_collar = 0
-        #         self.count_final_main = 0
-        #         text_finish = f"เริ่มออกกำลังกายอีกครั้ง"
-        #         frame = self.draw_text(frame, text_finish, (400, 500))
-        #     else :
-        #         text_finish = f"จบการออกกำลังกาย"
-        #         text_finish_con = f"หากต้องการออกกำลังกายอีกครั้ง"
-        #         text_finish_emote = f"ให้ทำมือสัญลักษณ์ เลิฟยู"
-        #         frame = self.draw_text(frame, text_finish, (200, 200))
-        #         frame = self.draw_text(frame, text_finish_con, (400, 400))
-        #         frame = self.draw_text(frame, text_finish_emote, (400, 500))
-        ret, jpeg = cv2.imencode('.jpg', frame)
+            if remaining_time_continue == 20:
+                set_queue_cam(10)
+             
+        if set_of_collar != 0 and self.set_main == 5:
+            set_queue_cam(11)
+            text_finish = f"ออกกำลังกายท่าบริหารปุ่มสมองเสร็จสิ้น"
+            frame = self.draw_text(frame, text_finish, (400, 500))
+            
+        ret, jpeg = cv2.imencode('.jpg', frame) 
 
         if not ret:
             return None
         
         return jpeg.tobytes()
-    
+    def reset_all(self):
+        global set_of_Hand_L,set_of_thumb_pinky,set_of_Header,set_of_Ear,set_of_collar
+        set_of_Hand_L = 0
+        set_of_thumb_pinky = 0
+        set_of_Header = 0
+        set_of_Ear = 0
+        set_of_collar = 0
+        self.count_final_main  = 0
+        
+        
     def set_of_main(self,check):
         self.set_main = check
         self.count_final_main = 0
@@ -229,7 +251,7 @@ class VideoCamera(object):
             yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
     
-queue_cam = 0
+
 
 def get_queue_cam():
     global queue_cam
