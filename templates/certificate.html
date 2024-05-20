@@ -25,6 +25,8 @@
         rel="stylesheet">
 </head>
 
+
+</head>
 <body>
     <div class="title-head">
         <h1>
@@ -32,17 +34,16 @@
         </h1>
     </div>
     <div id="popup" class="popup">
-        <div class="popup-content">
+        <div class="popup-content animate__animated animate__slideInDown">
             <div class="container">
-                <div class="form wow slideInDown" data-wow-duration="2s" data-wow-delay="0s">
+                <div class="form">
                     <div class="title">ยินดีด้วย !<br><span>กับการฝึกบริหารสมอง</span></div>
                     <input type="name" placeholder="กรอกชื่อ" class="input" id="name" maxlength="10">
                     <div class="container">
-                        <div class="form-group" x-data="{ fileName: '' }">
+                        <div class="form-group">
                             <div class="input-group shadow">
-                                <input type="file" x-ref="file" @change="fileName = $refs.file.files[0].name"
-                                    name="img[]" class="input file" id="customFileInput">
-                                <label class="input-label" for="customFileInput" id="customFileLabel">เลือกไฟล์</label>
+                                <input type="file" name="img[]" class="input file" id="customFileInput">
+                                <label class="input-label" for="customFileInput">เลือกไฟล์</label>
                             </div>
                         </div>
                     </div>
@@ -52,38 +53,29 @@
             </div>
         </div>
     </div>
-    <br><br>
-
-        <div class="give">
-            <h4>คุณได้รับ "การ์ดรักสุขภาพสมอง" !</h4>
-        </div>
-        <div class="canvas">
-            <canvas id="canvas" height="565.625px" width="400px"></canvas>
-        </div>
-        <div class="button-download">
-
-            <a href="#" id="download-btn">
-                <button class="button">
-                    <p class="text">
-                        ดาวน์โหลด
-                    </p>
-                    <div class="svg">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
-                            <path
-                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
-                            </path>
-                            <path
-                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
-                            </path>
-                        </svg>
-                    </div>
-                </button>
-            </a>
-        </div>
-        <a href="#" onclick="shareToLine()">แชร์ไปยัง Line</a>
-        <a href="#" onclick="shareToFacebook()">แชร์ไปยัง Facebook</a>
-
+    <div class="give">
+        <h4>คุณได้รับ "การ์ดรักสุขภาพสมอง" !</h4>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas" height="565.625px" width="400px"></canvas>
+    </div>
+    <div class="button-download">
+        <a href="#" id="download-btn">
+            <button class="button">
+                <p class="text">ดาวน์โหลด</p>
+                <div class="svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                    </svg>
+                </div>
+            </button>
+        </a>
+    </div>
+    <div class="text-center">
+        <a href="#" onclick="shareToLine()"><i class="fab fa-line"></i> แชร์ไปยัง Line</a>
+        <a href="#" onclick="shareToFacebook()"><i class="fab fa-facebook"></i> แชร์ไปยัง Facebook</a>
+    </div>
     <div class="back-btn">
         <form action="/">
             <button class="button-back">
@@ -94,12 +86,6 @@
         </form>
     </div>
 
-
-
-
-
-
-
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
@@ -108,8 +94,6 @@
     <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/certificate.js') }}"></script>
-    <!-- <script src="{{ url_for('static', filename='js/sound.js') }}"></script> -->
     <script src="{{ url_for('static', filename='js/congreat.js') }}"></script>
 </body>
-
 </html>

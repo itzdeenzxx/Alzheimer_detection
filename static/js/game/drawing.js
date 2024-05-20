@@ -30,13 +30,16 @@ const canvas = document.getElementById('canvas');
             console.log(backgroundImage.src)
             context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
         }
-
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
         function draw(e) {
             console.log(image_detect)
             if (!isDrawing) return;
             const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const x = isMobileDevice() ? e.clientX - rect.left : e.clientX - rect.left  ;
+            const y = isMobileDevice() ? e.clientY - rect.top : e.clientY - rect.top + 30;
             context.strokeStyle = hue;
             context.lineWidth = brushSize;
             context.lineJoin = 'round';
@@ -105,7 +108,10 @@ const canvas = document.getElementById('canvas');
                 context.globalAlpha = opacity
                 saveDrawingState();
             } else {
+                context.globalAlpha = 1
                 context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+                context.globalAlpha = opacity
+                saveDrawingState();
             }
         }
 
@@ -163,4 +169,57 @@ const canvas = document.getElementById('canvas');
                 hue = '#fff';
             }
         }
-       
+        function addRandomQueryParam(url) {
+            const randomParam = `?t=${new Date().getTime()}`;
+            return `${url}${randomParam}`;
+          }
+      
+          document.addEventListener("DOMContentLoaded", function() {
+            const box1 = document.querySelector('.box1');
+            const box2 = document.querySelector('.box2');
+            
+            box1.addEventListener('mouseenter', function() {
+              const gifUrl = addRandomQueryParam('static/img/banner-drawing/banner-draw.gif');
+              box1.style.backgroundImage = `url(${gifUrl})`;
+            });
+            
+            box1.addEventListener('mouseleave', function() {
+              box1.style.backgroundImage = 'url(static/img/banner-drawing/banner-draw.png)';
+            });
+      
+            box2.addEventListener('mouseenter', function() {
+              const gifUrl = addRandomQueryParam('static/img/banner-drawing/banner-paint.gif');
+              box2.style.backgroundImage = `url(${gifUrl})`;
+            });
+            
+            box2.addEventListener('mouseleave', function() {
+              box2.style.backgroundImage = 'url(static/img/banner-drawing/banner-paint.png)';
+            });
+          });
+
+          var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}

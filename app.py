@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, Response, jsonify , request
 from waitress import serve
 import threading
 from camera import VideoCamera , get_queue_cam , set_queue_cam
@@ -13,6 +13,7 @@ count = 0
 set_main = 1
 select_player = 0
 count_present = 0
+state = False
 
 @app.route("/") 
 def index():
@@ -23,6 +24,8 @@ def index():
 @app.route("/fitness", methods=["GET", "POST"])
 def fitness():
     global set_main , count
+    global state
+    state = False
     count = 0
     cam.reset_all()
     set_queue_cam(0)
@@ -33,6 +36,8 @@ def fitness():
 @app.route("/fitness2", methods=["GET", "POST"])
 def fitness2():
     global set_main , count
+    global state
+    state = False
     count = 0
     cam.reset_all()
     set_queue_cam(0)
@@ -43,6 +48,8 @@ def fitness2():
 @app.route("/fitness3", methods=["GET", "POST"])
 def fitness3():
     global set_main , count
+    global state
+    state = False
     count = 0
     cam.reset_all()
     set_queue_cam(0)
@@ -53,6 +60,8 @@ def fitness3():
 @app.route("/fitness4", methods=["GET", "POST"])
 def fitness4():
     global set_main , count
+    global state
+    state = False
     count = 0
     cam.reset_all()
     set_queue_cam(0)
@@ -63,6 +72,8 @@ def fitness4():
 @app.route("/fitness5", methods=["GET", "POST"])
 def fitness5():
     global set_main , count
+    global state
+    state = False
     count = 0
     cam.reset_all()
     set_queue_cam(0)
@@ -87,12 +98,20 @@ def video_feed():
 def sound_on_cam():
     global count
     with lock:
-        print(get_queue_cam())
-        print(count)
+        # print(get_queue_cam())
+        # print(count)
         count = get_queue_cam()
-        print(count)
+        # print(count)
         
     return jsonify({'count': count})
+
+# @app.route('/toggle', methods=['POST'])
+# def toggle():
+#     global state
+#     data = request.get_json()
+#     state = data['state']
+#     print(f'Toggle state: {state}')
+#     return jsonify(message=f'Toggle state is now {state}')
 
 # game
 @app.route("/game_counter", methods=["GET", "POST"])

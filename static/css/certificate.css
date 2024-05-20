@@ -15,7 +15,14 @@ body {
     left: 50%;
     margin-top: 30px;
 }
-
+.title-head {
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 20px;
+}
 .give {
   display: flex;
   align-items: center;

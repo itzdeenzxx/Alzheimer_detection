@@ -52,7 +52,7 @@ function submitText() {
 
       ctx.font = 'italic 18px Prompt, sans-serif';
       ctx.fillStyle = '#FFECBF';
-      ctx.fillText(dateString, 140, 465);
+      ctx.fillText(dateString, 130, 465);
 
       if (overlayInput.files && overlayInput.files[0]) {
         var reader = new FileReader();

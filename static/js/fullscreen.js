@@ -52,10 +52,25 @@ var video = document.getElementById('fullscreen-cam');
 var button = document.getElementById('toggle_camera');
 var cameraStarted = false;
 
+let toggleState = false;
+ 
 function toggleCamera() {
+    // toggleState = !toggleState;
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/toggle', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.onreadystatechange = function () {
+    // if (xhr.readyState === 4 && xhr.status === 200) {
+    //     console.log('Response from server: ' + xhr.responseText);
+    //     }
+    // };
+    // var data = JSON.stringify({"state": toggleState});
+    //  xhr.send(data);
+
     if (!cameraStarted) {
         video.src = "/video_feed";
         // button.style.backgroundColor = "red";
+        playSoundBasedOnCount(1)
         button.textContent = "พักการออกกำลังกาย";
         cameraStarted = true;
     } else {
@@ -105,6 +120,8 @@ function checkFingerCount() {
         })
         .catch(error => console.error('Error:', error));
 }
+
+
 
 function playSoundBasedOnCount(count) {
     var start_ex = document.getElementById('start_ex');

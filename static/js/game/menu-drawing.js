@@ -46,6 +46,16 @@ window.addEventListener("load", function () {
 function gallery_select() {
   card_main.style.display = 'none'
   canvas_container.style.display = 'block'
-  tools.style.display = 'flex'   
+  tools.style.display = 'flex' 
+  paint.style.display = 'none'
+}
+
+function back_menu(){
+  card_main.style.display = 'flex'
+  canvas_container.style.display = 'none'
+  tools.style.display = 'none' 
+}
+function back_menu_gellery(){
+  card_main.style.display = 'flex'
   paint.style.display = 'none'
 }
