@@ -28,11 +28,23 @@
             console.error("Error playing audio:", error);
           });
         };
+
+        function stop_music() {
+            audio.volume = 0.1;
+        }
+        function restart_music() {
+            audio.volume = 0.3;
+        }
+        // window.addEventListener('load', function() {
+        // var audio = document.getElementById('reload_audio');
+        // audio.play();
+        // });
       </script>
+    <!-- <audio id="reload_audio" src="{{ url_for('static', filename='sound/stroop-bgm.mp3') }}"></audio> -->
     <div class="game">
         <div class="border-center">
             <h2 class="title">เกมซ่อนสีอักษร</h2>
-            <button id="startButton" onclick="startGame()"><span class="shadow"></span>
+            <button id="startButton" onclick="startGame() ; playSound('../static/sound/push_start.mp3');stop_music();return false"><span class="shadow"></span>
                 <span class="edge"></span>
                 <span class="front">
                     เริ่มเกม
@@ -59,15 +71,15 @@
                 <div id="time"></div>
                 <div id="text"></div>
                 <div id="text-en" style="display: none;"></div>
-                <button onclick="checkAnswer('Correct')" class="correct">ถูก</button>
-                <button onclick="checkAnswer('Incorrect')" class="incorrect">ผิด</button>
+                <button onclick="checkAnswer('Correct');playSound('../static/sound/push_ans.mp3');return false" class="correct">ถูก</button>
+                <button onclick="checkAnswer('Incorrect');playSound('../static/sound/push_ans.mp3');return false" class="incorrect">ผิด</button>
             </div>
             <div id="score">
                 <h3>คะแนน</h3>
                 <p>จำนวนคำถามที่ตอบ: <span id="total"></span></p>
                 <p>จำนวนข้อที่ตอบถูก: <span id="correct"></span></p>
                 <p>คิดเป็นเปอร์เซ็นได้ทั้งหมด => <span id="percentage"></span>%</p>
-                <button onclick="restartGame()" class="correct">เริ่มใหม่</button>
+                <button onclick="restartGame();restart_music();return false" class="correct">เริ่มใหม่</button>
                 <a href="/">
                     <h3>
                         กลับหน้าหลัก
@@ -78,6 +90,7 @@
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/game/stroop.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/sound.js') }}"></script> -->
 </body>
 
 </html>

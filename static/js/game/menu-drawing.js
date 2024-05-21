@@ -55,7 +55,8 @@ function back_menu(){
   canvas_container.style.display = 'none'
   tools.style.display = 'none' 
 }
+
 function back_menu_gellery(){
   card_main.style.display = 'flex'
-  paint.style.display = 'none'
+  paint.style.display = 'none '
 }

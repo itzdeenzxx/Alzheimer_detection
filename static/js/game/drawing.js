@@ -35,10 +35,9 @@ const canvas = document.getElementById('canvas');
         }
         
         function draw(e) {
-            console.log(image_detect)
             if (!isDrawing) return;
             const rect = canvas.getBoundingClientRect();
-            const x = isMobileDevice() ? e.clientX - rect.left : e.clientX - rect.left  ;
+            const x = isMobileDevice() ? e.clientX - rect.left : e.clientX - rect.left ;
             const y = isMobileDevice() ? e.clientY - rect.top : e.clientY - rect.top + 30;
             context.strokeStyle = hue;
             context.lineWidth = brushSize;
@@ -49,7 +48,7 @@ const canvas = document.getElementById('canvas');
             context.beginPath();
         
             context.moveTo(lastX, lastY);
-        
+            
             context.lineTo(x, y);
             context.stroke();
             [lastX, lastY] = [x, y];
@@ -67,7 +66,7 @@ const canvas = document.getElementById('canvas');
 
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
-            [lastX, lastY] = [e.offsetX, e.offsetY];
+            [lastX, lastY] = [e.offsetX + 15, e.offsetY + 38]; //+ เพื่มตามตำแหน่งเมาส์
         });
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', () => {

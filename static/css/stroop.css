@@ -288,7 +288,10 @@ body {
     overflow: auto;
     /* padding: auto; */
   }
-  
+  ::selection {
+    background-color: #000000;
+    color: #fff;
+  }
   @media screen and (max-width: 700px){
     .box{
       width: 70%;

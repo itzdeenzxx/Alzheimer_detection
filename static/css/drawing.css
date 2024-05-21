@@ -315,7 +315,7 @@ body {
   }
 
   .btn-home{
-    background: #7079f0;
+    background: #4D9FAD;
     color: white;
     padding: 0.45em;
     padding-left: 3em;
@@ -327,7 +327,7 @@ body {
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
-    box-shadow: inset 0 0 1.6em -0.6em #714da6;
+    box-shadow: inset 0 0 1.6em -0.6em #274849;
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -346,21 +346,79 @@ body {
     height: 2.2em;
     width: 2.2em;
     border-radius: 0.7em;
-    box-shadow: 0.1em 0.1em 0.6em 0.2em #7a8cf3;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #274849;
     left: 0.3em;
     transition: all 0.3s;
   }
   
   .btn-home:hover {
     transform: translate(-0.05em, -0.05em);
-    box-shadow: 0.15em 0.15em #5566c2;
+    box-shadow: 0.15em 0.15em #235051;
   }
   
   .btn-home:active {
     transform: translate(0.05em, 0.05em);
-    box-shadow: 0.05em 0.05em #5566c2;
+    box-shadow: 0.05em 0.05em #1c5355;
   }
   
+  /*------ Settings ------*/
+.sound-check{
+  --color: #fff;
+  --size: 40px;
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+}
+
+.sound-check .mute {
+  position: absolute;
+  animation: keyframes-fill .5s;
+}
+
+.sound-check .voice {
+  position: absolute;
+  display: none;
+  animation: keyframes-fill .5s;
+}
+
+/* ------ On check event ------ */
+.sound-check input:checked ~ .mute {
+  display: none;
+}
+
+.sound-check input:checked ~ .voice {
+  display: block;
+}
+
+/* ------ Hide the default checkbox ------ */
+.sound-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* ------ Animation ------ */
+@keyframes keyframes-fill {
+  0% {
+    transform: rotate(0deg) scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: rotate(-10deg) scale(1.2);
+  }
+}
    
    ::selection {
     background: #284A49;

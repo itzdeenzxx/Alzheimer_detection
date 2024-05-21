@@ -115,6 +115,7 @@ class VideoCamera(object):
                 frame = self.draw_text(frame, text_finish_emote, (400, 500))
         if self.count_final_main < 10 and set_of_thumb_pinky < 3 and self.set_main == 2 :
             self.count_final_main = self.thumb_pink.detect_and_count_finger_distance(frame,self.count_final_main)
+            print(self.count_final_main)
             text_thumb = f"สำเร็จ : {str(self.count_final_main)}"
             text_thumb_round = f"รอบ : {str(set_of_thumb_pinky + 1)}"
             position_thumb = (50,50)
@@ -129,11 +130,11 @@ class VideoCamera(object):
             elif self.count_final_main == 0 and set_of_thumb_pinky == 2 :
                 set_queue_cam(3)
                 
-        elif self.count_final_main >= 10 and set_of_thumb_pinky <= 3:
+        if self.count_final_main >= 10 and set_of_thumb_pinky <= 3:
             check_finish = False
             set_of_thumb_pinky +=1
             self.count_final_main = 0
-        elif set_of_thumb_pinky == 3 and self.set_main == 2:
+        if set_of_thumb_pinky == 3 and self.set_main == 2:
             set_queue_cam(6)
             check_finish = self.finish.check_finish(frame , check_finish)
             if check_finish :

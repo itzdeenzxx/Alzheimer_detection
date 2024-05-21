@@ -86,6 +86,7 @@ function restartGame() {
 }
 
 function startGame() {
+    // audio_start.pause()
     totalQuestions = 0;
     correctAnswers = 0;
     document.getElementById("container").style.display = "inline-block";
@@ -144,3 +145,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
    
+
+  function playSound(line) {
+      var audio = new Audio(line);
+
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play();
+
+    }
+
+
+    // var audio_start = new Audio('{{ sound_file_url }}');
+    // audio_start.loop = true;
+    // audio_start.volume = 0.3;
+    // window.onload = function () {
+    //   console.log("Page loaded. Playing audio...");
+    //   audio_start.play().then(function () {
+    //     console.log("Audio played successfully!");
+    //   }).catch(function (error) {
+    //     console.error("Error playing audio:", error);
+    //   });
+    // };
+
+ 
