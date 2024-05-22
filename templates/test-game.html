@@ -20,6 +20,10 @@
         margin-top: 50px;
     }
 
+    .hidden {
+        display: none;
+    }
+
     #letter-container {
         font-size: 48px;
         margin: 20px;
@@ -49,46 +53,62 @@
         max-width: 100px;
         max-height: 100px;
     }
+
+    .mode-btn {
+        font-size: 24px;
+        padding: 15px 30px;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    #key-hint {
+        font-size: 16px;
+        margin: 10px;
+    }
 </style>
 
 <body>
     <div class="container">
         <h1>เกมทดสอบความจำ</h1>
-        <div>
-            <label for="game-type">เลือกประเภทเกม:</label>
-            <select id="game-type">
-                <option value="thai-letters">ตัวอักษรภาษาไทย</option>
-                <option value="english-letters">ตัวอักษรภาษาอังกฤษ</option>
-                <option value="images">รูปภาพ</option>
-            </select>
+        <div id="mode-selection">
+            <button class="mode-btn" data-mode="thai-letters">ตัวอักษรภาษาไทย</button>
+            <button class="mode-btn" data-mode="similar-thai-words">คำไทยที่เขียนคล้ายกัน</button>
+            <button class="mode-btn" data-mode="images">รูปภาพ</button>
+            <button class="mode-btn" data-mode="new-images">รูปภาพ (โหมดใหม่)</button>
         </div>
-        <div id="letter-container"></div>
-        <div id="timer">เวลา: 5</div>
-        <div class="buttons">
-            <button id="yes-btn" disabled>ใช่</button>
-            <button id="no-btn" disabled>ไม่</button>
+        <div id="game-container" class="hidden">
+            <div id="letter-container"></div>
+            <div id="timer">เวลา: 5</div>
+            <div class="buttons">
+                <button id="no-btn" disabled>ไม่</button>
+                <button id="yes-btn" disabled>ใช่</button>
+            </div>
+            <div id="key-hint" class="hidden">คุณสามารถใช้ Shift ซ้ายสำหรับ "ไม่" และ Shift ขวาสำหรับ "ใช่"</div>
+            <div id="message"></div>
+            <div id="scoreboard"></div>
+            <button id="start-btn">เริ่มเกมใหม่</button>
+            <button id="back-btn">กลับไปเลือกโหมด</button>
         </div>
-        <div id="message"></div>
-        <div id="scoreboard"></div>
-        <button id="start-btn">เริ่มเกมใหม่</button>
     </div>
     <script>
         const thaiLetters = ['ก', 'ข', 'ค', 'ฆ', 'ง', 'จ', 'ฉ', 'ช', 'ซ', 'ญ', 'ด', 'ต', 'ถ', 'ท', 'น', 'บ', 'ป', 'ผ', 'พ', 'ฟ', 'ม', 'ย', 'ร', 'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'อ'];
-        const englishLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        const similarThaiWords = ['ภาระ', 'ภาระกิจ', 'ราชา', 'ราฃา', 'สะบาย', 'สบาย', 'นาน', 'บาน', 'พบ', 'ฟบ', 'พอ', 'ฟอ', 'สว่าง', 'สว่างงาม', 'เมือง', 'เนือง'];
         const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.jpg']; // Add the paths to your images here
+        const newImages = ['newimage1.jpg', 'newimage2.jpg', 'newimage3.jpg', 'newimage4.jpg', 'newimage5.jpg']; // Add the paths to your new images here
 
         let currentItem = '';
         let previousItem = '';
         let score = 0;
         let correctAnswers = 0;
         let wrongAnswers = 0;
+        let wrongAnswersLog = [];
         let rounds = 0;
         const totalRounds = 20;
         const yesRounds = 6;
         let scheduledYesRounds;
         let timer;
         let countdown;
-        let gameType = 'thai-letters';
+        let gameType = '';
 
         const letterContainer = document.getElementById('letter-container');
         const yesBtn = document.getElementById('yes-btn');
@@ -96,20 +116,42 @@
         const message = document.getElementById('message');
         const scoreboard = document.getElementById('scoreboard');
         const startBtn = document.getElementById('start-btn');
+        const backBtn = document.getElementById('back-btn');
         const timerDisplay = document.getElementById('timer');
-        const gameTypeSelect = document.getElementById('game-type');
+        const modeSelection = document.getElementById('mode-selection');
+        const gameContainer = document.getElementById('game-container');
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const keyHint = document.getElementById('key-hint');
 
-        gameTypeSelect.addEventListener('change', () => {
-            gameType = gameTypeSelect.value;
+        modeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                gameType = button.dataset.mode;
+                modeSelection.classList.add('hidden');
+                gameContainer.classList.remove('hidden');
+                resetGame();
+                detectDevice();
+                startGame();
+            });
         });
+
+        function detectDevice() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (!isMobile) {
+                keyHint.classList.remove('hidden');
+            } else {
+                keyHint.classList.add('hidden');
+            }
+        }
 
         function getRandomItem() {
             if (gameType === 'thai-letters') {
                 return thaiLetters[Math.floor(Math.random() * thaiLetters.length)];
-            } else if (gameType === 'english-letters') {
-                return englishLetters[Math.floor(Math.random() * englishLetters.length)];
+            } else if (gameType === 'similar-thai-words') {
+                return similarThaiWords[Math.floor(Math.random() * similarThaiWords.length)];
             } else if (gameType === 'images') {
                 return images[Math.floor(Math.random() * images.length)];
+            } else if (gameType === 'new-images') {
+                return newImages[Math.floor(Math.random() * newImages.length)];
             }
         }
 
@@ -121,12 +163,24 @@
             return yesRounds;
         }
 
-        function startGame() {
+        function resetGame() {
             score = 0;
             correctAnswers = 0;
             wrongAnswers = 0;
+            wrongAnswersLog = [];
             rounds = 0;
             scheduledYesRounds = scheduleYesRounds();
+            letterContainer.textContent = '';
+            message.textContent = '';
+            scoreboard.classList.add('hidden');
+            startBtn.disabled = false;
+            yesBtn.disabled = false;
+            noBtn.disabled = false;
+            clearTimeout(timer);
+            clearInterval(countdown);
+        }
+
+        function startGame() {
             startBtn.disabled = true;
             nextRound(true);
         }
@@ -147,7 +201,7 @@
                     currentItem = getRandomItem();
                 }
             }
-            if (gameType === 'images') {
+            if (gameType === 'images' || gameType === 'new-images') {
                 letterContainer.innerHTML = `<img src="${currentItem}" alt="Image">`;
             } else {
                 letterContainer.textContent = currentItem;
@@ -194,17 +248,33 @@
             } else {
                 wrongAnswers++;
                 message.textContent = isTimeout ? 'หมดเวลา!' : 'ผิด!';
+                wrongAnswersLog.push({ correctItem: previousItem, selectedItem: currentItem });
             }
             updateScoreboard();
             nextRound();
         }
 
         function updateScoreboard() {
-            scoreboard.textContent = `คะแนน: ${correctAnswers} ถูก: ${correctAnswers} ผิด: ${wrongAnswers}`;
+            scoreboard.textContent = `รอบที่: ${rounds}/${totalRounds}`;
         }
 
         function endGame() {
-            message.textContent = `เกมจบแล้ว! คะแนนสุดท้าย: ${correctAnswers} จากทั้งหมด ${totalRounds} รอบ`;
+            message.textContent = `เกมจบแล้ว!`;
+            const scoreMessage = `คะแนนสุดท้าย: ${correctAnswers} จากทั้งหมด ${totalRounds} รอบ`;
+            let mistakeMessage = `ไม่มีข้อผิดพลาด`;
+            if (wrongAnswers > 0) {
+                mistakeMessage = 'ข้อผิดพลาด:';
+                wrongAnswersLog.forEach((log, index) => {
+                    mistakeMessage += `<br>${index + 1}. `;
+                    if (gameType === 'images' || gameType === 'new-images') {
+                        mistakeMessage += `รูปภาพที่ถูกแสดง: <img src="${log.correctItem}" alt="Image" style="height: 50px;">, รูปภาพที่ถูกเลือก: <img src="${log.selectedItem}" alt="Image" style="height: 50px;">`;
+                    } else {
+                        mistakeMessage += `คำหรือรูปภาพที่ถูกแสดง: ${log.correctItem}, คำหรือรูปภาพที่ถูกเลือก: ${log.selectedItem}`;
+                    }
+                });
+            }
+            scoreboard.classList.remove('hidden');
+            scoreboard.innerHTML = `<p>${scoreMessage}</p><p>${mistakeMessage}</p>`;
             startBtn.disabled = false;
         }
 
@@ -221,6 +291,21 @@
         });
 
         startBtn.addEventListener('click', startGame);
+
+        backBtn.addEventListener('click', () => {
+            gameContainer.classList.add('hidden');
+            modeSelection.classList.remove('hidden');
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'ShiftLeft' && !noBtn.disabled) {
+                noBtn.click();
+            }
+            if (event.code === 'ShiftRight' && !yesBtn.disabled) {
+                yesBtn.click();
+            }
+        });
+
 
     </script>
 </body>
