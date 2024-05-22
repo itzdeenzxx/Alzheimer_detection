@@ -132,6 +132,7 @@ def cam_game_count():
 def game_menu():
     return render_template("game_menu.html")
 
+
 @app.route("/matrix_game" , methods=["GET","POST"])
 def matrix_game():
     return render_template("matrix-game.html")

@@ -83,7 +83,7 @@ function restartGame() {
     document.getElementById("restart-btn").style.display = "none"
     document.getElementById("box-tutorial").style.display = "block"
 
-}
+} 
 
 function startGame() {
     // audio_start.pause()

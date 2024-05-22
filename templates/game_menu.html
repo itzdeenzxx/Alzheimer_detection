@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/game_menu.css') }}">
@@ -29,69 +28,175 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                        <h1 class="title_main">รายการเกมฝึกสมอง</h1>
+                        <h1 class="title_main" id="main-title">รายการเกมฝึกสมอง</h1>
                         <div>
-                            <form action="/">
-                                <button class="back-btn">
+                            <form action="/" id="back-home-form">
+                                <button class="back-btn" id="back-home-btn">
                                     กลับหน้าหลัก
                                 </button>
                             </form>
+                            <button class="back-btn" id="back-mode-btn" style="display: none;">
+                                ย้อนกลับ
+                            </button>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container">
-        <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
-            <div class="col-lg-3 mb-3">
-                <form action="/game_counter">
-                    <button class="card-btn">
-                        <div class="card_box box1">
-                            <span class="nav-box1"></span>
-                        </div>
-                    </button>
-                </form>
+    <div class="mode row wow slideInUp" data-wow-duration="1s" data-wow-delay="0s" id="mode-select">
+        <div class="card" id="memory-select">
+            <img src="{{ url_for('static', filename='img/banner-menu/bg-memory-gamemenu.png') }}" alt="">
+            <div class="card__content">
+                <p class="card__title">ด้านความจำ</p>
+                <p class="card__description">เกมฝึกความจำช่วยพัฒนาการจดจำโดยกระตุ้นสมองให้ทำงานหนักขึ้น
+                    ช่วยเพิ่มความสามารถในการจำข้อมูลสำคัญและลดความเสี่ยงต่อการเสื่อมสภาพของสมองเมื่ออายุมากขึ้น</p>
             </div>
-            <div class="col-lg-3 mb-3">
-                <form action="/matrix_game">
-                    <button class="card-btn">
-                        <div class="card_box box3">
-                            <span class="nav-box1"></span>
-                        </div>
-                    </button>
-                </form>
-            </div> 
-            <div class="col-lg-3 mb-3">
-                <form action="/stroop_game">
-                    <button class="card-btn">
-                        <div class="card_box box2">
-                            <span class="nav-box2"></span>
-                        </div>
-                    </button>
-                </form>
+        </div>
+        <div class="card" id="observer-select">
+            <img src="{{ url_for('static', filename='img/banner-menu/bg-observer-gamemenu.png') }}" alt="">
+            <div class="card__content">
+                <p class="card__title">ด้านการสังเกต</p>
+                <p class="card__description">เกมที่เน้นการสังเกตช่วยเพิ่มทักษะในการมองเห็นรายละเอียดเล็กๆ น้อยๆ
+                    และพัฒนาการคิดวิเคราะห์อย่างมีระบบ ช่วยให้การตัดสินใจในชีวิตประจำวันแม่นยำและรอบคอบมากขึ้น</p>
             </div>
-            <div class="col-lg-3 mb-3">
-                <form action="/drawing">
-                    <button class="card-btn">
-                        <div class="card_box box3">
-                            <span class="nav-box3"></span>
-                        </div>
-                    </button>
-                </form>
+        </div>
+        <div class="card" id="relax-select">
+            <img src="{{ url_for('static', filename='img/banner-menu/bg-relax-gamemenu.png') }}" alt="">
+            <div class="card__content">
+                <p class="card__title">มุมผ่อนคลาย</p>
+                <p class="card__description">เกมที่ออกแบบมาเพื่อการผ่อนคลายช่วยลดความเครียดและความวิตกกังวล
+                    โดยทำให้สมองได้พักผ่อนและฟื้นฟูสภาพจิตใจ ช่วยเสริมสร้างความสุขและความสงบในชีวิต</p>
             </div>
-            <!-- <div class="col-lg-3 mb-3">
-                <button class="card-btn">
-                    <div class="card_box box4">
-                        <span></span>
-                    </div>
-                </button>
-            </div> -->
-
         </div>
     </div>
+    <div class="in-mode memory" id="memory-mode">
+        <div class="container">
+            <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
 
-
+                <div class="col-lg-3 mb-3">
+                    <form action="/game_counter">
+                        <button class="card-btn">
+                            <div class="card_box box1">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/matrix_game">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/stroop_game">
+                        <button class="card-btn">
+                            <div class="card_box box2">
+                                <span class="nav-box2"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/drawing">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box3"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="in-mode observer" id="observer-mode">
+        <div class="container">
+            <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
+                <div class="col-lg-3 mb-3">
+                    <form action="/game_counter">
+                        <button class="card-btn">
+                            <div class="card_box box1">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/matrix_game">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/stroop_game">
+                        <button class="card-btn">
+                            <div class="card_box box2">
+                                <span class="nav-box2"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/drawing">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box3"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="in-mode relax" id="relax-mode">
+        <div class="container">
+            <div class="row wow slideInUp bar-top" data-wow-duration="1s" data-wow-delay="0s">
+                <div class="col-lg-3 mb-3">
+                    <form action="/game_counter">
+                        <button class="card-btn">
+                            <div class="card_box box1">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/matrix_game">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box1"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/stroop_game">
+                        <button class="card-btn">
+                            <div class="card_box box2">
+                                <span class="nav-box2"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <form action="/drawing">
+                        <button class="card-btn">
+                            <div class="card_box box3">
+                                <span class="nav-box3"></span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
@@ -100,6 +205,7 @@
     <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/game_menu.js') }}"></script>
+
 </body>
 
 </html>

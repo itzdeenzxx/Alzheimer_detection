@@ -114,8 +114,6 @@ function checkFingerCount() {
             if (data.count !== lastPlayedCount) {
                 lastPlayedCount = data.count;
                 playSoundBasedOnCount(data.count);
-                
-
             }
         })
         .catch(error => console.error('Error:', error));
