@@ -3,7 +3,7 @@ from waitress import serve
 import threading
 from camera import VideoCamera , get_queue_cam , set_queue_cam
 from class_game.cam_counter import VideoCamera_Game
-
+from camera_control import generate_frames , get_message , set_message
 app = Flask(__name__, static_folder="static")
 
 #develop mode
@@ -14,7 +14,6 @@ set_main = 1
 select_player = 0
 count_present = 0
 state = False
-
 @app.route("/") 
 def index():
     return render_template(
@@ -146,6 +145,21 @@ def infomation():
 @app.route("/drawing" , methods=["GET","POST"])
 def drawing():
     return render_template("drawing.html" ,sound_file_url="/static/sound/draw-relax.mp3")
+
+@app.route("/memory_prev" , methods=["GET","POST"])
+def memory_prev():
+    return render_template("picture_game.html" ,sound_file_url="/static/sound/draw-relax.mp3")
+
+#control game
+
+@app.route('/video_control')
+def video_control():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/get_message')
+def get_message():
+    massage = get_message()
+    return jsonify(message=massage)
 
 if __name__ == "__main__":
     

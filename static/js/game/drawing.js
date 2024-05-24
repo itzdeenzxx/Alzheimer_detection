@@ -222,3 +222,12 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
 }
+
+function clear_menu() {
+    image_detect = false
+    context.globalAlpha = 1
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#FFFFFF';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.globalAlpha = opacity
+}

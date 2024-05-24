@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+#letter-container {
+    font-size: 48px;
+    margin: 20px;
+}
+
+#timer {
+    font-size: 24px;
+    margin: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#scoreboard {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.mode-btn {
+    font-size: 24px;
+    padding: 15px 30px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+#key-hint {
+    font-size: 16px;
+    margin: 10px;
+}

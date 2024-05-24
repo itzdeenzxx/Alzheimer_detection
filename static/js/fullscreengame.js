@@ -51,7 +51,7 @@ var cameraStarted = false;
 
 function toggleCameragame() {
     if (!cameraStarted) {
-        video.src = "/cam_game_count";
+        video.src = "/video_control";
         button.innerHTML = "พักการเล่นเกม";
         cameraStarted = true;
     } else {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมทดสอบความจำ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/picture_game.css') }}">
+
+</head>
+
+
+<body>
+    <div class="container">
+        <h1>เกมทดสอบความจำ</h1>
+        <div id="mode-selection">
+            <button class="mode-btn" data-mode="thai-letters">ตัวอักษรภาษาไทย</button>
+            <button class="mode-btn" data-mode="similar-thai-words">คำไทยที่เขียนคล้ายกัน</button>
+            <button class="mode-btn" data-mode="images">รูปภาพ</button>
+            <button class="mode-btn" data-mode="new-images">รูปภาพ (โหมดใหม่)</button>
+        </div>
+        <div id="game-container" class="hidden">
+            <div id="letter-container"></div>
+            <div id="timer">เวลา: 5</div>
+            <div class="buttons">
+                <button id="no-btn" disabled>ไม่</button>
+                <button id="yes-btn" disabled>ใช่</button>
+            </div>
+            <div id="key-hint" class="hidden">คุณสามารถใช้ Shift ซ้ายสำหรับ "ไม่" และ Shift ขวาสำหรับ "ใช่"</div>
+            <div id="message"></div>
+            <div id="scoreboard"></div>
+            <button id="start-btn">เริ่มเกมใหม่</button>
+            <button id="back-btn">กลับไปเลือกโหมด</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/game/picture_game.js') }}"></script>
+</body>
+
+</html>

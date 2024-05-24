@@ -256,4 +256,4 @@ def get_queue_cam():
 def set_queue_cam(value):
     global queue_cam
     queue_cam = value
-    
+     
