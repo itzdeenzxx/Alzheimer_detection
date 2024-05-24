@@ -1633,6 +1633,54 @@ footer p a {
 footer p a:hover {
   color: #50623A;
 }
+.chatBtn {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background-color: #789461;
+  background-image: linear-gradient(147deg, #789461, #294B29, #789461);
+  cursor: pointer;
+  padding-top: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.164);
+  position: fixed;
+  bottom: 50px; /* Distance from the bottom */
+  right: 50px; /* Distance from the right */
+  background-size: 300%;
+  background-position: left;
+  transition-duration: 1s;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  opacity: 0;
+  background-color: #789461;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 0.5s;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+.chatBtn:hover .tooltip {
+  opacity: 1;
+  transition-duration: 0.5s;
+}
+
+.chatBtn:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
 
 /* 
 responsive
