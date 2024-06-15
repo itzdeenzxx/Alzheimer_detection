@@ -116,7 +116,7 @@ body {
   }
   .card_box .nav-box3::before {
     font-family: "Prompt", sans-serif;
-    content: '(demo)';
+    content: 'สร้างสรรค์';
     font-size: 25px;
     position: absolute;
     width: 150%;

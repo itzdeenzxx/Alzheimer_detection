@@ -3,7 +3,7 @@ from waitress import serve
 import threading
 from camera import VideoCamera, get_queue_cam, set_queue_cam
 from class_game.cam_counter import VideoCamera_Game
-from camera_control import generate_frames, get_message, set_message
+# from camera_control import generate_frames, get_message, set_message
 
 app = Flask(__name__, static_folder="static")
 
@@ -94,14 +94,14 @@ def certificate():
     return render_template("certificate.html")
 
 
-@app.route("/certificate_game", methods=["GET", "POST"])
-def certificate_game():
-    return render_template("certificate_game.html")
+@app.route("/cert_game", methods=["GET", "POST"])
+def cert_game():
+    return render_template("cert_game.html")
 
 
-@app.route("/certificate_game_cl", methods=["GET", "POST"])
-def certificate_game_cl():
-    return render_template("certificate_game_cl.html")
+@app.route("/cert_stroop", methods=["GET", "POST"])
+def cert_stroop():
+    return render_template("cert_stroop.html")
 
 
 cam = VideoCamera()
@@ -139,6 +139,18 @@ def sound_on_cam():
 @app.route("/game_counter", methods=["GET", "POST"])
 def game_counter():
     return render_template("game_room.html")
+
+#send score
+@app.route("/send_score", methods=["GET", "POST"])
+def send_score():
+    global count
+    with lock:
+        # print(get_queue_cam())
+        # print(count)
+        count = get_queue_cam()
+        # print(count)
+
+    return jsonify({"count": count})
 
 
 @app.route("/stroop_game", methods=["GET", "POST"])
@@ -187,17 +199,17 @@ def memory_prev():
 # control game
 
 
-@app.route("/video_control")
-def video_control():
-    return Response(
-        generate_frames(), mimetype="multipart/x-mixed-replace; boundary=frame"
-    )
+# @app.route("/video_control")
+# def video_control():
+#     return Response(
+#         generate_frames(), mimetype="multipart/x-mixed-replace; boundary=frame"
+#     )
 
 
-@app.route("/get_message")
-def get_message():
-    massage = get_message()
-    return jsonify(message=massage)
+# @app.route("/get_message")
+# def get_message():
+#     massage = get_message()
+#     return jsonify(message=massage)
 
 
 if __name__ == "__main__":

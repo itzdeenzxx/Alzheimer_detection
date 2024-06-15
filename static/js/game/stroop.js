@@ -155,13 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-  function fetchMessage() {
-      fetch('/get_message')
-          .then(response => response.json())
-          .then(data => {
-              document.getElementById("result").innerText = data.message;
-          });
-  }
+  // function fetchMessage() {
+  //     fetch('/get_message')
+  //         .then(response => response.json())
+  //         .then(data => {
+  //             document.getElementById("result").innerText = data.message;
+  //         });
+  // }
 
-  setInterval(fetchMessage, 1000);
+  // setInterval(fetchMessage, 1000);
  
