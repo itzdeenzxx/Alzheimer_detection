@@ -1,0 +1,360 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url(../img/bg-cert.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Prompt', sans-serif;
+  color: #333;
+}
+
+.title-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  background-color: #2d6a4f;
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.give {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.popup {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 40px;
+  border: none;
+  width: 80%;
+  margin-top: 200px;
+
+  max-width: 600px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 25px;
+  border-top: 5px solid #294B29;
+}
+
+canvas {
+  border-radius: 10px;
+  box-shadow: 3px 2px 8px 3px rgba(0, 0, 0, 0.09);
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  padding: 20px;
+  background: #DBE7C9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 12px;
+  border: 2px solid #294B29;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.title {
+  color: #294B29;
+  font-weight: 900;
+  font-size: 35px;
+  text-align: center;
+}
+
+.title span {
+  color: #50623A;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.input {
+  width: 100%;
+  max-width: 250px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #294B29;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  color: #294B29;
+  padding: 5px 10px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input::placeholder {
+  color: #50623A;
+  opacity: 0.8;
+}
+
+.input:focus {
+  border-color: #2d8cf0;
+}
+
+.button-log,
+.button-confirm {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #294B29;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #294B29;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-log:active,
+.button-confirm:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translate(2px, 2px);
+}
+
+.button-confirm {
+  margin: 50px auto 0;
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #294B29;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 17px;
+  font-weight: 600;
+  color: #294B29;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-confirm:hover {
+  background-color: #294B29;
+  color: #fff;
+}
+
+/* .button {
+  padding: 0.8rem 4rem;
+  border: 5px solid #294B29;
+  font-size: 1.3rem;
+  border-radius: 0.3rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.95);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+.button .text {
+  position: absolute;
+  left: 1.8rem;
+  top: 1.3rem;
+  transition: 0.4s ease-in-out;
+  color: #323232;
+}
+
+.svg {
+  transform: translateY(-20px) rotate(30deg);
+  opacity: 0;
+  width: 2rem;
+  transition: 0.4s ease-in-out;
+}
+
+.button:hover {
+  background-color: #294B29;
+}
+
+.button:hover .svg {
+  transform: translateY(0px) rotate(0deg);
+  opacity: 1;
+}
+
+.button:hover .text {
+  opacity: 0;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+/*  
+/*  */
+.button-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+
+.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #17795E;
+  background-color: #209978;
+  overflow: hidden;
+}
+
+.button,
+.button__icon,
+.button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(22px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #17795E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 20px;
+  fill: #fff;
+}
+
+.button:hover {
+  background: #17795E;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #146c54;
+}
+
+.button:active {
+  border: 1px solid #146c54;
+}
+
+
+
+.back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.button-back {
+  font-size: 20px;
+  padding: 1em 2em;
+  font-weight: 500;
+  background: #294B29;
+  color: white;
+  border: none;
+  border-radius: 0.6em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.button-back .label {
+  position: relative;
+}
+
+.button-back .transition {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 500ms;
+  background-color: #789461;
+  border-radius: 9999px;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-back:hover .transition {
+  width: 14em;
+  height: 14em;
+}
+
+.button-back:hover {
+  background-color: #1e3b2c;
+}
+
+.button-back:active {
+  transform: scale(0.97);
+}
+
+.file {
+  display: none;
+}
+
+.input-label {
+  color: #fff;
+  background-color: #50623A;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.input-label:hover {
+  background-color: #789461;
+}

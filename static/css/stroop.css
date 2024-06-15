@@ -23,7 +23,7 @@ body {
   border-radius: 50%;
   pointer-events: none;
   transition: transform 0.2s, top 0.2s, left 0.2s;
-}
+} 
 #container {
   display: none;
   text-align: center; /* Center align text */

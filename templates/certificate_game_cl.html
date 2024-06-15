@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยินดีด้วยกับคะแนนที่คุณได้!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animated.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/certificate_game_cl.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/congreat.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon_io/favicon.ico') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+
+    <div class="title-head m-top  ">
+        <h1>
+            คุณชนะเกม **** !
+        </h1>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content animate__animated animate__slideInDown">
+            <div class="container">
+                <div class="form">
+                    <div class="title">คุณชนะ!!!<br><span>ยินดีด้วยกับคะแนนที่คุณได้</span><br><span>คะแนน = ???</span>
+                    </div>
+                    <input type="name" placeholder="กรอกชื่อ" class="input" id="name" maxlength="10">
+                    <div class="container">
+                        <div class="form-group">
+                            <div class="input-group shadow">
+                                <input type="file" name="img[]" class="input file" id="customFileInput">
+                                <label class="input-label" for="customFileInput">เลือกไฟล์</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button-confirm"
+                        onclick="submitText();playSound_cert('../static/sound/finished.mp3')">ต่อไป →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="give head-text ">
+        <h4>คุณได้รับ "การ์ดคะเเนนเกมของคุณ" !</h4>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas" height="565.625px" width="400px"></canvas>
+    </div>
+    <div class="button-download">
+        <a href="#" id="download-btn">
+            <button class="button" type="button">
+
+                <span class="button__text">Download</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35"
+                        id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg">
+                        <path
+                            d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z">
+                        </path>
+                        <path
+                            d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z">
+                        </path>
+                        <path
+                            d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z">
+                        </path>
+                    </svg></span>
+            </button>
+        </a>
+    </div>
+
+
+    <!-- <div class="button-download">
+        <a href="#" id="download-btn">
+            <button class="button">
+                <p class="text label">ดาวน์โหลด</p>
+                <div class="svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+                        </path>
+                        <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+                        </path>
+                    </svg>
+                </div>
+            </button>
+        </a>
+    </div> -->
+    <!-- <div class="text-center">
+        <a href="#" onclick="shareToLine()"><i class="fab fa-line"></i> แชร์ไปยัง Line</a>
+        <a href="#" onclick="shareToFacebook()"><i class="fab fa-facebook"></i> แชร์ไปยัง Facebook</a>
+    </div> -->
+    <div class="back-btn">
+        <form action="/">
+            <button class="button-back m-buttom">
+                <span class="transition"></span>
+                <span class="gradient"></span>
+                <span class="label">กลับหน้าหลัก</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/fullscreen.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/imagesloaded.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/certificate_game_cl.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/congreat.js') }}"></script>
+</body>
+
+</html>
