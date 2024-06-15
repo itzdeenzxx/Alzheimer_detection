@@ -1,7 +1,19 @@
 window.onload = function() {
     openPopup();
+    checkScore();
   };
-  
+  var SCORE = 0;
+
+  function checkScore() {
+    fetch('/send_score')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data : ", data.count)
+            SCORE = data.count
+        })
+        .catch(error => console.error('Error:', error));
+  }
+
   // Function to open popup
   function openPopup() {
     document.getElementById("popup").style.display = "block";
@@ -53,6 +65,10 @@ function submitText() {
       ctx.font = 'italic 18px Prompt, sans-serif';
       ctx.fillStyle = '#FFECBF';
       ctx.fillText(dateString, 130, 465);
+
+      ctx.font = 'bold 30px Prompt, sans-serif';
+      ctx.fillStyle = '#FFECBF';
+      ctx.fillText(String(SCORE), 130, 465);
 
       if (overlayInput.files && overlayInput.files[0]) {
         var reader = new FileReader();

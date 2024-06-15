@@ -11,6 +11,7 @@ app = Flask(__name__, static_folder="static")
 mode = "dev"
 lock = threading.Lock()
 count = 0
+count_game = 0
 set_main = 1
 select_player = 0
 count_present = 0
@@ -143,14 +144,26 @@ def game_counter():
 #send score
 @app.route("/send_score", methods=["GET", "POST"])
 def send_score():
-    global count
+    global count_game
     with lock:
         # print(get_queue_cam())
         # print(count)
-        count = get_queue_cam()
+        count_game = cam_game.send_score_cam()
+        count = count_game
         # print(count)
 
     return jsonify({"count": count})
+
+@app.route("/time_check", methods=["GET", "POST"])
+def time_check():
+    with lock:
+        # print(get_queue_cam())
+        # print(count)
+        time = cam_game.send_time()
+        print(time)
+        # time = 60
+
+    return jsonify({"count": time})
 
 
 @app.route("/stroop_game", methods=["GET", "POST"])

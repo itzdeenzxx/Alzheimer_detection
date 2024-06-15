@@ -11,6 +11,7 @@ mp_hands = mp.solutions.hands
 
 # var break time 10sec
 countdown_time = 10
+TIME = 0
 
 
 class VideoCamera_Game(object):
@@ -106,8 +107,9 @@ class VideoCamera_Game(object):
             if times == 60 :
                 self.confirm_game = False
             frame = self.draw_text(frame , str(60-times) , (1080,50))
+            self.update_time(times)
         else :
-            pass 
+            pass
             # ทำฟังชันก์ใน gamereal ให้สามารถ restart และ บอกคะแนนทั้งหมดที่ได้ ได้ โดย ถ้าเงื่อนไขที่ return ออกมา เป็น true ให้ restart ได้ 
         
         
@@ -133,3 +135,19 @@ class VideoCamera_Game(object):
             if self.i == len(self.Number_random):
                 self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]
                 self.i = 0
+
+    def send_score_cam(self) :
+        return self.score
+    
+    def update_time(self,times) :
+        global TIME
+        TIME = times
+    
+    def send_time(self) :
+        global TIME
+        return TIME
+    
+    def reset_game(self) :
+        self.score = 0
+        self.i = 0
+        self.confirm_game = True

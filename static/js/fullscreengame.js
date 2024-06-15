@@ -10,7 +10,7 @@ function toggleFullscreengame() {
             console.error(`Error attempting to enable full-screen mode: ${err.message}`);
         });
     }
-}
+} 
 
 function isSafari() {
     return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -51,7 +51,7 @@ var cameraStarted = false;
 
 function toggleCameragame() {
     if (!cameraStarted) {
-        video.src = "/video_control";
+        video.src = "/cam_game_count";
         button.innerHTML = "พักการเล่นเกม";
         cameraStarted = true;
     } else {
@@ -80,3 +80,15 @@ $(document).ready(function(){
     
   });
 
+  function CheckTime() {
+    fetch('/time_check')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data : ", data.count)
+            if(data.count >= 60){
+                window.location.href = "/cert_game"
+            }
+        })
+        .catch(error => console.error('Error:', error));
+  }
+  setInterval(CheckTime, 1000);
