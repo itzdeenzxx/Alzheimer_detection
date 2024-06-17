@@ -80,7 +80,7 @@ var downloadBtn = document.getElementById('download-btn')
 
 var image = new Image()
 image.crossOrigin = "Nerosafezone";
-image.src = "static/img/certificate-ez.jpg"
+image.src = "static/img/certificate-stroop.png"
 image.onload = function () {
   drawImage()
 }
@@ -89,13 +89,17 @@ function drawImage() {
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
   ctx.font = 'bold 30px Prompt, sans-serif';
   ctx.fillStyle = '#294B29'
-  ctx.fillText(nameInput.value, 110, 120)
-  var currentDate = new Date();
-  var dateString = currentDate.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+  ctx.fillText(nameInput.value, 110, 143)
 
-  ctx.font = 'italic 18px Prompt, sans-serif';
+  ctx.font = 'bold 30px Prompt, sans-serif';
   ctx.fillStyle = '#FFECBF';
-  ctx.fillText(dateString, 130, 465);
+  ctx.fillText(String("SCORE") + " คะแนน", 130, 475);
+  // var currentDate = new Date();
+  // var dateString = currentDate.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // ctx.font = 'italic 18px Prompt, sans-serif';
+  // ctx.fillStyle = '#FFECBF';
+  // ctx.fillText(dateString, 130, 465);
 
   if (overlayInput.files && overlayInput.files[0]) {
     var reader = new FileReader();

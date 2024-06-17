@@ -54,7 +54,7 @@ var cameraStarted = false;
 
 let toggleState = false;
  
-function toggleCamera() {
+function toggleCamera(queue) {
     // toggleState = !toggleState;
     // var xhr = new XMLHttpRequest();
     // xhr.open('POST', '/toggle', true);
@@ -73,7 +73,38 @@ function toggleCamera() {
         playSoundBasedOnCount(1)
         button.textContent = "พักการออกกำลังกาย";
         cameraStarted = true;
-    } else {
+    } 
+    else if(queue == 1) {
+        video.src = "static/img/Cover/1.png";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
+        cameraStarted = false;
+    } 
+    else if(queue == 2) {
+        video.src = "static/img/Cover/2.png";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
+        cameraStarted = false;
+    } 
+    else if(queue == 3) {
+        video.src = "static/img/Cover/GIF_2.gif";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
+        cameraStarted = false;
+    } 
+    else if(queue == 4) {
+        video.src = "static/img/Cover/3.png";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
+        cameraStarted = false;
+    } 
+    else if(queue == 5) {
+        video.src = "static/img/Cover/GIF_1.gif";
+        // button.style.backgroundColor = "";
+        button.textContent = "เริ่มออกกำลังกาย";
+        cameraStarted = false;
+    } 
+    else {
         video.src = "static/img/pre-fitness-test.jpg";
         // button.style.backgroundColor = "";
         button.textContent = "เริ่มออกกำลังกาย";

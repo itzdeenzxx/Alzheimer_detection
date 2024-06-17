@@ -17,7 +17,7 @@ TIME = 0
 class VideoCamera_Game(object):
     global Number_random
     def __init__(self):
-        self.camera_index = 0
+        self.camera_index = 1
         self.video = cv2.VideoCapture(self.camera_index)
         self.game = HandTracker()
         self.Number_random = [0] + [rd.randint(1, 5) for _ in range(4)]

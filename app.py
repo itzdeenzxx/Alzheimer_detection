@@ -97,7 +97,8 @@ def certificate():
 
 @app.route("/cert_game", methods=["GET", "POST"])
 def cert_game():
-    return render_template("cert_game.html")
+    global count_game
+    return render_template("cert_game.html" , score=str(count_game))
 
 
 @app.route("/cert_stroop", methods=["GET", "POST"])

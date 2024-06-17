@@ -26,7 +26,7 @@ const canvas = document.getElementById('canvas');
         function paint_select(idx) {
             image_detect = true
             index = idx
-            backgroundImage.src = `static/img/paint/paint${idx}.jpg`;
+            backgroundImage.src = `static/img/paint/paint${idx}.png`;
             console.log(backgroundImage.src)
             context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
         }
@@ -48,6 +48,9 @@ const canvas = document.getElementById('canvas');
             context.beginPath();
         
             context.moveTo(lastX, lastY);
+            // let bg_white = new Image();
+            // bg_white.src = `static/img/paint/remove/bg-white.png`;
+            // context.drawImage(bg_white, 0, 0, canvas.width, canvas.height);
             
             context.lineTo(x, y);
             context.stroke();
@@ -59,11 +62,13 @@ const canvas = document.getElementById('canvas');
                     let RestoreImage = new Image();
                     RestoreImage.src = `static/img/paint/remove/paint${index}re.png`;
                     // console.log(1);
+                    // context.fillStyle = '#FFFFFF';
+                    // context.fillRect(0, 0, canvas.width, canvas.height);
                     context.drawImage(RestoreImage, 0, 0, canvas.width, canvas.height);
                 }
             }
         }
-
+        
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
             [lastX, lastY] = [e.offsetX + 15, e.offsetY + 38]; //+ เพื่มตามตำแหน่งเมาส์
