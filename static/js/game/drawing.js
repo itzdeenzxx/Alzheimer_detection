@@ -26,7 +26,7 @@ const canvas = document.getElementById('canvas');
         function paint_select(idx) {
             image_detect = true
             index = idx
-            backgroundImage.src = `static/img/paint/paint${idx}.png`;
+            backgroundImage.src = `static/img/paint/paint${idx}.jpg`;
             console.log(backgroundImage.src)
             context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
         }
